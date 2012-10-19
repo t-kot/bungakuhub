@@ -1,0 +1,38 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{"data-toggle"=>'collapse',"data-target"=>".nav-collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{href:"/"} BungakuHub
+      .nav-collapse
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle"=>"dropdown"}
+              Work
+              %b.caret
+            %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
+              %li
+                != link_to "Create Game Room",root_path
+              %li
+                = link_to "Game Room",root_path
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle"=>"dropdown"}
+              User
+              %b.caret
+            %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
+              %li
+                != link_to "hoge",root_path
+              %li
+                != link_to "fuga",root_path
+              %li
+                != link_to "test",root_path
+          - if user_signed_in?
+            %li
+              = link_to "Sign Out",destroy_user_session_path
+          - else
+            %li
+              = link_to "Sign In",new_user_session_path
+            %li
+              = link_to "Sign Up",new_user_registration_path

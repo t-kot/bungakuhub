@@ -9,6 +9,8 @@ module NavigationHelpers
       '/'
     when /ログインページ/
       new_user_session_path
+    when /ユーザ登録ページ/
+      new_user_registration_path
     else
       raise "\"#{page_name}\"にあたるpathが見当たりませんでした．"
     end

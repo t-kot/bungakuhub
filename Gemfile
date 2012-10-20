@@ -31,6 +31,7 @@ group :test do
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-cucumber'
+  gem 'rails3-generators'
   gem 'factory_girl_rails'
   gem 'rb-fsevent'
   gem 'growl'

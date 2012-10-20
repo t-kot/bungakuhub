@@ -24,15 +24,16 @@ gem 'jquery-rails'
 group :test do
   gem 'rspec-rails'
   gem 'cucumber-rails'
+  gem 'cucumber'
   gem 'spork'
-  gem 'capybara'
+  gem 'webrat'
   gem 'database_cleaner'
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-cucumber'
   gem 'rails3-generators'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', :require => false
   gem 'rb-fsevent'
   gem 'growl'
 end

@@ -1,0 +1,9 @@
+- name:
+    ja: 男性
+    en: male
+- name:
+    ja: 女性
+    en: female
+- name:
+    ja: その他
+    en: unisex

@@ -10,5 +10,5 @@
     かつ "user_password"に"fukuda"と入力する
     かつ "user_display_name"に"fukuda"と入力する
     かつ "user_password_confirmation"に"fukuda"と入力する
-    かつ "Sign up"ボタンをクリックする
+    かつ "ユーザ登録"ボタンをクリックする
     ならば "送られました"と表示されていること

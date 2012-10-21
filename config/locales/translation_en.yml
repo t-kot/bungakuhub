@@ -5,22 +5,39 @@ en:
     header:
       signup: Sign Up
       signin: Sign In
+      signout: Sign Out
     footer:
       hoge: hoge
     user:
       signin: Sign In
       signup: Sign Up
+      edit: Edit Profile
+      profile: Profile
+      update: Save
   text:
     user:
       forgot_password: Forgot your password?
       not_receive_confirmation: Didn't receive confirmation instructions?
   activerecord:
     models:
-      user: User
+      user: User #g
     attributes:
       user:
         email: Email
+        display_name: User Name
         password: Password
         password_confirmation: Password Confirmation
         remember_me: Remember me
-
+        first_name: First Name
+        last_name: Last Name
+  flash:
+    info:
+      create:
+        notice: "%{model} was successfully created."
+      update:
+        notice: "%{model} was successfully updated."
+  errors:
+    create:
+      notice: "%%{model} was not saved for 1 error."
+      one: "%{model} was not saved for ${count} errors."
+    

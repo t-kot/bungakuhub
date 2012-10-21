@@ -1,7 +1,8 @@
 = form_for @user do |f|
   - if @user.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      //%h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %h2= t("errors.create.notice",count: @user.errors.count,model:@user.class.model_name)
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
@@ -15,5 +16,9 @@
   .field
     = f.label :last_name
     = f.text_field :last_name
+  .field
+    - Sex.all.each do |sex|
+      = f.radio_button :sex_id,sex.id
+      %span= sex.name[current_locale]
   .actions
-    = f.submit 'Save'
+    = f.submit t("label.user.update")

@@ -17,22 +17,23 @@
                 != link_to "Create Game Room",root_path
               %li
                 = link_to "Game Room",root_path
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle"=>"dropdown"}
-              User
-              %b.caret
-            %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
-              %li
-                != link_to "hoge",root_path
-              %li
-                != link_to "fuga",root_path
-              %li
-                != link_to "test",root_path
+          - if user_signed_in?
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle"=>"dropdown"}
+                Hello, #{current_user.display_name}
+                %b.caret
+              %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
+                %li
+                  != link_to t("label.user.edit"),edit_user_path(current_user)
+                %li
+                  != link_to t("label.user.profile"),user_path(current_user)
+                %li
+                  != link_to "test",root_path
           - if user_signed_in?
             %li
-              = link_to "Sign Out",destroy_user_session_path
+              = link_to t("label.header.signout"),destroy_user_session_path
           - else
             %li
-              = link_to I18n.t("label.header.signin"),new_user_session_path
+              = link_to t("label.header.signin"),new_user_session_path
             %li
-              = link_to I18n.t("label.header.signup"),new_user_registration_path
+              = link_to t("label.header.signup"),new_user_registration_path

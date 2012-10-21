@@ -5,7 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name
+  belongs_to :sex
+
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id
 
   validates :display_name,  presence: true, length: {maximum:30},
                             uniqueness: true

@@ -43,5 +43,5 @@ en:
         notice: "%{model} was successfully updated."
   errors:
     create:
-      notice: "%%{model} was not saved for 1 error."
-      one: "%{model} was not saved for ${count} errors."
+      one: "%{model} was not saved for 1 error."
+      other: "%{model} was not saved for %{count} errors."

@@ -6,6 +6,9 @@ ja:
       signup: ユーザ登録
       signin: ログイン
       signout: ログアウト
+      language: 言語選択
+      en: 英語
+      ja: 日本語
     footer:
       hoge: hoge
     user:

@@ -1,8 +1,10 @@
 = form_for @user do |f|
   - if @user.errors.any?
     #error_explanation
-      //%h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %h2= t("errors.create.notice",count: @user.errors.count,model:@user.class.model_name)
+      - if @user.errors.count == 1
+        %h2= t("errors.create.one",model:@user.class.model_name)
+      - else
+        %h2= t("errors.create.other",count:@user.errors.count,model:@user.class.model_name)
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg

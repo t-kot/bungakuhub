@@ -3,9 +3,9 @@
 # http://github.com/brynary/webrat
 
 
-もし /言語は"(.*)"/ do |lang|
-  header("ACCEPT_LANGUAGE", lang)
-end
+#もし /言語は"(.*)"/ do |lang|
+#  header("ACCEPT_LANGUAGE", lang)
+#end
 
 もし /^"(.*)"ボタンをクリックする$/ do |button|
   click_button(button)
@@ -49,11 +49,11 @@ end
   visit path_to(page_name)
 end
 
-When /^"(.*)"と表示されていること$/ do |content|
+もし /^"(.*)"と表示されていること$/ do |content|
   page.body.should =~ /#{Regexp.escape(content)}/m
 end
 
-Then /^"(.*)"と表示されていないこと$/ do |content|
+もし /^"(.*)"と表示されていないこと$/ do |content|
   #page.body.should_not =~ /#{text}/m
   page.body.should_not =~ /#{Regexp.escape(content)}/m
 end

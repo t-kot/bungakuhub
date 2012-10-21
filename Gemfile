@@ -5,6 +5,7 @@ gem 'pry-rails'
 gem 'thin'
 gem 'devise'
 gem 'haml-rails'
+gem 'friendly_id'
 
 group :development do
   gem 'erb2haml'

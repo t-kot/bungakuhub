@@ -1,0 +1,26 @@
+en:
+  label:
+    date: Date
+    ago: ago
+    header:
+      signup: Sign Up
+      signin: Sign In
+    footer:
+      hoge: hoge
+    user:
+      signin: Sign In
+      signup: Sign Up
+  text:
+    user:
+      forgot_password: Forgot your password?
+      not_receive_confirmation: Didn't receive confirmation instructions?
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Password Confirmation
+        remember_me: Remember me
+

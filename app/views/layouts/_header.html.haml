@@ -33,6 +33,6 @@
               = link_to "Sign Out",destroy_user_session_path
           - else
             %li
-              = link_to "Sign In",new_user_session_path
+              = link_to I18n.t("label.header.signin"),new_user_session_path
             %li
-              = link_to "Sign Up",new_user_registration_path
+              = link_to I18n.t("label.header.signup"),new_user_registration_path

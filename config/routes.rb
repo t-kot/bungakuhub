@@ -6,7 +6,7 @@ Bungaku::Application.routes.draw do
     get "/users/sign_out", to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  resources :users
+  resources :users, except: [:new]
 
   root to: "home#index"
 end

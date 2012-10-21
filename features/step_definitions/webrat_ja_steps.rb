@@ -54,7 +54,8 @@ When /^"(.*)"と表示されていること$/ do |content|
 end
 
 Then /^"(.*)"と表示されていないこと$/ do |content|
-  page.body.should_not =~ /#{text}/m
+  #page.body.should_not =~ /#{text}/m
+  page.body.should_not =~ /#{Regexp.escape(content)}/m
 end
 
 ならば /^"(.*)"がチェックされていること$/ do |label|

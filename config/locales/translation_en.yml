@@ -18,6 +18,8 @@ en:
     user:
       forgot_password: Forgot your password?
       not_receive_confirmation: Didn't receive confirmation instructions?
+      send_password_instructions: Send me reset password instructions
+      resend_confirmation_instructions: Resend confirmation instructions
   activerecord:
     models:
       user: User #g

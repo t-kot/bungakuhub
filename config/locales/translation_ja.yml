@@ -18,6 +18,8 @@ ja:
     user:
       forgot_password: パスワードをお忘れの方
       not_receive_confirmation: 確認メールが届かない方
+      send_password_instructions: パスワード再発行メールを送る
+      resend_confirmation_instructions: 確認メールを再送信する
   activerecord:
     models:
       user: ユーザ

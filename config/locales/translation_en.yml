@@ -6,6 +6,9 @@ en:
       signup: Sign Up
       signin: Sign In
       signout: Sign Out
+      language: Language
+      en: English
+      ja: Japanese
     footer:
       hoge: hoge
     user:
@@ -42,4 +45,3 @@ en:
     create:
       notice: "%%{model} was not saved for 1 error."
       one: "%{model} was not saved for ${count} errors."
-    

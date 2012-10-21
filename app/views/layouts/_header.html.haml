@@ -37,3 +37,13 @@
               = link_to t("label.header.signin"),new_user_session_path
             %li
               = link_to t("label.header.signup"),new_user_registration_path
+        %ul.nav.pull-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle"=>"dropdown"}
+              = I18n.t("label.header.language")
+              %b.caret
+            %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
+              %li
+                = link_to t("label.header.ja"),"?locale=ja"
+              %li
+                != link_to t("label.header.en"),"?locale=en"

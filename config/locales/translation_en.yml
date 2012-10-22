@@ -26,6 +26,7 @@ en:
   activerecord:
     models:
       user: User #g
+      language: Language
     attributes:
       user:
         email: Email

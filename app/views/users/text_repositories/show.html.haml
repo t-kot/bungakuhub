@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @text_repository.user_id
+%p
+  %b Repository type:
+  = @text_repository.repository_type_id
+%p
+  %b Name:
+  = @text_repository.name
+%p
+  %b Description:
+  = @text_repository.description
+
+= link_to 'Edit', edit_user_text_repository_path(current_user,@text_repository)
+\|
+= link_to 'Back', user_text_repositories_path(current_user)

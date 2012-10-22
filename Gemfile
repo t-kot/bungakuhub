@@ -22,8 +22,11 @@ end
 
 gem 'jquery-rails'
 
-group :test do
+group :development,:test do
   gem 'rspec-rails'
+end
+
+group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber'
   gem 'spork'

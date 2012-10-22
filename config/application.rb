@@ -20,5 +20,8 @@ module Bungaku
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += %W(#{config.root}/lib/validators)
     config.i18n.load_path += Dir[Rails.root.join('config', 'locale', '**', '*.{rb,yml}')]
+    config.generators do |g|
+      g.fixture_replacement :factory_girl,dir: 'spec/factories'
+    end
   end
 end

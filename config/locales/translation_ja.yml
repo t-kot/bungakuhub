@@ -26,6 +26,7 @@ ja:
   activerecord:
     models:
       user: ユーザ
+      language: 言語
     attributes:
       user:
         email: メールアドレス

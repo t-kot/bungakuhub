@@ -43,7 +43,6 @@
               = I18n.t("label.header.language")
               %b.caret
             %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
-              %li
-                = link_to t("label.header.ja"),"?locale=ja"
-              %li
-                != link_to t("label.header.en"),"?locale=en"
+              - Language.all.each do |lang|
+                %li
+                  != link_to t("label.header.#{lang.code}"),"?locale=#{lang.code}"

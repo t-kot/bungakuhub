@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
          :confirmable
 
   belongs_to :sex
+  has_many :repositories
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id
 

@@ -1,5 +1,6 @@
 # coding:utf-8
+# language: ja
 
-もし /^ユーザ名が"(.*?)"のユーザがいる$/ do |user|
+Before do
   FactoryGirl.create(:tanaka).confirm!
 end

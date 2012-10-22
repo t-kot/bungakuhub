@@ -26,7 +26,7 @@
                 %li
                   != link_to "Listing My Repository",user_repositories_path(current_user)
                 %li
-                  != link_to "Create Repository",new_user_repository_path(current_user)
+                  != link_to "Create Repository",new_repository_path
             %li.dropdown
               %a.dropdown-toggle{"data-toggle"=>"dropdown"}
                 Hello, #{current_user.display_name}

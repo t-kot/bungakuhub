@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "repositories/new" do
+describe "users/repositories/new" do
   before(:each) do
     assign(:repository, stub_model(Repository,
       :type => "",

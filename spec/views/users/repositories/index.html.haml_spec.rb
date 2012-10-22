@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "repositories/index" do
+describe "users/repositories/index" do
   before(:each) do
     assign(:repositories, [
       stub_model(Repository,

@@ -8,14 +8,12 @@ Bungaku::Application.routes.draw do
     get "/users/sign_out", to: 'devise/sessions#destroy', as: :destroy_user_session
   end
 
-  resources :users, except: [:new,:create] do
-    resources :repositories
-    resources :text_repositories
-  end
-  namespace :users do
-    resources :admin, as: :user do
-      resources :repositories
-      resources :text_repositories
+  resources :repositories, only: [:index, :new]
+  resources :text_repositories, except: [:edit, :show, :update, :destroy]
+  resources :users, except: [:index, :new, :create] do
+    scope module: :users do
+      resources :text_repositories, except: [:create, :new, :destroy]
+      resources :repositories, except: [:create, :new]
     end
   end
 

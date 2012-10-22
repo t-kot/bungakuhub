@@ -9,6 +9,7 @@ en:
       language: Language
       en: English
       ja: Japanese
+      repository: Repository
     footer:
       hoge: hoge
     user:
@@ -17,6 +18,11 @@ en:
       edit: Edit Profile
       profile: Profile
       update: Save
+    repository:
+      list: Listing My Repository
+      create: Create Repository
+    button:
+      create: Create
   text:
     user:
       forgot_password: Forgot your password?
@@ -27,6 +33,9 @@ en:
     models:
       user: User #g
       language: Language
+      sex: Sex
+      repository: Repository
+      text_repository: Text Repository
     attributes:
       user:
         email: Email
@@ -36,6 +45,9 @@ en:
         remember_me: Remember me
         first_name: First Name
         last_name: Last Name
+      repository:
+        name: Repository Name
+        description: Description
   flash:
     info:
       create:

@@ -12,6 +12,7 @@ describe "users/repositories/edit" do
     @view.stub(:current_user).and_return(
       FactoryGirl.create(:tanaka)
     )
+    @view.stub(:current_locale).and_return("ja")
   end
 
   it "renders the edit repository form" do
@@ -20,7 +21,6 @@ describe "users/repositories/edit" do
     assert_select "form", :action => user_repositories_path(@view.current_user, @repository), :method => "post" do
       assert_select "input#repository_type", :name => "repository[type]"
       assert_select "input#repository_user_id", :name => "repository[user_id]"
-      assert_select "input#repository_repository_type_id", :name => "repository[repository_type_id]"
       assert_select "input#repository_name", :name => "repository[name]"
       assert_select "textarea#repository_description", :name => "repository[description]"
     end

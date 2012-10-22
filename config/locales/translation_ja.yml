@@ -9,6 +9,7 @@ ja:
       language: 言語選択
       en: 英語
       ja: 日本語
+      repository: レポジトリ
     footer:
       hoge: hoge
     user:
@@ -17,6 +18,11 @@ ja:
       edit: プロフィール編集
       profile: プロフィール
       update: 更新
+    repository:
+      list: マイレポジトリ
+      create: 新規レポジトリ
+    button:
+      create: 作成
   text:
     user:
       forgot_password: パスワードをお忘れの方
@@ -27,6 +33,9 @@ ja:
     models:
       user: ユーザ
       language: 言語
+      sex: 性別
+      repository: レポジトリ
+      text_repository: テキストレポジトリ
     attributes:
       user:
         email: メールアドレス
@@ -36,6 +45,9 @@ ja:
         remember_me: ログイン情報を記憶する
         first_name: 苗字
         last_name: 名前
+      repository:
+        name: レポジトリ名
+        description: 説明
   flash:
     info:
       create:

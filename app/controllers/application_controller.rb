@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_locale
 
+  def user_repository_authenticate
+    repository_id = params[:repository_id] || params[:id]
+    redirect_to root_path unless current_user == Repository.find(repository_id).user
+  end
+
   def current_locale
     I18n.locale.to_s
   end

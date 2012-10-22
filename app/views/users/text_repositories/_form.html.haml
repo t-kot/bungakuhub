@@ -1,10 +1,5 @@
 = form_for [current_user,@text_repository] do |f|
-  - if @text_repository.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@text_repository.errors.count, "error")} prohibited this text_repository from being saved:"
-      %ul
-        - @text_repository.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'common/form_error', record: @text_repository
 
   .field
     = f.hidden_field :user_id

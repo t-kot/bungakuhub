@@ -1,13 +1,5 @@
 class UsersController < ApplicationController
   before_filter :valid_user_authenticate, only: [:edit, :update, :destroy]
-  def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
-  end
 
   def show
     @user = User.find(params[:id])
@@ -42,7 +34,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to root_path, notice: I18n.t("flash.info.delete_user")}
       format.json { head :no_content }
     end
   end

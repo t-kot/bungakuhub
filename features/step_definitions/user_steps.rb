@@ -2,6 +2,6 @@
 # language: ja
 
 Before do
-  FactoryGirl.create(:tanaka).confirm!
-  FactoryGirl.create(:takeshita).confirm!
+  user = FactoryGirl.create(:tanaka).confirm!
+  #FactoryGirl.create(:user).confirm!
 end

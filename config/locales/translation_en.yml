@@ -54,6 +54,7 @@ en:
         notice: "%{model} was successfully created."
       update:
         notice: "%{model} was successfully updated."
+      delete_user: See you next time!
     alert:
       access_denied: You don't have permittion
   errors:

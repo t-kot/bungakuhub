@@ -54,6 +54,7 @@ ja:
         notice: "%{model} が作成されました"
       update:
         notice: "%{model} が更新されました"
+      delete_user: またのご利用をお待ちしております。
     alert:
       access_denied: 許可されていないアクションです
   errors:

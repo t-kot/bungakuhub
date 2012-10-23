@@ -12,8 +12,10 @@ class ApplicationController < ActionController::Base
 
   def valid_user_authenticate
     user_id = params[:user_id] || params[:id]
-    flash[:alert] = t("flash.alert.access_denied")
-    redirect_to root_path unless current_user.try(:id) == user_id
+    if current_user.try(:to_param) != user_id
+      flash[:alert] = t("flash.alert.access_denied")
+      redirect_to root_path unless current_user.try(:to_param) == user_id
+    end
   end
 
   def current_locale

@@ -54,6 +54,8 @@ en:
         notice: "%{model} was successfully created."
       update:
         notice: "%{model} was successfully updated."
+    alert:
+      access_denied: You don't have permittion
   errors:
     create:
       one: "%{model} was not saved for 1 error."

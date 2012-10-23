@@ -7,4 +7,12 @@ FactoryGirl.define do
     password "tanaka"
     confirmed_at Time.now
   end
+  factory :takeshita, class: User do
+    display_name "Takeshita"
+    first_name "Takeshita"
+    last_name "Noboru"
+    email "takeshita@noboru.com"
+    password "password"
+    confirmed_at Time.now
+  end
 end

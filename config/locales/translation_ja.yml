@@ -54,6 +54,8 @@ ja:
         notice: "%{model} が作成されました"
       update:
         notice: "%{model} が更新されました"
+    alert:
+      access_denied: 許可されていないアクションです
   errors:
     create:
         one: "１つのエラーによって%{model}は保存されませんでした"

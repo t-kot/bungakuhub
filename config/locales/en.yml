@@ -1,5 +1,25 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      blank: Necessary to enter.
+      no_select: Necessary to select.
+      less_than_or_equal_to: must be less than %{count} characters.
+      wrong_combination: Woops! Wrong ID or Password?
+      disabled_user: Sorry, this account has been rejected or deleted.
+      confirmation: may be wrong.
+      alphanumeric: You can only use alphabets and numbers.
+      strspacemark: 
+      email: are wrong format.
+      image_limited: format is png, jpg only.
+      vector_image_limited: format is eps only.
+      url: are wrong format.
+      image: are wrong format.
+      taken: 
+      no_rectangle: Please select a Feedback Area.
+      not_exist: does not exist.
+      is_wrong: is wrong.
+
+  support:
+    array:
+      words_connector: and

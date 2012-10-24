@@ -1,0 +1,10 @@
+- if record.errors.any?
+  #error_explanation.alert.alert-error
+    %a.close{"data-dismiss"=>"alert"} x
+    - if record.errors.count == 1
+      %h2= t("errors.create.one",model:record.class.model_name.human)
+    - else
+      %h2= t("errors.create.other",count:record.errors.count,model:record.class.model_name.human)
+    %ul
+      - record.errors.full_messages.each do |msg|
+        %li= msg

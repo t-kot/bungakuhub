@@ -8,7 +8,4 @@ describe User do
   it "full_name()でfirst_name+last_nameが返されること" do
     @user.full_name.should == "tanaka kakuei"
   end
-  it "以下は失敗すること" do
-    @user.full_name.should == "kakuei tanaka"
-  end
 end

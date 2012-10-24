@@ -14,11 +14,11 @@
       - if notice
         .alert.alert-success
           %a.close{"data-dismiss"=>"alert"} x
-          = flash
+          = notice
 
       - if alert
         .alert.alert-error
           %a.close{"data-dismiss"=>'alert'} x
-          = flash
+          = alert
       = yield
       = render 'layouts/footer'

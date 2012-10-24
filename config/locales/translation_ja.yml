@@ -1,0 +1,63 @@
+ja:
+  label:
+    date: 日時
+    ago: 前
+    header:
+      signup: ユーザ登録
+      signin: ログイン
+      signout: ログアウト
+      language: 言語選択
+      en: 英語
+      ja: 日本語
+      repository: レポジトリ
+    footer:
+      hoge: hoge
+    user:
+      signin: ログイン
+      signup: ユーザ登録
+      edit: プロフィール編集
+      profile: プロフィール
+      update: 更新
+    repository:
+      list: マイレポジトリ
+      create: 新規レポジトリ
+    button:
+      create: 作成
+  text:
+    user:
+      forgot_password: パスワードをお忘れの方
+      not_receive_confirmation: 確認メールが届かない方
+      send_password_instructions: パスワード再発行メールを送る
+      resend_confirmation_instructions: 確認メールを再送信する
+  activerecord:
+    models:
+      user: ユーザ
+      language: 言語
+      sex: 性別
+      repository: レポジトリ
+      text_repository: テキストレポジトリ
+    attributes:
+      user:
+        email: メールアドレス
+        display_name: ユーザ名
+        password: パスワード
+        password_confirmation: パスワードの確認
+        remember_me: ログイン情報を記憶する
+        first_name: 苗字
+        last_name: 名前
+      repository:
+        name: レポジトリ名
+        description: 説明
+  flash:
+    info:
+      create:
+        notice: "%{model} が作成されました"
+      update:
+        notice: "%{model} が更新されました"
+      delete_user: またのご利用をお待ちしております。
+    alert:
+      access_denied: 許可されていないアクションです
+  errors:
+    create:
+        one: "１つのエラーによって%{model}は保存されませんでした"
+        other: "%{count} つのエラーにより %{model} は保存されませんでした。"

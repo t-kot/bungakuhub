@@ -5,6 +5,7 @@ gem 'pry-rails'
 gem 'thin'
 gem 'devise'
 gem 'haml-rails'
+gem 'friendly_id'
 
 group :development do
   gem 'erb2haml'
@@ -21,20 +22,24 @@ end
 
 gem 'jquery-rails'
 
-group :test do
+group :development,:test do
   gem 'rspec-rails'
-  gem 'cucumber-rails'
+  gem 'growl'
+end
+
+group :test do
+  gem 'cucumber-rails', :require => false
+  gem 'cucumber'
   gem 'spork'
-  gem 'capybara'
+  gem 'webrat'
   gem 'database_cleaner'
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-cucumber'
   gem 'rails3-generators'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', :require => false
   gem 'rb-fsevent'
-  gem 'growl'
 end
 
 

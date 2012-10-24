@@ -1,0 +1,63 @@
+en:
+  label:
+    date: Date
+    ago: ago
+    header:
+      signup: Sign Up
+      signin: Sign In
+      signout: Sign Out
+      language: Language
+      en: English
+      ja: Japanese
+      repository: Repository
+    footer:
+      hoge: hoge
+    user:
+      signin: Sign In
+      signup: Sign Up
+      edit: Edit Profile
+      profile: Profile
+      update: Save
+    repository:
+      list: Listing My Repository
+      create: Create Repository
+    button:
+      create: Create
+  text:
+    user:
+      forgot_password: Forgot your password?
+      not_receive_confirmation: Didn't receive confirmation instructions?
+      send_password_instructions: Send me reset password instructions
+      resend_confirmation_instructions: Resend confirmation instructions
+  activerecord:
+    models:
+      user: User #g
+      language: Language
+      sex: Sex
+      repository: Repository
+      text_repository: Text Repository
+    attributes:
+      user:
+        email: Email
+        display_name: User Name
+        password: Password
+        password_confirmation: Password Confirmation
+        remember_me: Remember me
+        first_name: First Name
+        last_name: Last Name
+      repository:
+        name: Repository Name
+        description: Description
+  flash:
+    info:
+      create:
+        notice: "%{model} was successfully created."
+      update:
+        notice: "%{model} was successfully updated."
+      delete_user: See you next time!
+    alert:
+      access_denied: You don't have permittion
+  errors:
+    create:
+      one: "%{model} was not saved for 1 error."
+      other: "%{model} was not saved for %{count} errors."

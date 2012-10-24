@@ -1,0 +1,21 @@
+%h1 Listing repositories
+
+%table
+  %tr
+    %th Type
+    %th User
+    %th Name
+    %th Description
+    %th Action
+
+  - @repositories.each do |repository|
+    %tr
+      %td= repository.type
+      %td= repository.user_id
+      %td= repository.name
+      %td= repository.description
+      %td= link_to 'Show', user_repository_path(repository.user,repository)
+
+%br
+
+= link_to 'New Repository', new_repository_path

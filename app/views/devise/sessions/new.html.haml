@@ -1,0 +1,30 @@
+%h2 Sign in
+%table
+  %tr
+    %th ユーザ名
+    %th メールアドレス
+    %th パスワード
+  %tr
+    %td User1
+    %td tanaka@kakuei.com
+    %td tanaka
+  %tr
+    %td User2
+    %td fukuda@takeo.com
+    %td fukuda
+  
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  %div
+    = f.label :email
+    %br/
+    = f.email_field :email
+  %div
+    = f.label :password
+    %br/
+    = f.password_field :password
+  - if devise_mapping.rememberable?
+    %div
+      = f.check_box :remember_me
+      = f.label :remember_me
+  %div= f.submit I18n.t("label.user.signin")
+= render "devise/shared/links"

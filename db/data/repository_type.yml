@@ -1,0 +1,6 @@
+- name:
+    ja: 公開
+    en: public
+- name:
+    ja: プライベート
+    en: private

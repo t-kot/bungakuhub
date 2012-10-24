@@ -1,11 +1,9 @@
 require 'spec_helper'
 describe TextRepositoriesController do
-  login_user
 
   def valid_attributes
     {
       type: "TextRepository",
-      user_id: 1,
       repository_type_id: 1,
       description: "Hello,world",
       name: "sample code"
@@ -18,21 +16,32 @@ describe TextRepositoriesController do
 
   describe "GET index" do
     it "assigns all text_repositories as @text_repositories" do
-      text_repository = TextRepository.create! valid_attributes
-      get :index, {user_id: subject.current_user}, valid_session
-      assigns(:text_repositories).should eq([text_repository])
+      text_repositories = TextRepository.all
+      get :index,  valid_session
+      assigns(:text_repositories).should eq(text_repositories)
     end
   end
 
   describe "GET new" do
-    it "assigns a new text_repository as @text_repository" do
-      get :new, {user_id: subject.current_user}, valid_session
-      assigns(:text_repository).should be_a_new(TextRepository)
+    context "When already authenticated" do
+      login_user
+      it "assigns a new text_repository as @text_repository" do
+        get :new, {user_id: subject.current_user}, valid_session
+        assigns(:text_repository).should be_a_new(TextRepository)
+      end
+    end
+    context "When not yet authenticated" do
+      it "redirects to new session path" do
+        get :new, {user_id: subject.current_user}, valid_session
+        response.should redirect_to new_user_session_path
+        flash[:alert].should eq I18n.t("devise.failure.unauthenticated")
+      end
     end
   end
 
 
   describe "POST create" do
+    login_user
     describe "with valid params" do
       it "creates a new TextRepository" do
         expect {

@@ -5,7 +5,6 @@ describe Users::RepositoriesController do
   def valid_attributes
     {
       type: "TextRepository",
-      user_id: 1,
       repository_type_id: 1,
       description: "HOGEHOGE",
       name: "fuga"
@@ -20,29 +19,30 @@ describe Users::RepositoriesController do
 
   describe "GET index" do
     it "assigns all repositories as @repositories" do
-      repository = TextRepository.create(valid_attributes)
-      current_user = subject.current_user
+      user = FactoryGirl.create(:user_with_text_repositories)
+      repositories = user.repositories
 
-      get :index, {user_id: current_user}, valid_session
-      assigns(:repositories).should eq([repository])
+      get :index, {user_id: user.to_param}, valid_session
+      assigns(:repositories).should eq(repositories)
     end
   end
 
   describe "GET show" do
     it "assigns the requested repository as @repository" do
-      repository = TextRepository.create! valid_attributes
-      current_user = subject.current_user
-      get :show, {user_id: current_user,id: repository.to_param}, valid_session
+      #repository = TextRepository.create! valid_attributes
+      #current_user = subject.current_user
+      user = FactoryGirl.create(:user_with_text_repositories)
+      repository = user.repositories.last
+      get :show, {user_id: user.to_param, id: repository.to_param}, valid_session
       assigns(:repository).should eq(repository)
     end
   end
 
-
   describe "GET edit" do
     it "assigns the requested repository as @repository" do
-      repository = TextRepository.create! valid_attributes
-      current_user = subject.current_user
-      get :edit, {user_id:current_user,id:repository.to_param}, valid_session
+      #repository = @current_user.text_repositories.create! valid_attributes
+      repository = FactoryGirl.create(:repository, user: @current_user).becomes(TextRepository)
+      get :edit, {user_id:subject.current_user,id:repository.to_param}, valid_session
       assigns(:repository).should eq(repository)
     end
   end
@@ -51,8 +51,8 @@ describe Users::RepositoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested repository" do
-        repository = TextRepository.create! valid_attributes
-        TextRepository.any_instance.should_receive(:update_attributes).with({'name' => 'hogehoge'})
+        repository = FactoryGirl.create(:repository, user: @current_user)
+        Repository.any_instance.should_receive(:update_attributes).with({'name' => 'hogehoge'})
         put :update, {user_id: subject.current_user,:id => repository.to_param, :repository => {'name' => 'hogehoge'}}, valid_session
       end
 

@@ -1,4 +1,5 @@
 class RepositoriesController < ApplicationController
+  before_filter :authenticate_user!, only: [:new]
   def index
     @repositories = Repository.all
 

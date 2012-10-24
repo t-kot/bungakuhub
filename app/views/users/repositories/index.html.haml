@@ -4,23 +4,17 @@
   %tr
     %th Type
     %th User
-    %th Repository type
     %th Name
     %th Description
-    %th
-    %th
-    %th
+    %th Action
 
   - @repositories.each do |repository|
     %tr
       %td= repository.type
       %td= repository.user_id
-      %td= repository.repository_type_id
       %td= repository.name
       %td= repository.description
-      %td= link_to 'Show', user_repository_path(current_user,repository)
-      %td= link_to 'Edit', edit_user_repository_path(current_user,repository)
-      %td= link_to 'Destroy', user_repository_path(current_user,repository), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', user_repository_path(repository.user,repository)
 
 %br
 

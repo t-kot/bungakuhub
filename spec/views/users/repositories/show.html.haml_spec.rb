@@ -9,9 +9,6 @@ describe "users/repositories/show" do
       :name => "Name",
       :description => "MyText"
     ))
-    @view.stub(:current_user).and_return(
-      FactoryGirl.create(:tanaka)
-    )
   end
 
   it "renders attributes in <p>" do

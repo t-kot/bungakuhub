@@ -10,7 +10,7 @@ describe "repositories/new" do
       :description => "MyText"
     ).as_new_record)
     @view.stub(:current_user).and_return(
-      FactoryGirl.create(:tanaka)
+      FactoryGirl.create(:user)
     )
   end
 

@@ -19,7 +19,7 @@ describe "repositories/index" do
       )
     ])
     @view.stub(:current_user).and_return(
-      FactoryGirl.create(:tanaka)
+      FactoryGirl.create(:user)
     )
   end
 

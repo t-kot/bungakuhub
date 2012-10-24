@@ -64,13 +64,13 @@ describe TextRepositoriesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved text_repository as @text_repository" do
         TextRepository.any_instance.stub(:save).and_return(false)
-        post :create, {user_id: subject.current_user, :text_repository => {}}, valid_session
+        post :create, {user_id: subject.current_user, :text_repository => {:name => ''}}, valid_session
         assigns(:text_repository).should be_a_new(TextRepository)
       end
 
       it "re-renders the 'new' template" do
         TextRepository.any_instance.stub(:save).and_return(false)
-        post :create, {user_id: subject.current_user, :text_repository => {}}, valid_session
+        post :create, {user_id: subject.current_user, :text_repository => {:name => ''}}, valid_session
         response.should render_template("new")
       end
     end

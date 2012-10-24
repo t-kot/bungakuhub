@@ -2,7 +2,6 @@
 
 %table
   %tr
-    %th User
     %th Repository type
     %th Name
     %th Description
@@ -12,8 +11,7 @@
 
   - @text_repositories.each do |text_repository|
     %tr
-      %td= text_repository.user_id
-      %td= text_repository.repository_type_id
+      %td= text_repository.repository_type.name[current_locale]
       %td= text_repository.name
       %td= text_repository.description
       %td= link_to 'Show', user_text_repository_path(text_repository.user,text_repository.to_param)

@@ -32,9 +32,9 @@ describe RepositoriesController do
         assigns(:repository).should be_a_new(Repository)
       end
     end
-    context "not yet athenticated" do
+    context "not yet authenticated" do
       it "redirects to new session path" do
-        get :new, {user_id: nil}, valid_session
+        get :new, {user_id: subject.current_user}, valid_session
         response.should redirect_to new_user_session_path
         flash[:alert].should eq I18n.t("devise.failure.unauthenticated")
       end

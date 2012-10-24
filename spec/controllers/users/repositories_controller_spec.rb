@@ -1,6 +1,5 @@
 require 'spec_helper'
 describe Users::RepositoriesController do
-  login_user
 
   def valid_attributes
     {
@@ -12,9 +11,6 @@ describe Users::RepositoriesController do
   end
 
   def valid_session
-  end
-  it "should have a current_user" do
-    subject.current_user.should_not be_nil
   end
 
   describe "GET index" do
@@ -29,76 +25,96 @@ describe Users::RepositoriesController do
 
   describe "GET show" do
     it "assigns the requested repository as @repository" do
-      #repository = TextRepository.create! valid_attributes
-      #current_user = subject.current_user
       user = FactoryGirl.create(:user_with_text_repositories)
       repository = user.repositories.last
-      get :show, {user_id: user.to_param, id: repository.to_param}, valid_session
+      get :show, {user_id: repository.to_param, id: repository.to_param}, valid_session
       assigns(:repository).should eq(repository)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested repository as @repository" do
-      #repository = @current_user.text_repositories.create! valid_attributes
-      repository = FactoryGirl.create(:repository, user: @current_user).becomes(TextRepository)
-      get :edit, {user_id:subject.current_user,id:repository.to_param}, valid_session
-      assigns(:repository).should eq(repository)
+    context "when valid user" do
+      login_user
+      it "assigns the requested repository as @repository" do
+        repository = FactoryGirl.create(:repository, user: @current_user).becomes(TextRepository)
+        get :edit, {user_id:repository.user, id:repository.to_param}, valid_session
+        assigns(:repository).should eq(repository)
+      end
+    end
+    context "When invalid user" do
+      it "redirects to root" do
+        repository = FactoryGirl.create(:repository).becomes(TextRepository)
+        get :edit, {user_id:repository.user,id:repository.to_param}, valid_session
+        response.should redirect_to root_path
+        flash[:alert].should eq I18n.t("flash.alert.access_denied")
+      end
     end
   end
 
 
   describe "PUT update" do
+    login_user
     describe "with valid params" do
       it "updates the requested repository" do
-        repository = FactoryGirl.create(:repository, user: @current_user)
-        Repository.any_instance.should_receive(:update_attributes).with({'name' => 'hogehoge'})
+        repository = FactoryGirl.create(:text_repository, user: @current_user)
+        TextRepository.any_instance.should_receive(:update_attributes).with({'name' => 'hogehoge'})
         put :update, {user_id: subject.current_user,:id => repository.to_param, :repository => {'name' => 'hogehoge'}}, valid_session
       end
 
       it "assigns the requested repository as @repository" do
-        repository = TextRepository.create! valid_attributes
+        repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => valid_attributes}, valid_session
         assigns(:repository).should eq(repository)
       end
 
       it "redirects to the repository" do
-        repository = TextRepository.create! valid_attributes
+        repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => valid_attributes}, valid_session
-        response.should redirect_to user_repository_path(subject.current_user,repository)
+        response.should redirect_to user_repository_path(subject.current_user.to_param,repository)
       end
     end
 
     describe "with invalid params" do
       it "assigns the repository as @repository" do
-        repository = TextRepository.create! valid_attributes
+        repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         Repository.any_instance.stub(:save).and_return(false)
-        put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => {}}, valid_session
+        put :update, {user_id: repository.user, :id => repository.to_param, :repository => {:name => ''}}, valid_session
         assigns(:repository).should eq(repository)
       end
 
       it "re-renders the 'edit' template" do
-        repository = TextRepository.create! valid_attributes
+        repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         Repository.any_instance.stub(:save).and_return(false)
-        put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => {name: ''}}, valid_session
+        put :update, {user_id: repository.user, :id => repository.to_param, :repository => {:name => ''}}, valid_session
         response.should render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested repository" do
-      repository = Repository.create! valid_attributes
-      expect {
-        delete :destroy, {user_id: subject.current_user,:id => repository.to_param}, valid_session
-      }.to change(Repository, :count).by(-1)
-    end
+    context "When valid user" do
+      login_user
+      it "destroys the requested repository" do
+        repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
+        expect {
+          delete :destroy, {user_id: repository.user,:id => repository.to_param}, valid_session
+        }.to change(Repository, :count).by(-1)
+      end
 
-    it "redirects to the repositories list" do
-      repository = Repository.create! valid_attributes
-      user = repository.user
-      delete :destroy, {user_id: subject.current_user, :id => repository.to_param}, valid_session
-      response.should redirect_to(user_repositories_url(user))
+      it "redirects to the repositories list" do
+        repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
+        user = repository.user
+        delete :destroy, {user_id: repository.user, :id => repository.to_param}, valid_session
+        response.should redirect_to(user_repositories_url(user))
+      end
+    end
+    context "When invalid user" do
+      it "redirects to root" do
+        repository = FactoryGirl.create(:text_repository).becomes(TextRepository)
+        delete :destroy, {user_id:repository.user, :id => repository.to_param}, valid_session
+        response.should redirect_to root_path
+        flash[:alert].should eq I18n.t("flash.alert.access_denied")
+      end
     end
   end
 

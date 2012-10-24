@@ -50,36 +50,38 @@ describe Users::TextRepositoriesController do
 
 
   describe "PUT update" do
+    login_user
     describe "with valid params" do
       it "updates the requested text_repository" do
         text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
-        TextRepository.any_instance.should_receive(:update_attributes).with({'description' => 'test'})
-        put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {'description' => 'test'}}, valid_session
+        TextRepository.any_instance.should_receive(:update_attributes).with({'description' => 'test', 'name' => 'test'})
+        put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {'description' => 'test','name' => 'test'}}, valid_session
       end
 
       it "assigns the requested text_repository as @text_repository" do
-        text_repository = TextRepository.create! valid_attributes
-        put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => valid_attributes}, valid_session
+        text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
+        put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {'description' => 'test' } }, valid_session
         assigns(:text_repository).should eq(text_repository)
       end
 
       it "redirects to the text_repository" do
-        text_repository = TextRepository.create! valid_attributes
+        text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => valid_attributes}, valid_session
         response.should redirect_to user_text_repository_path(subject.current_user)
+        flash[:notice].should eq I18n.t("flash.info.update.notice", model: I18n.t("activerecord.models.text_repository"))
       end
     end
 
     describe "with invalid params" do
       it "assigns the text_repository as @text_repository" do
-        text_repository = TextRepository.create! valid_attributes
+        text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         TextRepository.any_instance.stub(:save).and_return(false)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {}}, valid_session
         assigns(:text_repository).should eq(text_repository)
       end
 
       it "re-renders the 'edit' template" do
-        text_repository = TextRepository.create! valid_attributes
+        text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         TextRepository.any_instance.stub(:save).and_return(false)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {}}, valid_session
         response.should render_template("edit")

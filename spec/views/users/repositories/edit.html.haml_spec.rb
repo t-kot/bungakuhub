@@ -10,7 +10,7 @@ describe "users/repositories/edit" do
       :description => "MyText"
     ))
     @view.stub(:current_user).and_return(
-      FactoryGirl.create(:tanaka)
+      FactoryGirl.create(:user)
     )
     @view.stub(:current_locale).and_return("ja")
   end

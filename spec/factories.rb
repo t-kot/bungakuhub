@@ -1,13 +1,13 @@
 FactoryGirl.define do
-  factory :repository do
+  factory :repository  do
     user
     type "TextRepository"
     sequence(:name) {|n|  "TextRepo#{n}"}
     repository_type_id 1
     description "Created by factory_girl"
-    factory :text_repository do
-      type "TextRepository"
-    end
+  end
+  factory :text_repository , parent: :repository do
+    type "TextRepository"
   end
   factory :user do
     sequence(:email) {|n| "email#{n}@example.com"}

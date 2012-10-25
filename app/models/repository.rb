@@ -3,6 +3,15 @@ class Repository < ActiveRecord::Base
   belongs_to :repository_type
   belongs_to :user
 
-
   validates :name,  presence: true, length: {maximum:30}
+
+  def owner
+    self.user
+  end
+  def owner=(arg)
+    self.user=(arg)
+  end
+  def original?
+    self.forked_from.nil?
+  end
 end

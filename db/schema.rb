@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021124042) do
+ActiveRecord::Schema.define(:version => 20121025100033) do
+
+  create_table "branches", :force => true do |t|
+    t.integer  "repository_id"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "languages", :force => true do |t|
     t.string   "code"
@@ -28,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20121021124042) do
     t.text     "description"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "forked_from"
   end
 
   create_table "repository_types", :force => true do |t|

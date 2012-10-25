@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
 
   def user_repository_authenticate
     repository_id = params[:repository_id] || params[:id]
-    unless current_user == Repository.find(repository_id).user
+    unless current_user == Repository.find(repository_id).owner
       flash[:alert] = t("flash.alert.access_denied")
-      redirect_to root_path unless current_user == Repository.find(repository_id).user
+      redirect_to root_path
     end
   end
 

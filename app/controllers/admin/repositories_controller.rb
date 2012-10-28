@@ -1,4 +1,4 @@
-module Users
+module Admin
   class RepositoriesController < ApplicationController
     before_filter :user_repository_authenticate, only: [:edit, :update, :destroy]
     def index

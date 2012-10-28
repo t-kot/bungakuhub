@@ -1,23 +1,7 @@
-module Users
+module Admin
   class BranchesController < ApplicationController
     before_filter :user_repository_authenticate, except: [:index, :show]
-    def index
-      @branches = Branch.all
 
-      respond_to do |format|
-        format.html # index.html.erb
-        format.json { render json: @branches }
-      end
-    end
-
-    def show
-      @branch = Branch.find(params[:id])
-
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @branch }
-      end
-    end
     def new
       @branch = Branch.new
       @branch.repository = Repository.find(params[:repository_id])

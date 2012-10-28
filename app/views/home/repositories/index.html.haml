@@ -1,17 +1,21 @@
-%h1 Listing repositories
+%h1 publicな、すべてのユーザによるサイト上のレポジトリ一覧
 
 %table
   %tr
     %th Type
     %th User
+    %th Repository type
     %th Name
     %th Description
-    %th Action
+    %th
+    %th
+    %th
 
   - @repositories.each do |repository|
     %tr
       %td= repository.type
       %td= repository.user_id
+      %td= repository.repository_type_id
       %td= repository.name
       %td= repository.description
       %td= link_to 'Show', user_repository_path(repository.user,repository)

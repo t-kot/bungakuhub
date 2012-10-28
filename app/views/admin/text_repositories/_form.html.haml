@@ -1,12 +1,8 @@
-= form_for [current_user,@repository.becomes(Repository)] do |f|
-  = render 'common/form_error', record: @repository
+= form_for [current_user,:admin,@text_repository] do |f|
+  = render 'common/form_error', record: @text_repository
 
   .field
-    = f.label :type
-    = f.text_field :type
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
+    = f.hidden_field :user_id
   .field
     - RepositoryType.all.each do |repo_type|
       = f.radio_button :repository_type_id,repo_type.id
@@ -16,6 +12,6 @@
     = f.text_field :name
   .field
     = f.label :description
-    = f.text_area :description
+    = f.text_field :description
   .actions
     = f.submit 'Save'

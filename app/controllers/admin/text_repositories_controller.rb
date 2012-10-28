@@ -1,4 +1,4 @@
-module Users
+module Admin
   class TextRepositoriesController < ApplicationController
     before_filter :user_repository_authenticate, only: [:edit, :update]
     def index

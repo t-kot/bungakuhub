@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe Users::RepositoriesController do
+describe Admin::RepositoriesController do
 
   def valid_attributes
     {

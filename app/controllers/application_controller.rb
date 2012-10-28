@@ -4,6 +4,22 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_locale
 
+  def user_repository_authenticate
+    repository_id = params[:repository_id] || params[:id]
+    unless current_user == Repository.find(repository_id).owner
+      flash[:alert] = t("flash.alert.access_denied")
+      redirect_to root_path
+    end
+  end
+
+  def valid_user_authenticate
+    user_id = params[:user_id] || params[:id]
+    if current_user.try(:to_param) != user_id
+      flash[:alert] = t("flash.alert.access_denied")
+      redirect_to root_path unless current_user.try(:to_param) == user_id
+    end
+  end
+
   def current_locale
     I18n.locale.to_s
   end

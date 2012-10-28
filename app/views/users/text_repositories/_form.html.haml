@@ -1,0 +1,17 @@
+= form_for [current_user,@text_repository] do |f|
+  = render 'common/form_error', record: @text_repository
+
+  .field
+    = f.hidden_field :user_id
+  .field
+    - RepositoryType.all.each do |repo_type|
+      = f.radio_button :repository_type_id,repo_type.id
+      %span= repo_type.name[current_locale]
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+  .actions
+    = f.submit 'Save'

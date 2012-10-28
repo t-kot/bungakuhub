@@ -22,8 +22,12 @@ end
 
 gem 'jquery-rails'
 
-group :test do
+group :development,:test do
   gem 'rspec-rails'
+  gem 'growl'
+end
+
+group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber'
   gem 'spork'
@@ -36,7 +40,6 @@ group :test do
   gem 'rails3-generators'
   gem 'factory_girl_rails', :require => false
   gem 'rb-fsevent'
-  gem 'growl'
 end
 
 

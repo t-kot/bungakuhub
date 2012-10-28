@@ -11,11 +11,35 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021112745) do
+ActiveRecord::Schema.define(:version => 20121025100033) do
+
+  create_table "branches", :force => true do |t|
+    t.integer  "repository_id"
+    t.string   "name"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "languages", :force => true do |t|
     t.string   "code"
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "repositories", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.integer  "repository_type_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "forked_from"
+  end
+
+  create_table "repository_types", :force => true do |t|
+    t.text     "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

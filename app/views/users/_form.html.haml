@@ -1,13 +1,5 @@
 = form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      - if @user.errors.count == 1
-        %h2= t("errors.create.one",model:@user.class.model_name)
-      - else
-        %h2= t("errors.create.other",count:@user.errors.count,model:@user.class.model_name)
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'common/form_error', record: @user
 
   .field
     = f.label :display_name

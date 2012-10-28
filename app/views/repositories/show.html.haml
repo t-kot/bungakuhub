@@ -1,0 +1,19 @@
+%p
+  %b Type:
+  = @repository.type
+%p
+  %b User:
+  = @repository.user_id
+%p
+  %b Repository type:
+  = @repository.repository_type_id
+%p
+  %b Name:
+  = @repository.name
+%p
+  %b Description:
+  = @repository.description
+
+= link_to 'Edit', edit_user_repository_path(current_user,@repository)
+\|
+= link_to 'Back', user_repositories_path(current_user)

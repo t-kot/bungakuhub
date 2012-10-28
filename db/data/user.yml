@@ -3,3 +3,9 @@
   last_name: Kakuei
   email: tanaka@kakuei.com
   password: tanaka
+
+- display_name: User2
+  first_name: fukuda
+  last_name: takeo
+  email: fukuda@takeo.com
+  password: fukuda

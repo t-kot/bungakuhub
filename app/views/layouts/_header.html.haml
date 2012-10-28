@@ -20,6 +20,15 @@
           - if user_signed_in?
             %li.dropdown
               %a.dropdown-toggle{"data-toggle"=>"dropdown"}
+                = t("label.header.repository")
+                %b.caret
+              %ul.dropdown-menu{role:'menu',"aria-labelledby"=>"drop1"}
+                %li
+                  != link_to t("label.repository.list"),user_repositories_path(current_user)
+                %li
+                  != link_to t("label.repository.create"),new_repository_path
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle"=>"dropdown"}
                 Hello, #{current_user.display_name}
                 %b.caret
               %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
@@ -43,7 +52,6 @@
               = I18n.t("label.header.language")
               %b.caret
             %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
-              %li
-                = link_to t("label.header.ja"),"?locale=ja"
-              %li
-                != link_to t("label.header.en"),"?locale=en"
+              - Language.all.each do |lang|
+                %li
+                  != link_to t("label.header.#{lang.code}"),"?locale=#{lang.code}"

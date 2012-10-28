@@ -1,0 +1,25 @@
+%h1 Listing text_repositories
+
+%table
+  %tr
+    %th User
+    %th Repository type
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @text_repositories.each do |text_repository|
+    %tr
+      %td= text_repository.user_id
+      %td= text_repository.repository_type_id
+      %td= text_repository.name
+      %td= text_repository.description
+      %td= link_to 'Show', user_text_repository_path(current_user,text_repository)
+      %td= link_to 'Edit', edit_user_text_repository_path(current_user,text_repository)
+      %td= link_to 'Destroy', user_text_repository_path(current_user,text_repository), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Text repository', new_text_repository_path

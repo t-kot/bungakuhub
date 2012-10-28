@@ -13,3 +13,8 @@
 %p
   %b Description:
   = @repository.description
+
+- @repository.branches.each_with_index do |branch, i|
+  %p= "#{i+1}:#{branch.name}"
+
+= link_to "New Branch", new_user_repository_branch_path(current_user, @repository)

@@ -26,6 +26,12 @@ FactoryGirl.define do
       end
     end
 
+
     after(:create){|user| user.confirm! }
+  end
+
+  factory :branch do
+    sequence(:name) {|n| "Branch#{n}"}
+    repository
   end
 end

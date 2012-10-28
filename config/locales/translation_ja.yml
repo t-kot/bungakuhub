@@ -36,6 +36,7 @@ ja:
       sex: 性別
       repository: レポジトリ
       text_repository: テキストレポジトリ
+      branch: ブランチ
     attributes:
       user:
         email: メールアドレス
@@ -55,6 +56,8 @@ ja:
       update:
         notice: "%{model} が更新されました"
       delete_user: またのご利用をお待ちしております。
+      destroy:
+        notice: "%{model} が削除されました"
     alert:
       access_denied: 許可されていないアクションです
   errors:

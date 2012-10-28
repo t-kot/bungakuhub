@@ -1,0 +1,20 @@
+%h1 Listing branches
+
+%table
+  %tr
+    %th Repository
+    %th Name
+    %th
+    %th
+    %th
+
+  - @branches.each do |branch|
+    %tr
+      %td= branch.repository_id
+      %td= branch.name
+      %td= link_to 'Show', user_repository_branch_path(params[:user_id], params[:repository_id], branch)
+      %td= link_to 'Destroy', user_repository_branch_path(params[:user_id], params[:repository_id], branch), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+//= link_to 'New Branch', new_branch_path

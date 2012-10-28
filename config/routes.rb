@@ -2,7 +2,6 @@ Bungaku::Application.routes.draw do
 
 
 
-  resources :branches
 
   devise_for :users
   devise_scope :user do

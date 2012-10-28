@@ -36,6 +36,7 @@ en:
       sex: Sex
       repository: Repository
       text_repository: Text Repository
+      branch: Branch
     attributes:
       user:
         email: Email
@@ -54,6 +55,8 @@ en:
         notice: "%{model} was successfully created."
       update:
         notice: "%{model} was successfully updated."
+      destroy:
+        notice: "%{model} was successfully deleted."
       delete_user: See you next time!
     alert:
       access_denied: You don't have permittion

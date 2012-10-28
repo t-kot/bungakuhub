@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "users/text_repositories/edit" do
+describe "admin/text_repositories/edit" do
   before(:each) do
     @text_repository = assign(:text_repository, stub_model(TextRepository,
       :user_id => 1,

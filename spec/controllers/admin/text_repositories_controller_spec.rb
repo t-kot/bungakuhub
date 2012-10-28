@@ -1,5 +1,5 @@
 require 'spec_helper'
-describe Users::TextRepositoriesController do
+describe Admin::TextRepositoriesController do
   login_user
 
   def valid_attributes

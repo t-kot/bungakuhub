@@ -1,5 +1,6 @@
 require 'spec_helper'
 describe Admin::RepositoriesController do
+  login_user
 
   def valid_attributes
     {
@@ -15,19 +16,19 @@ describe Admin::RepositoriesController do
 
   describe "GET index" do
     it "assigns all repositories as @repositories" do
-      user = FactoryGirl.create(:user_with_text_repositories)
-      repositories = user.repositories
+      repositories = [FactoryGirl.create(:repository, user: subject.current_user).becomes(TextRepository)]
+      FactoryGirl.create(:repository).becomes(TextRepository)
 
-      get :index, {user_id: user.to_param}, valid_session
+      get :index, {user_id: subject.current_user}, valid_session
       assigns(:repositories).should eq(repositories)
     end
   end
 
   describe "GET show" do
+    login_user
     it "assigns the requested repository as @repository" do
-      user = FactoryGirl.create(:user_with_text_repositories)
-      repository = user.repositories.last
-      get :show, {user_id: repository.to_param, id: repository.to_param}, valid_session
+      repository = FactoryGirl.create(:repository, user: subject.current_user).becomes(TextRepository)
+      get :show, {user_id: subject.current_user, id: repository.to_param}, valid_session
       assigns(:repository).should eq(repository)
     end
   end

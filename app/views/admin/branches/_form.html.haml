@@ -1,10 +1,5 @@
 = form_for [current_user, :admin, @branch.repository.becomes(Repository), @branch] do |f|
-  - if @branch.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@branch.errors.count, "error")} prohibited this branch from being saved:"
-      %ul
-        - @branch.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'common/form_error', record: @branch
 
   = f.hidden_field :repository_id
   .field

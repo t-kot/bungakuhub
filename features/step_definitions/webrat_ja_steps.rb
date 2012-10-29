@@ -49,11 +49,11 @@ end
   visit path_to(page_name)
 end
 
-もし /^"(.*)"と表示されていること$/ do |content|
+ならば /^"(.*)"と表示されていること$/ do |content|
   page.body.should =~ /#{Regexp.escape(content)}/m
 end
 
-もし /^"(.*)"と表示されていないこと$/ do |content|
+ならば /^"(.*)"と表示されていないこと$/ do |content|
   #page.body.should_not =~ /#{text}/m
   page.body.should_not =~ /#{Regexp.escape(content)}/m
 end

@@ -21,6 +21,7 @@ en:
     repository:
       list: Listing My Repository
       create: Create Repository
+      admin: Repository Admin
     button:
       create: Create
   text:

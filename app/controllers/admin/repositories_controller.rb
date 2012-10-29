@@ -1,8 +1,9 @@
 module Admin
   class RepositoriesController < ApplicationController
-    before_filter :user_repository_authenticate, only: [:edit, :update, :destroy]
+    before_filter :user_repository_authenticate, only: [:show, :edit, :update, :destroy]
+    before_filter :valid_user_authenticate, only: [:index]
     def index
-      @repositories = Repository.all
+      @repositories = User.find(params[:user_id]).repositories
 
       respond_to do |format|
         format.html # index.html.erb

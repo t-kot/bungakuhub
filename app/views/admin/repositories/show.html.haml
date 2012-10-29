@@ -19,3 +19,9 @@
   %p= "#{i+1}:#{branch.name}"
 
 = link_to "Public Page", user_repository_path(@repository.user, @repository)
+\|
+= link_to "New Branch", new_user_admin_repository_branch_path(current_user, @repository)
+\|
+= link_to 'Edit', edit_user_admin_repository_path(@repository.user,@repository)
+\|
+= link_to 'Back', user_repositories_path(@repository.user)

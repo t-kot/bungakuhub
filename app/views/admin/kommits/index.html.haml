@@ -1,0 +1,20 @@
+%h1 Listing kommits
+
+%table
+  %tr
+    %th Message
+    %th Revision
+    %th
+    %th
+    %th
+
+  - @kommits.each do |kommit|
+    %tr
+      %td= kommit.message
+      %td= kommit.revision
+      %td= link_to 'Show', user_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id], kommit)
+      %td= link_to 'Destroy', user_admin_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id], kommit), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Kommit', new_user_admin_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id])

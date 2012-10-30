@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start 'rails'
 require 'rubygems'
 require 'spork'
 require 'factory_girl_rails'

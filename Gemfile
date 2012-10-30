@@ -40,6 +40,7 @@ group :test do
   gem 'rails3-generators'
   gem 'factory_girl_rails', :require => false
   gem 'rb-fsevent'
+  gem 'simplecov',  require: false
 end
 
 

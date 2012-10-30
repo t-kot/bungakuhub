@@ -1,0 +1,10 @@
+%p#notice= notice
+
+%p
+  %b Message:
+  = @kommit.message
+%p
+  %b Revision:
+  = @kommit.revision
+
+= link_to 'Back', user_admin_repository_branch_kommits_path(params[:user_id], params[:repository_id], params[:branch_id])

@@ -4,7 +4,11 @@ describe TextRepositoriesController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/text_repositories").should route_to("text_repositories#index")
+      get("/users/User1/text_repositories").should route_to("text_repositories#index", user_id: "User1")
+    end
+
+    it "routes to #show" do
+      get("users/User1/text_repositories/1").should route_to("text_repositories#show", user_id:"User1", id:"1")
     end
 
     it "routes to #new" do

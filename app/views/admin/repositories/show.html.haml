@@ -1,0 +1,28 @@
+%h1 管理用のレポジトリ詳細ページ
+%p
+  %b Type:
+  = @repository.type
+%p
+  %b User:
+  = @repository.user_id
+%p
+  %b Repository type:
+  = @repository.repository_type_id
+%p
+  %b Name:
+  = @repository.name
+%p
+  %b Description:
+  = @repository.description
+
+- @repository.branches.each_with_index do |branch, i|
+  = link_to "#{i+1}:#{branch.name}", user_admin_repository_branch_path(params[:user_id], branch.repository, @repository)
+  %br
+
+= link_to "Public Page", user_repository_path(@repository.user, @repository)
+\|
+= link_to "New Branch", new_user_admin_repository_branch_path(current_user, @repository)
+\|
+= link_to 'Edit', edit_user_admin_repository_path(@repository.user,@repository)
+\|
+= link_to 'Back', user_repositories_path(@repository.user)

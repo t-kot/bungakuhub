@@ -11,13 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025100033) do
+ActiveRecord::Schema.define(:version => 20121029114936) do
+
+  create_table "branch_kommits", :force => true do |t|
+    t.integer  "kommit_id"
+    t.integer  "branch_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "branches", :force => true do |t|
     t.integer  "repository_id"
     t.string   "name"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "kommits", :force => true do |t|
+    t.string   "message"
+    t.string   "revision"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "languages", :force => true do |t|

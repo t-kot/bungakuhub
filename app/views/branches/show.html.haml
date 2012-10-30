@@ -1,0 +1,10 @@
+%p#notice= notice
+
+%p
+  %b Repository:
+  = @branch.repository_id
+%p
+  %b Name:
+  = @branch.name
+
+= link_to 'Back', user_repository_path(@branch.repository.user, @branch.repository)

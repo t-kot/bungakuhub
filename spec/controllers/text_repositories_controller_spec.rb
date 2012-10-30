@@ -16,8 +16,10 @@ describe TextRepositoriesController do
 
   describe "GET index" do
     it "assigns all text_repositories as @text_repositories" do
-      text_repositories = TextRepository.all
-      get :index,  valid_session
+      user = FactoryGirl.create(:user)
+      text_repositories = [FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)]
+      others = FactoryGirl.create(:text_repository)
+      get :index,{user_id: user},  valid_session
       assigns(:text_repositories).should eq(text_repositories)
     end
   end

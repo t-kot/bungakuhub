@@ -9,6 +9,7 @@ gem 'friendly_id'
 
 group :development do
   gem 'erb2haml'
+  gem 'rails-erd'
 end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

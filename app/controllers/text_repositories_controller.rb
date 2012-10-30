@@ -1,7 +1,7 @@
 class TextRepositoriesController < ApplicationController
-  before_filter :authenticate_user!, except:[:index]
+  before_filter :authenticate_user!, except:[:index, :show]
   def index
-    @text_repositories = TextRepository.all
+    @text_repositories = User.find(params[:user_id]).text_repositories
 
     respond_to do |format|
       format.html # index.html.erb
@@ -9,9 +9,18 @@ class TextRepositoriesController < ApplicationController
     end
   end
 
+  def show
+    @text_repository = TextRepository.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @text_repository }
+    end
+  end
+
   def new
     @text_repository = TextRepository.new
-    @text_repository.owner = current_user
+    @text_repository.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb

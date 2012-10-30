@@ -1,0 +1,10 @@
+= form_for [:user, :admin, :repository, :branch, @kommit] do |f|
+  = render 'common/form_error', record: @kommit
+  .field
+    = f.label :message
+    = f.text_field :message
+  .field
+    = f.label :revision
+    = f.text_field :revision
+  .actions
+    = f.submit 'Save'

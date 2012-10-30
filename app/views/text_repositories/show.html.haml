@@ -1,3 +1,4 @@
+%h1 publicなテキストレポジトリ閲覧のページ
 %p
   %b User:
   = @text_repository.user_id
@@ -11,6 +12,7 @@
   %b Description:
   = @text_repository.description
 
-= link_to 'Edit', edit_user_text_repository_path(current_user,@text_repository)
-\|
-= link_to 'Back', user_text_repositories_path(current_user)
+- if current_user == @text_repository.user
+  = link_to 'Edit', edit_user_admin_text_repository_path(current_user,@text_repository)
+  \|
+= link_to 'Back', user_text_repositories_path(@text_repository.user)

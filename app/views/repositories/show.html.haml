@@ -14,6 +14,16 @@
   %b Description:
   = @repository.description
 
-= link_to 'Edit', edit_user_repository_path(current_user,@repository)
-\|
-= link_to 'Back', user_repositories_path(current_user)
+
+- @repository.branches.each_with_index do |branch, i|
+  %span #{i+1}:
+  = link_to branch.name, user_repository_branch_path(branch.repository.user, branch.repository, branch)
+  %br
+
+
+- if current_user == @repository.user
+  = link_to "New Branch", new_user_admin_repository_branch_path(current_user, @repository)
+  \|
+  = link_to 'Edit', edit_user_admin_repository_path(@repository.user,@repository)
+  \|
+= link_to 'Back', user_repositories_path(@repository.user)

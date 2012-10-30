@@ -1,4 +1,4 @@
-%h1 Listing text_repositories
+%h1 publicな、特定のユーザのレポジトリ一覧
 
 %table
   %tr
@@ -16,9 +16,10 @@
       %td= text_repository.repository_type_id
       %td= text_repository.name
       %td= text_repository.description
-      %td= link_to 'Show', user_text_repository_path(current_user,text_repository)
-      %td= link_to 'Edit', edit_user_text_repository_path(current_user,text_repository)
-      %td= link_to 'Destroy', user_text_repository_path(current_user,text_repository), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', user_text_repository_path(text_repository.user,text_repository)
+      - if current_user == text_repository.user
+        %td= link_to 'Edit', edit_user_admin_text_repository_path(current_user,text_repository)
+        %td= link_to 'Destroy', user_text_repository_path(current_user,text_repository), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

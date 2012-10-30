@@ -34,4 +34,8 @@ FactoryGirl.define do
     sequence(:name) {|n| "Branch#{n}"}
     repository
   end
+  factory :kommit do
+    sequence(:message) {|n| "Commit Message #{n}"}
+    sequence(:revision) {|n| "Commit Revision #{n}"}
+  end
 end

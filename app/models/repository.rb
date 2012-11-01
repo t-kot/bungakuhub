@@ -15,4 +15,7 @@ class Repository < ActiveRecord::Base
   def original?
     self.forked_from.nil?
   end
+  def forked?
+    self.forked_from.present?
+  end
 end

@@ -6,6 +6,7 @@ gem 'thin'
 gem 'devise'
 gem 'haml-rails'
 gem 'friendly_id'
+gem 'grit', require: false
 
 group :development do
   gem 'erb2haml'

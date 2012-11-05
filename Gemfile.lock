@@ -84,6 +84,10 @@ GEM
     friendly_id (4.0.8)
     gherkin (2.11.5)
       json (>= 1.4.6)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
     growl (1.0.3)
     guard (1.5.2)
       listen (>= 0.4.2)
@@ -129,6 +133,7 @@ GEM
     nokogiri (1.5.5)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    posix-spawn (0.3.6)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -242,6 +247,7 @@ DEPENDENCIES
   erb2haml
   factory_girl_rails
   friendly_id
+  grit
   growl
   guard
   guard-cucumber

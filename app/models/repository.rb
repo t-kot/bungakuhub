@@ -1,5 +1,6 @@
 require 'grit'
 class Repository < ActiveRecord::Base
+  attr_reader :repo
   attr_accessible :description, :name, :repository_type_id, :type, :user_id
   belongs_to :repository_type
   belongs_to :user
@@ -34,5 +35,9 @@ class Repository < ActiveRecord::Base
 
   def working_dir
     "#{Rails.root}/public/repositories/#{self.name}"
+  end
+
+  def repo
+    Grit::Repo.new("#{self.working_dir}")
   end
 end

@@ -1,3 +1,4 @@
+require 'fileutils'
 class Repository < ActiveRecord::Base
   attr_accessible :description, :name, :repository_type_id, :type, :user_id
   belongs_to :repository_type
@@ -17,5 +18,13 @@ class Repository < ActiveRecord::Base
   end
   def forked?
     self.forked_from.present?
+  end
+
+  def mkdir
+    Dir::mkdir("#{Rails.root}/public/repositories/#{self.name}/")
+  end
+  def init_readme
+    FileUtils.cp("#{Rails.root}/lib/public/README.rdoc",
+                 "#{Rails.root}/public/repositories/#{self.name}/README_template.rdoc")
   end
 end

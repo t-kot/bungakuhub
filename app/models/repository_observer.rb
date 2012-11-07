@@ -1,7 +1,9 @@
 class RepositoryObserver < ActiveRecord::Observer
+  observe Repository, TextRepository
   def before_create(repository)
-    p repository.name
-    Dir::mkdir("#{Rails.root}/public/repositories/#{repository.name}/")
-    File.new("#{Rails.root}/public/repositories/#{repository.name}/README", "w")
+    unless Rails.env.test?
+      repository.mkdir
+      repository.init_readme
+    end
   end
 end

@@ -3,4 +3,6 @@ class Sex < ActiveRecord::Base
   serialize :name
 
   has_many :users
+
+  validates :name, uniqueness: true
 end

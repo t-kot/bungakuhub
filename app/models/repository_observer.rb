@@ -1,7 +1,7 @@
 class RepositoryObserver < ActiveRecord::Observer
   observe Repository, TextRepository
   def before_create(repository)
-    unless Rails.env.test?
+    unless File.exist?("#{repository.working_dir}")
       repository.mkdir
       repository.init_readme
     end

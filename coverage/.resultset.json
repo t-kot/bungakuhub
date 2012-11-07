@@ -278,8 +278,13 @@
         1,
         1,
         1,
+        1,
+        1,
         null,
         1,
+        null,
+        1,
+        0,
         null,
         1,
         0,
@@ -289,6 +294,23 @@
         null,
         1,
         0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
         null,
         1,
         0,
@@ -399,7 +421,6 @@
         1,
         1,
         0,
-        0,
         null,
         null
       ],
@@ -446,10 +467,11 @@
         null,
         1,
         0,
+        0,
         null,
         0,
         0,
-        0,
+        null,
         null,
         null,
         null,
@@ -561,6 +583,12 @@
         1,
         null
       ],
+      "/Users/kotohata/Projects/bungakuhub/app/models/kommit_observer.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
       "/Users/kotohata/Projects/bungakuhub/app/models/language.rb": [
         1,
         1,
@@ -572,6 +600,7 @@
         0,
         0,
         0,
+        null,
         null,
         null
       ],
@@ -591,6 +620,6 @@
         null
       ]
     },
-    "timestamp": 1351765130
+    "timestamp": 1352120112
   }
 }

@@ -3,7 +3,5 @@ class Kommit < ActiveRecord::Base
 
   has_many :branch_kommits, dependent: :destroy
   has_many :branches, through: :branch_kommits
-  accepts_nested_attributes_for :branch_kommits
-
   validates :message, presence: true, length: {maximum: 30}
 end

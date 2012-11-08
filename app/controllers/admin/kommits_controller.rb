@@ -1,8 +1,9 @@
 module Admin
   class KommitsController < ApplicationController
     before_filter :user_repository_authenticate
+    before_filter :load_branch, only: [:index, :new, :create]
     def index
-      @kommits = Branch.find(params[:branch_id]).kommits
+      @kommits = @branch.kommits
 
       respond_to do |format|
         format.html # index.html.erb
@@ -20,12 +21,8 @@ module Admin
     end
 
     def new
-      #@kommit = Kommit.new
-      @branch = Branch.find(params[:branch_id])
       @kommit = Kommit.new
-      @branch_kommit = BranchKommit.new(branch_id:@branch, kommit_id:@kommit)
       @new_post = Post.new
-      @new_post.branch = @branch
 
       respond_to do |format|
         format.html # new.html.erb
@@ -34,10 +31,10 @@ module Admin
     end
 
     def create
-      branch = Branch.find(params[:branch_id])
       @kommit = Kommit.new(params[:kommit])
-      @kommit.branches << branch
-      branch.posts.create(params[:post]) unless blank_post?
+      @kommit.branches << @branch
+      create_new_post
+      update_post
 
       respond_to do |format|
         if @kommit.save
@@ -61,6 +58,24 @@ module Admin
     end
 
     private
+
+    def load_branch
+      @branch = Branch.find(params[:branch_id])
+    end
+
+    def create_new_post
+      branch = Branch.find(params[:branch_id])
+      branch.posts.create(params[:post]) unless blank_post?
+    end
+
+    def update_post
+      if params[:update_posts].present?
+        params[:update_posts].each do |key, value|
+          value[:delete]? Post.find(key).destroy : Post.find(key).update_attributes(value)
+        end
+      end
+    end
+
     def blank_post?
       params[:post].all?{|key, value| value.blank?}
     end

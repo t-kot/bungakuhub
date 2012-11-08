@@ -1,15 +1,16 @@
 = form_for [:user, :admin, :repository, :branch, @kommit] do |f|
   = render 'common/form_error', record: @kommit
-  = f.fields_for @branch_kommit do |bk|
-    = bk.fields_for @branch do |b|
-      - b.object.posts.each do |post|
-        =b.fields_for post do |fi|
-          .field
-            = fi.label :title
-            = fi.text_field :title
-          .field
-            = fi.label :body
-            = fi.text_area :body
+  - @branch.posts.each do |post|
+    = fields_for "update_posts[#{post.id}]", post do |p|
+      .field
+        = p.label :title
+        = p.text_field :title
+      .field
+        = p.label :body
+        = p.text_area :body
+      .field
+        = p.label :delete
+        = p.check_box :delete, {}, true, false
   = fields_for @new_post do |f|
     新しい
     .field
@@ -24,5 +25,6 @@
   .field
     = f.label :revision
     = f.text_field :revision
+  
   .actions
     = f.submit 'Save'

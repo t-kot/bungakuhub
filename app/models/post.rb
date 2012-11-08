@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :body, :title
+  attr_accessor :delete
+  attr_accessible :body, :title, :delete
   belongs_to :branch
-  accepts_nested_attributes_for :branch
 end

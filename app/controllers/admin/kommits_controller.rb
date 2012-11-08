@@ -20,7 +20,12 @@ module Admin
     end
 
     def new
+      #@kommit = Kommit.new
+      @branch = Branch.find(params[:branch_id])
       @kommit = Kommit.new
+      @branch_kommit = BranchKommit.new(branch_id:@branch, kommit_id:@kommit)
+      @new_post = Post.new
+      @new_post.branch = @branch
 
       respond_to do |format|
         format.html # new.html.erb
@@ -29,8 +34,10 @@ module Admin
     end
 
     def create
+      branch = Branch.find(params[:branch_id])
       @kommit = Kommit.new(params[:kommit])
-      @kommit.branches << Branch.find(params[:branch_id])
+      @kommit.branches << branch
+      branch.posts.create(params[:post]) unless blank_post?
 
       respond_to do |format|
         if @kommit.save
@@ -51,6 +58,11 @@ module Admin
         format.html { redirect_to user_admin_repository_branch_kommits_url(params[:user_id], params[:repository_id], params[:branch_id])}
         format.json { head :no_content }
       end
+    end
+
+    private
+    def blank_post?
+      params[:post].all?{|key, value| value.blank?}
     end
   end
 end

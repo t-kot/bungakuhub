@@ -1,5 +1,23 @@
 = form_for [:user, :admin, :repository, :branch, @kommit] do |f|
   = render 'common/form_error', record: @kommit
+  = f.fields_for @branch_kommit do |bk|
+    = bk.fields_for @branch do |b|
+      - b.object.posts.each do |post|
+        =b.fields_for post do |fi|
+          .field
+            = fi.label :title
+            = fi.text_field :title
+          .field
+            = fi.label :body
+            = fi.text_area :body
+  = fields_for @new_post do |f|
+    新しい
+    .field
+      = f.label :title
+      = f.text_field :title
+    .field
+      = f.label :body
+      = f.text_area :body
   .field
     = f.label :message
     = f.text_field :message

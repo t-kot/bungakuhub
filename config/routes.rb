@@ -1,9 +1,4 @@
 Bungaku::Application.routes.draw do
-
-
-
-
-
   devise_for :users
   devise_scope :user do
     get "/users/sign_in", to: 'devise/sessions#new', as: :new_user_session

@@ -6,5 +6,11 @@
 %p
   %b Revision:
   = @kommit.revision
+%p
+  %b Commit Date:
+  = @kommit_info.authored_date
+%p
+  %b Author:
+  = @kommit.user.try(:display_name)
 
 = link_to 'Back', user_admin_repository_branch_kommits_path(params[:user_id], params[:repository_id], params[:branch_id])

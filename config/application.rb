@@ -14,7 +14,7 @@ module Bungaku
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
     config.active_record.whitelist_attributes = true
-    config.active_record.observers = :repository_observer
+    config.active_record.observers = [:repository_observer, :post_observer, :kommit_observer]
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.i18n.default_locale = :ja

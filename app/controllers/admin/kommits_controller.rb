@@ -1,3 +1,4 @@
+require 'grit'
 module Admin
   class KommitsController < ApplicationController
     before_filter :user_repository_authenticate
@@ -13,6 +14,8 @@ module Admin
 
     def show
       @kommit = Kommit.find(params[:id])
+      repository = Repository.find(params[:repository_id])
+      @kommit_info = @kommit.info
 
       respond_to do |format|
         format.html

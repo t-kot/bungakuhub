@@ -27,14 +27,11 @@ class Repository < ActiveRecord::Base
   end
 
   def init_readme
-    #FileUtils.cp("#{Rails.root}/lib/public/README_template.rdoc",
-    #             "#{self.working_dir}/README.rdoc")
     copy_readme
     git_init
     new_file = File.open("#{self.working_dir}/README.rdoc", "w")
     new_blob = Grit::Blob.create(repo, {name:"README.rdoc", data:new_file})
     Dir.chdir(repo.working_dir){repo.add(new_blob.name)}
-    repo.commit_index("First Commit")
   end
 
   def working_dir

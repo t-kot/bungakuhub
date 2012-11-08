@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :sex
   has_many :text_repositories
   has_many :repositories
+  has_many :kommits
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id
 

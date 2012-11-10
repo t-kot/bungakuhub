@@ -15,7 +15,7 @@ class PostObserver < ActiveRecord::Observer
 
   def before_destroy(post)
     repository = post.branch.repository
-    #File.unlink("#{repository.working_dir}/#{post.title}.txt")
-    repository.repo.remove("#{repository.working_dir}/#{post.title}.txt")
+    File.unlink("#{repository.working_dir}/#{post.title}.txt")
+    repository.repo.remove("#{post.title}.txt")
   end
 end

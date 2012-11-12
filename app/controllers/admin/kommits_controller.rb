@@ -15,7 +15,6 @@ module Admin
     def show
       @kommit = Kommit.find(params[:id])
       repository = Repository.find(params[:repository_id])
-      @kommit_info = @kommit.info
 
       respond_to do |format|
         format.html
@@ -35,6 +34,7 @@ module Admin
 
     def create
       @kommit = Kommit.new(params[:kommit])
+      @kommit.user = current_user
       @kommit.branches << @branch
       create_new_post
       update_post

@@ -1,27 +1,36 @@
 = form_for [:user, :admin, :repository, :branch, @kommit] do |f|
   = render 'common/form_error', record: @kommit
-  - @branch.posts.each do |post|
-    = fields_for "update_posts[#{post.id}]", post do |p|
+  %ul.nav.nav-tabs
+    %li.active
+      %a{href:"#new_post", "data-toggle"=>"tab"} New
+    %li
+      %a{href:"#edit", "data-toggle"=>"tab"} Edit
+
+  .tab-content
+    .tab-pane#edit
+      - @branch.posts.each do |post|
+        = fields_for "update_posts[#{post.id}]", post do |p|
+          .field
+            = p.label :title
+            = p.text_field :title
+          .field
+            = p.label :body
+            = p.text_area :body
+          .field
+            = p.label :delete
+            = p.check_box :delete, {}, true, false
+    .tab-pane#new_post
+      = fields_for @new_post do |f|
+        新しい
+        .field
+          = f.label :title
+          = f.text_field :title
+        .field
+          = f.label :body
+          = f.text_area :body
       .field
-        = p.label :title
-        = p.text_field :title
-      .field
-        = p.label :body
-        = p.text_area :body
-      .field
-        = p.label :delete
-        = p.check_box :delete, {}, true, false
-  = fields_for @new_post do |f|
-    新しい
-    .field
-      = f.label :title
-      = f.text_field :title
-    .field
-      = f.label :body
-      = f.text_area :body
-  .field
-    = f.label :message
-    = f.text_field :message
+        = f.label :message
+        = f.text_field :message
   
   .actions
     = f.submit 'Save'

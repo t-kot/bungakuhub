@@ -43,12 +43,13 @@ class Repository < ActiveRecord::Base
     Grit::Repo.new("#{self.working_dir}")
   end
 
+  def git_init
+    repo = Grit::Repo.init("#{self.working_dir}/")
+  end
+
   private
   def copy_readme
     FileUtils.cp("#{Rails.root}/lib/public/README_template.rdoc",
                  "#{self.working_dir}/README.rdoc")
-  end
-  def git_init
-    repo = Grit::Repo.init("#{self.working_dir}/")
   end
 end

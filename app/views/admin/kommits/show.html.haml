@@ -24,5 +24,7 @@
     = diff.diff.force_encoding("UTF-8")
   %br
 
+= link_to 'Revert', user_admin_repository_branch_kommit_revert_path(params[:user_id], params[:repository_id], params[:branch_id], params[:id]), method: :post
+
 
 = link_to 'Back', user_admin_repository_branch_kommits_path(params[:user_id], params[:repository_id], params[:branch_id])

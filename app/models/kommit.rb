@@ -1,10 +1,11 @@
 class Kommit < ActiveRecord::Base
-  attr_accessible :message, :revision
+  attr_accessor :skip_callback
+  attr_accessible :message, :revision, :skip_callback
 
   has_many :branch_kommits, dependent: :destroy
   has_many :branches, through: :branch_kommits
   belongs_to :user
-  validates :message, presence: true, length: {maximum: 30}
+  validates :message, presence: true
 
   def repository
     self.branches.first.repository

@@ -22,7 +22,9 @@ Bungaku::Application.routes.draw do
       resources :text_repositories, except: [:create, :new, :destroy]
       resources :repositories, only: [:index, :show, :edit, :update, :destroy] do
         resources :branches, only: [:show, :new, :create, :destroy] do
-          resources :kommits, only: [:index, :show, :new, :create, :destroy]
+          resources :kommits, only: [:index, :show, :new, :create, :destroy] do
+            resource :revert, only: [:create]
+          end
         end
       end
     end

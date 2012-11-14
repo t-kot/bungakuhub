@@ -13,11 +13,12 @@ module Admin
       kommit.skip_callback = true
       kommit.save
       branch.kommits << kommit
-      current_head.contents.each do |content|
-        Post.create(skip_callback: true,
-                    branch: branch,
-                    title: content.name,
-                    body: content.data)
+      branch.posts.delete_all
+      current_head.tree.contents.each do |content|
+        title = content.name.force_encoding("UTF-8").split(".").first
+        branch.posts.create(skip_callback: true,
+                            title: title,
+                            body: content.data.force_encoding("UTF-8"))
       end
       
       redirect_to user_admin_repository_branch_kommits_path(params[:user_id], params[:repository_id], params[:branch_id])

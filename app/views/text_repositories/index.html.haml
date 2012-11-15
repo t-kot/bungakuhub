@@ -16,11 +16,11 @@
       %td= text_repository.repository_type_id
       %td= text_repository.name
       %td= text_repository.description
-      %td= link_to 'Show', user_text_repository_path(text_repository.user,text_repository)
+      %td= link_to 'Show', text_repository_path(text_repository)
       - if current_user == text_repository.user
-        %td= link_to 'Edit', edit_user_admin_text_repository_path(current_user,text_repository)
-        %td= link_to 'Destroy', user_text_repository_path(current_user,text_repository), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Edit', edit_admin_text_repository_path(text_repository)
+        %td= link_to 'Destroy', text_repository_path(text_repository), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Text repository', new_text_repository_path
+= link_to 'New Text repository', new_user_text_repository_path(current_user)

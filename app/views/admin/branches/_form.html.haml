@@ -1,4 +1,4 @@
-= form_for [current_user, :admin, @branch.repository.becomes(Repository), @branch] do |f|
+= form_for [:admin, @branch.repository.becomes(Repository), @branch] do |f|
   = render 'common/form_error', record: @branch
 
   = f.hidden_field :repository_id

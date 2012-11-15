@@ -13,6 +13,6 @@
   = @text_repository.description
 
 - if current_user == @text_repository.user
-  = link_to 'Edit', edit_user_admin_text_repository_path(current_user,@text_repository)
+  = link_to 'Edit', edit_admin_text_repository_path(@text_repository)
   \|
 = link_to 'Back', user_text_repositories_path(@text_repository.user)

@@ -1,4 +1,4 @@
-= form_for [@text_repository] do |f|
+= form_for [current_user, @text_repository] do |f|
   = render 'common/form_error', record: @text_repository
 
   .field

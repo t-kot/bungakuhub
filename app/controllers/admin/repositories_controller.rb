@@ -1,9 +1,8 @@
 module Admin
   class RepositoriesController < ApplicationController
     before_filter :user_repository_authenticate, only: [:show, :edit, :update, :destroy]
-    before_filter :valid_user_authenticate, only: [:index]
     def index
-      @repositories = User.find(params[:user_id]).repositories
+      @repositories = current_user.repositories
 
       respond_to do |format|
         format.html # index.html.erb
@@ -29,7 +28,7 @@ module Admin
 
       respond_to do |format|
         if @repository.update_attributes(params[:repository])
-          format.html { redirect_to user_repository_url(current_user,@repository), notice: t("flash.info.update.notice", model: t("activerecord.models.repository")) }
+          format.html { redirect_to repository_url(@repository), notice: t("flash.info.update.notice", model: t("activerecord.models.repository")) }
           format.json { head :no_content }
         else
           format.html { render action: "edit" }

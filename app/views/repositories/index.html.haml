@@ -18,10 +18,10 @@
       %td= repository.repository_type_id
       %td= repository.name
       %td= repository.description
-      %td= link_to 'Show', user_repository_path(repository.user,repository)
+      %td= link_to 'Show', repository_path(repository)
       -if current_user == repository.user
-        %td= link_to 'Edit', edit_user_admin_repository_path(current_user,repository)
-        %td= link_to 'Destroy', user_repository_path(current_user,repository), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Edit', edit_admin_repository_path(repository)
+        %td= link_to 'Destroy', admin_repository_path(repository), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

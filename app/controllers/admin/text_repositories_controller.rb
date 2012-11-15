@@ -28,7 +28,7 @@ module Admin
 
       respond_to do |format|
         if @text_repository.update_attributes(params[:text_repository])
-          format.html { redirect_to user_text_repository_path(current_user,@text_repository), notice: t("flash.info.update.notice", model:t("activerecord.models.text_repository"))}
+          format.html { redirect_to text_repository_path(@text_repository), notice: t("flash.info.update.notice", model:t("activerecord.models.text_repository"))}
           format.json { head :no_content }
         else
           format.html { render action: "edit" }

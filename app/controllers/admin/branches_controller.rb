@@ -22,7 +22,7 @@ module Admin
 
       respond_to do |format|
         if @branch.save
-          format.html { redirect_to user_repository_path(current_user,@branch.repository), notice: t("flash.info.create.notice", model: t("activerecord.models.branch"))}
+          format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.create.notice", model: t("activerecord.models.branch"))}
           format.json { render json: @branch, status: :created, location: @branch}
         else
           format.html { render action: "new" }
@@ -36,7 +36,7 @@ module Admin
       @branch.destroy
 
       respond_to do |format|
-        format.html { redirect_to user_repository_path(current_user, @branch.repository), notice: t("flash.info.destroy.notice", model: t("activerecord.models.branch")) }
+        format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.destroy.notice", model: t("activerecord.models.branch")) }
         format.json { head :no_content }
       end
     end

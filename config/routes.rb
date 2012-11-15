@@ -9,26 +9,28 @@ Bungaku::Application.routes.draw do
     resources :repositories, only: [:index]
     resources :text_repositories, only: [:index]
   end
-  resources :repositories, only: [:new]
-  resources :text_repositories, only: [:new, :create]
-  resources :users, except: [:index, :new, :create] do
-    resources :repositories, only: [:index, :show] do
-      resources :branches, only: [:index, :show] do
-        resources :kommits, only: [:index, :show]
-      end
+  resources :users, only: [:show, :edit, :update, :destroy] do
+    resources :repositories, only: [:index, :new]
+    resources :text_repositories, only: [:index, :new, :create]
+  end
+  resources :text_repositories, only: [:show]
+  resources :repositories, only: [:show] do
+    resources :branches, only: [:index]
+  end
+  resources :branches, only: [:show] do
+    resources :kommits, only: [:index, :show]
+  end
+
+  namespace :admin do
+    resources :text_repositories, only: [:index, :show, :edit, :update]
+    resources :repositories, only: [:index, :show, :edit, :update, :destroy] do
+      resources :branches, only: [:new, :create]
     end
-    resources :text_repositories, only: [:index, :show]
-    namespace :admin do
-      resources :text_repositories, except: [:create, :new, :destroy]
-      resources :repositories, only: [:index, :show, :edit, :update, :destroy] do
-        resources :branches, only: [:show, :new, :create, :destroy] do
-          resources :kommits, only: [:index, :show, :new, :create, :destroy] do
-            resource :revert, only: [:create]
-          end
-        end
+    resources :branches, only: [:show, :destroy] do
+      resources :kommits, only: [:index, :show, :new, :create, :destroy] do
+        resource :revert, only: [:create]
       end
     end
   end
-
   root to: "home#index"
 end

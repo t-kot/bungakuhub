@@ -18,7 +18,7 @@
       |user2    |repo3    |1              |
       |user2    |repo4    |1              |
     かつ メールアドレスが"email1@example.com"のユーザとしてログインしている
-    もし "user1のレポジトリ管理ページ"へアクセス
+    もし "レポジトリ管理ページ"へアクセス
     ならば 以下のレポジトリが表示されている:
       |name|repository_type|
       |repo1|1|
@@ -27,17 +27,3 @@
       |name|repository_type|
       |repo3|1|
       |repo4|1|
-  シナリオ: 他人の管理ページを表示する
-    前提 以下のユーザが存在している:
-      |email             |display_name|
-      |email1@example.com|  user1     |
-      |email2@example.com|  user2     |
-    かつ 以下のレポジトリが存在している:
-      |user     |name     |repository_type|
-      |user1    |repo1    |1              |
-      |user1    |repo2    |1              |
-      |user2    |repo3    |1              |
-      |user2    |repo4    |1              |
-    かつ メールアドレスが"email1@example.com"のユーザとしてログインしている
-    もし "user2のレポジトリ管理ページ"へアクセス
-    ならば "許可されていないアクションです"と表示されていること

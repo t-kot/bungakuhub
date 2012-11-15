@@ -8,8 +8,8 @@
       |email | display_name|
       |email1@example.com | user1|
       |email2@example.com | user2|
-    もし ユーザとしてログインしている
-    かつ "テキストレポジトリ作成ページ"へアクセス
+    もし メールアドレスが"email1@example.com"のユーザとしてログインしている
+    かつ "user1のテキストレポジトリ作成ページ"へアクセス
     ならば "公開"と表示されていること
     かつ "プライベート"と表示されていること
     かつ "レポジトリ名"と表示されていること
@@ -19,8 +19,8 @@
       |email | display_name|
       |email1@example.com | user1|
       |email2@example.com | user2|
-    もし ユーザとしてログインしている
-    かつ "テキストレポジトリ作成ページ"へアクセス
+    もし メールアドレスが"email1@example.com"のユーザとしてログインしている
+    かつ "user1のテキストレポジトリ作成ページ"へアクセス
     かつ "text_repository_repository_type_id_1"を選択する
     かつ "レポジトリ名"に"テストのレポジトリ"と入力する
     かつ "説明"に"これはcucumberによって作成しました"と入力する
@@ -31,13 +31,16 @@
       |email | display_name|
       |email1@example.com | user1|
       |email2@example.com | user2|
-    もし ユーザとしてログインしている
-    かつ "テキストレポジトリ作成ページ"へアクセス
+    もし メールアドレスが"email1@example.com"のユーザとしてログインしている
+    かつ "user1のテキストレポジトリ作成ページ"へアクセス
     かつ "text_repository_repository_type_id_1"を選択する
     かつ "レポジトリ名"に""と入力する
     かつ "説明"に"これはcucumberによって作成しました"と入力する
     かつ "作成"ボタンをクリックする
     ならば "は保存されませんでした"と表示されていること
   シナリオ: ログインせずに、テキストレポジトリを作成しようとする
-    もし "テキストレポジトリ作成ページ"へアクセス
+    前提 以下のユーザが存在している:
+      |email | display_name|
+      |email1@example.com | user1|
+    もし "user1のテキストレポジトリ作成ページ"へアクセス
     ならば "ログインしてください"と表示されていること

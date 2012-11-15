@@ -1,20 +1,20 @@
 require 'grit'
 module Admin
   class KommitsController < ApplicationController
-    before_filter :user_repository_authenticate
+    before_filter :user_branch_authenticate
     before_filter :load_branch, only: [:index, :new, :create]
     def index
       @kommits = @branch.kommits
 
       respond_to do |format|
-        format.html # index.html.erb
+        format.html
         format.json { render json: @kommits }
       end
     end
 
     def show
       @kommit = Kommit.find(params[:id])
-      repository = Repository.find(params[:repository_id])
+      repository = @kommit.repository
 
       respond_to do |format|
         format.html
@@ -27,7 +27,7 @@ module Admin
       @new_post = Post.new
 
       respond_to do |format|
-        format.html # new.html.erb
+        format.html
         format.json { render json: @kommit }
       end
     end
@@ -41,7 +41,7 @@ module Admin
 
       respond_to do |format|
         if @kommit.save
-          format.html { redirect_to user_admin_repository_branch_kommits_path(params[:user_id],params[:repository_id], params[:branch_id]), notice: 'Kommit was successfully created.' }
+          format.html { redirect_to admin_branch_kommits_path(params[:branch_id]), notice: 'Kommit was successfully created.' }
           format.json { render json: @kommit, status: :created, location: @kommit }
         else
           format.html { render action: "new" }

@@ -12,8 +12,8 @@
     %tr
       %td= branch.repository_id
       %td= branch.name
-      %td= link_to 'Show', user_repository_branch_path(params[:user_id], params[:repository_id], branch)
-      %td= link_to 'Destroy', user_repository_branch_path(params[:user_id], params[:repository_id], branch), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', admin_branch_path(branch)
+      %td= link_to 'Destroy', admin_branch_path(branch), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

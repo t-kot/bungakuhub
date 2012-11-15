@@ -8,7 +8,7 @@ describe RepositoriesController do
     end
 
     it "routes to #show" do
-      get("/users/User1/repositories/1").should route_to("repositories#show", user_id:"User1", id: "1")
+      get("/repositories/1").should route_to("repositories#show", id: "1")
     end
 
     it "routes to #new" do

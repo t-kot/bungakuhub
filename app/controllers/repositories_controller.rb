@@ -5,18 +5,17 @@ class RepositoriesController < ApplicationController
     @repositories = User.find(params[:user_id]).repositories
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @repositories }
     end
   end
 
   def show
     @repository = Repository.find(params[:id])
-    @repository.repo
 
     respond_to do |format|
-      format.html # show.html.erb
-      #format.json { render json: @repository }
+      format.html
+      format.json { render json: @repository }
     end
   end
 
@@ -24,7 +23,7 @@ class RepositoriesController < ApplicationController
     @repository = Repository.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @repository }
     end
   end

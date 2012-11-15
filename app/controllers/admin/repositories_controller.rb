@@ -1,5 +1,6 @@
 module Admin
   class RepositoriesController < ApplicationController
+    before_filter :authenticate_user!
     before_filter :user_repository_authenticate, only: [:show, :edit, :update, :destroy]
     def index
       @repositories = current_user.repositories

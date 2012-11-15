@@ -4,7 +4,7 @@ class TextRepositoriesController < ApplicationController
     @text_repositories = User.find(params[:user_id]).text_repositories
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @text_repositories }
     end
   end
@@ -13,7 +13,7 @@ class TextRepositoriesController < ApplicationController
     @text_repository = TextRepository.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @text_repository }
     end
   end
@@ -23,7 +23,7 @@ class TextRepositoriesController < ApplicationController
     @text_repository.user = current_user
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @text_repository }
     end
   end

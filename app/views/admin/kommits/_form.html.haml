@@ -1,4 +1,4 @@
-= form_for [:user, :admin, :repository, :branch, @kommit] do |f|
+= form_for [:admin,:branch, @kommit] do |f|
   = render 'common/form_error', record: @kommit
   %ul.nav.nav-tabs
     %li.active

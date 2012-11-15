@@ -11,25 +11,25 @@ module NavigationHelpers
       new_user_session_path
     when /ユーザ登録ページ/
       new_user_registration_path
-    when /テキストレポジトリ作成ページ/
-      new_text_repository_path
+    when /^(.*)のテキストレポジトリ作成ページ/
+      @user = User.find_by_display_name($1)
+      new_user_text_repository_path(@user)
     when /自分のプロフィール編集ページ/
       edit_user_path(@current_user)
     when /^(.*)のプロフィール編集ページ$/
       @user = User.find_by_display_name($1)
       edit_user_path(@user)
-    when /^(.*)のレポジトリ管理ページ$/
-      @user = User.find_by_display_name($1)
-      user_admin_repositories_path(@user)
+    when /レポジトリ管理ページ$/
+      admin_repositories_path
     when /^(.*)のレポジトリ詳細ページ$/
       repo = Repository.find_by_name($1)
-      user_admin_repository_path(repo.user, repo)
+      admin_repository_path(repo)
     when /^(.*)のレポジトリ編集ページ$/
       repo = Repository.find_by_name($1)
-      edit_user_admin_repository_path(repo.user, repo)
+      edit_admin_repository_path(repo)
     when /^(.*)のブランチ作成ページ$/
       repo = Repository.find_by_name($1)
-      new_user_admin_repository_branch_path(repo.user, repo)
+      new_admin_repository_branch_path(repo)
     else
       raise "\"#{page_name}\"にあたるpathが見当たりませんでした．"
     end

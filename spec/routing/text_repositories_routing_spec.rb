@@ -8,15 +8,15 @@ describe TextRepositoriesController do
     end
 
     it "routes to #show" do
-      get("users/User1/text_repositories/1").should route_to("text_repositories#show", user_id:"User1", id:"1")
+      get("/text_repositories/1").should route_to("text_repositories#show", id:"1")
     end
 
     it "routes to #new" do
-      get("/text_repositories/new").should route_to("text_repositories#new")
+      get("/users/User1/text_repositories/new").should route_to("text_repositories#new", user_id:"User1")
     end
 
     it "routes to #create" do
-      post("/text_repositories").should route_to("text_repositories#create")
+      post("/users/User1/text_repositories").should route_to("text_repositories#create", user_id:"User1")
     end
 
   end

@@ -1,12 +1,13 @@
 module Admin
   class BranchesController < ApplicationController
-    before_filter :user_repository_authenticate
+    before_filter :user_branch_authenticate, only:[:show, :destroy]
+    before_filter :user_repository_authenticate, only:[:new, :create]
 
     def show
       @branch = Branch.find(params[:id])
 
       respond_to do |format|
-        format.html # index.html.erb
+        format.html
         format.json { render json: @kommits }
       end
     end

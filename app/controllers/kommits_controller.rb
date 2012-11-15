@@ -3,7 +3,7 @@ class KommitsController < ApplicationController
     @kommits = Branch.find(params[:branch_id]).kommits
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @kommits }
     end
   end
@@ -12,7 +12,7 @@ class KommitsController < ApplicationController
     @kommit = Kommit.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @kommit }
     end
   end

@@ -56,7 +56,7 @@ describe Admin::BranchesController do
       it "redirects to the created branch" do
         create_repository_for(@current_user)
         post :create, {user_id: subject.current_user, repository_id: @repository, :branch => valid_attributes}, valid_session
-        response.should redirect_to user_repository_path(@current_user, @repository)
+        response.should redirect_to repository_path(@repository)
       end
     end
 
@@ -89,7 +89,7 @@ describe Admin::BranchesController do
     it "redirects to the branches list" do
       create_branch_for(@current_user)
       delete :destroy, {user_id: subject.current_user, repository_id: @repository, :id => @branch.to_param}, valid_session
-      response.should redirect_to user_repository_path(subject.current_user, @repository)
+      response.should redirect_to repository_path(@repository)
     end
   end
 

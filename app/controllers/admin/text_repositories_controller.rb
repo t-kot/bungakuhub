@@ -1,8 +1,8 @@
 module Admin
   class TextRepositoriesController < ApplicationController
-    before_filter :user_repository_authenticate, only: [:edit, :update]
+
     def index
-      @text_repositories = TextRepository.all
+      @text_repositories = current_user.text_repositories
 
       respond_to do |format|
         format.html # index.html.erb

@@ -12,9 +12,9 @@
     %tr
       %td= kommit.message
       %td= kommit.revision
-      %td= link_to 'Show', user_admin_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id], kommit)
-      %td= link_to 'Destroy', user_admin_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id], kommit), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', admin_branch_kommit_path(params[:branch_id], kommit)
+      %td= link_to 'Destroy', admin_branch_kommit_path(params[:branch_id], kommit), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Kommit', new_user_admin_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id])
+= link_to 'New Kommit', new_admin_branch_kommit_path(params[:branch_id])

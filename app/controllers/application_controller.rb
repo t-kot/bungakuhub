@@ -7,16 +7,21 @@ class ApplicationController < ActionController::Base
   def user_repository_authenticate
     repository_id = params[:repository_id] || params[:id]
     unless current_user == Repository.find(repository_id).owner
-      flash[:alert] = t("flash.alert.access_denied")
-      redirect_to root_path
+      access_deny
+    end
+  end
+
+  def user_branch_authenticate
+    branch_id = params[:branch_id] || params[:id]
+    unless current_user == Branch.find(branch_id).repository.owner
+      access_deny
     end
   end
 
   def valid_user_authenticate
     user_id = params[:user_id] || params[:id]
     if current_user.try(:to_param) != user_id
-      flash[:alert] = t("flash.alert.access_denied")
-      redirect_to root_path unless current_user.try(:to_param) == user_id
+      access_deny
     end
   end
 
@@ -26,5 +31,11 @@ class ApplicationController < ActionController::Base
   def set_locale
     session[:locale] = params[:locale] if params[:locale] && Language.all.map(&:code).index(params[:locale])
     I18n.locale = session[:locale] if session[:locale]
+  end
+
+  private
+  def access_deny
+    flash[:alert] = t("flash.alert.access_denied")
+    redirect_to root_path
   end
 end

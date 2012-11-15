@@ -1,5 +1,6 @@
 module Admin
   class RevertsController < ApplicationController
+    before_filter :user_branch_authenticate
 
     def create
       @kommit = Kommit.find(params[:kommit_id])
@@ -17,7 +18,7 @@ module Admin
                             body: content.data.force_encoding("UTF-8"))
       end
       
-      redirect_to user_admin_repository_branch_kommits_path(params[:user_id], params[:repository_id], params[:branch_id])
+      redirect_to admin_branch_kommits_path(params[:branch_id])
     end
   
   end

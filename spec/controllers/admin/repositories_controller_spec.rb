@@ -76,7 +76,7 @@ describe Admin::RepositoriesController do
       it "redirects to the repository" do
         repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => valid_attributes}, valid_session
-        response.should redirect_to user_repository_path(subject.current_user.to_param,repository)
+        response.should redirect_to repository_path(repository)
         repository.destroy
       end
     end

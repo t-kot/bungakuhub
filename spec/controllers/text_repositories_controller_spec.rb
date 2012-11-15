@@ -35,7 +35,7 @@ describe TextRepositoriesController do
     end
     context "When not yet authenticated" do
       it "redirects to new session path" do
-        get :new, {user_id: subject.current_user}, valid_session
+        get :new, {user_id: 3}, valid_session
         response.should redirect_to new_user_session_path
         flash[:alert].should eq I18n.t("devise.failure.unauthenticated")
       end
@@ -62,7 +62,7 @@ describe TextRepositoriesController do
 
       it "redirects to the created text_repository" do
         post :create, {user_id: subject.current_user, :text_repository => valid_attributes}, valid_session
-        response.should redirect_to user_text_repository_path(subject.current_user,TextRepository.last)
+        response.should redirect_to text_repository_path(TextRepository.last)
         TextRepository.last.destroy
       end
     end

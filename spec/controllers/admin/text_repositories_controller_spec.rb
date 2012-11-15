@@ -17,11 +17,13 @@ describe Admin::TextRepositoriesController do
   end
 
   describe "GET index" do
+    login_user
     it "assigns all text_repositories as @text_repositories" do
-      user = FactoryGirl.create(:user)
+      user = @current_user
+      @view.stub(:current_user).and_return(subject.current_user)
       text_repository = FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)
       text_repositories = [text_repository]
-      get :index, {user_id: user.to_param}, valid_session
+      get :index, {}, valid_session
       assigns(:text_repositories).should eq(text_repositories)
       text_repository.destroy
     end
@@ -73,7 +75,7 @@ describe Admin::TextRepositoriesController do
       it "redirects to the text_repository" do
         text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => valid_attributes}, valid_session
-        response.should redirect_to user_text_repository_path(subject.current_user)
+        response.should redirect_to text_repository_path(text_repository)
         flash[:notice].should eq I18n.t("flash.info.update.notice", model: I18n.t("activerecord.models.text_repository"))
         text_repository.destroy
       end

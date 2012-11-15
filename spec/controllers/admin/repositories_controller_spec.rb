@@ -17,10 +17,10 @@ describe Admin::RepositoriesController do
   describe "GET index" do
     it "assigns all repositories as @repositories" do
       repositories = [FactoryGirl.create(:repository, user: subject.current_user).becomes(TextRepository)]
-      FactoryGirl.create(:repository).becomes(TextRepository)
 
       get :index, {user_id: subject.current_user}, valid_session
       assigns(:repositories).should eq(repositories)
+      repositories.each{|repository| repository.destroy}
     end
   end
 
@@ -30,6 +30,7 @@ describe Admin::RepositoriesController do
       repository = FactoryGirl.create(:repository, user: subject.current_user).becomes(TextRepository)
       get :show, {user_id: subject.current_user, id: repository.to_param}, valid_session
       assigns(:repository).should eq(repository)
+      repository.destroy
     end
   end
 
@@ -40,6 +41,7 @@ describe Admin::RepositoriesController do
         repository = FactoryGirl.create(:repository, user: @current_user).becomes(TextRepository)
         get :edit, {user_id:repository.user, id:repository.to_param}, valid_session
         assigns(:repository).should eq(repository)
+        repository.destroy
       end
     end
     context "When invalid user" do
@@ -48,6 +50,7 @@ describe Admin::RepositoriesController do
         get :edit, {user_id:repository.user,id:repository.to_param}, valid_session
         response.should redirect_to root_path
         flash[:alert].should eq I18n.t("flash.alert.access_denied")
+        repository.destroy
       end
     end
   end
@@ -60,18 +63,21 @@ describe Admin::RepositoriesController do
         repository = FactoryGirl.create(:text_repository, user: @current_user)
         TextRepository.any_instance.should_receive(:update_attributes).with({'name' => 'hogehoge'})
         put :update, {user_id: subject.current_user,:id => repository.to_param, :repository => {'name' => 'hogehoge'}}, valid_session
+        repository.destroy
       end
 
       it "assigns the requested repository as @repository" do
         repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => valid_attributes}, valid_session
         assigns(:repository).should eq(repository)
+        repository.destroy
       end
 
       it "redirects to the repository" do
         repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => repository.to_param, :repository => valid_attributes}, valid_session
         response.should redirect_to user_repository_path(subject.current_user.to_param,repository)
+        repository.destroy
       end
     end
 
@@ -81,6 +87,7 @@ describe Admin::RepositoriesController do
         Repository.any_instance.stub(:save).and_return(false)
         put :update, {user_id: repository.user, :id => repository.to_param, :repository => {:name => ''}}, valid_session
         assigns(:repository).should eq(repository)
+        repository.destroy
       end
 
       it "re-renders the 'edit' template" do
@@ -88,6 +95,7 @@ describe Admin::RepositoriesController do
         Repository.any_instance.stub(:save).and_return(false)
         put :update, {user_id: repository.user, :id => repository.to_param, :repository => {:name => ''}}, valid_session
         response.should render_template("edit")
+        repository.destroy
       end
     end
   end
@@ -100,6 +108,7 @@ describe Admin::RepositoriesController do
         expect {
           delete :destroy, {user_id: repository.user,:id => repository.to_param}, valid_session
         }.to change(Repository, :count).by(-1)
+        repository.destroy
       end
 
       it "redirects to the repositories list" do
@@ -107,6 +116,7 @@ describe Admin::RepositoriesController do
         user = repository.user
         delete :destroy, {user_id: repository.user, :id => repository.to_param}, valid_session
         response.should redirect_to(user_repositories_url(user))
+        repository.destroy
       end
     end
     context "When invalid user" do
@@ -115,6 +125,7 @@ describe Admin::RepositoriesController do
         delete :destroy, {user_id:repository.user, :id => repository.to_param}, valid_session
         response.should redirect_to root_path
         flash[:alert].should eq I18n.t("flash.alert.access_denied")
+        repository.destroy
       end
     end
   end

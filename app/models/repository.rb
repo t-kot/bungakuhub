@@ -1,8 +1,8 @@
 require 'fileutils'
 require 'grit'
 class Repository < ActiveRecord::Base
-  attr_accessor :repo
-  attr_accessible :description, :name, :repository_type_id, :type, :user_id
+  attr_accessor :repo, :skip_callback
+  attr_accessible :description, :name, :repository_type_id, :type, :user_id, :skip_callback
   belongs_to :repository_type
   belongs_to :user
   has_many :branches

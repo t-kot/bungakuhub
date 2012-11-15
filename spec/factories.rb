@@ -17,14 +17,14 @@ FactoryGirl.define do
     password "testtest"
     password_confirmation "testtest"
     
-    factory :user_with_text_repositories do
-      ignore do
-        text_repositories_count 5
-      end
-      after(:create) do |user,evaluator|
-        FactoryGirl.create_list(:text_repository, evaluator.text_repositories_count,user: user)
-      end
-    end
+    #factory :user_with_text_repositories do
+    #  ignore do
+    #    text_repositories_count 5
+    #  end
+    #  after(:create) do |user,evaluator|
+    #    FactoryGirl.create_list(:text_repository, evaluator.text_repositories_count,user: user)
+    #  end
+    #end
 
 
     after(:create){|user| user.confirm! }

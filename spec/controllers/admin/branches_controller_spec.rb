@@ -12,6 +12,10 @@ describe Admin::BranchesController do
     {}
   end
 
+  after(:each) do
+    @repository.destroy
+  end
+
   describe "GET new" do
     context "already authenticated" do
       login_user

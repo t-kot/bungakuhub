@@ -5,4 +5,8 @@ class Branch < ActiveRecord::Base
   has_many :kommits, through: :branch_kommits
   has_many :posts
   validates :name, presence: true, length: {maximum: 30}
+
+  def delete_all_post
+    self.posts.delete_all
+  end
 end

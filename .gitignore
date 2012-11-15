@@ -6,3 +6,4 @@
 .rvmrc
 /coverage
 /public/repositories
+.*\.swp

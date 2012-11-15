@@ -4,6 +4,7 @@ FactoryGirl.factories.map(&:name).each do |factory_name|
   describe "#{factory_name} factory" do
     it 'should be valid' do
       build(factory_name).should be_valid
+      Repository.destroy_all
     end
   end
 end

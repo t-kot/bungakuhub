@@ -29,9 +29,8 @@ class PostObserver < ActiveRecord::Observer
 
   def before_destroy(post)
     return if post.skip_callback
-    repository = post.branch.repository
-    File.unlink("#{repository.working_dir}/#{post.title}.txt")
-    repository.repo.remove("#{post.title}.txt")
+    post.delete_file
+    post.remove_index
   end
 
 end

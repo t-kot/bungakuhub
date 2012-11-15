@@ -6,7 +6,8 @@ describe TextRepositoriesController do
       type: "TextRepository",
       repository_type_id: 1,
       description: "Hello,world",
-      name: "sample code"
+      name: "sample code",
+      skip_callback: true
     }
   end
 
@@ -18,9 +19,9 @@ describe TextRepositoriesController do
     it "assigns all text_repositories as @text_repositories" do
       user = FactoryGirl.create(:user)
       text_repositories = [FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)]
-      others = FactoryGirl.create(:text_repository)
       get :index,{user_id: user},  valid_session
       assigns(:text_repositories).should eq(text_repositories)
+      text_repositories.each(&:destroy)
     end
   end
 
@@ -49,17 +50,20 @@ describe TextRepositoriesController do
         expect {
           post :create, {user_id: subject.current_user,:text_repository => valid_attributes}, valid_session
         }.to change(TextRepository, :count).by(1)
+        TextRepository.last.destroy
       end
 
       it "assigns a newly created text_repository as @text_repository" do
         post :create, {user_id: subject.current_user, :text_repository => valid_attributes}, valid_session
         assigns(:text_repository).should be_a(TextRepository)
         assigns(:text_repository).should be_persisted
+        TextRepository.last.destroy
       end
 
       it "redirects to the created text_repository" do
         post :create, {user_id: subject.current_user, :text_repository => valid_attributes}, valid_session
         response.should redirect_to user_text_repository_path(subject.current_user,TextRepository.last)
+        TextRepository.last.destroy
       end
     end
 

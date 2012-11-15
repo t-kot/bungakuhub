@@ -18,19 +18,22 @@ describe Admin::TextRepositoriesController do
 
   describe "GET index" do
     it "assigns all text_repositories as @text_repositories" do
-      user = FactoryGirl.create(:user_with_text_repositories)
-      text_repositories = user.text_repositories
+      user = FactoryGirl.create(:user)
+      text_repository = FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)
+      text_repositories = [text_repository]
       get :index, {user_id: user.to_param}, valid_session
       assigns(:text_repositories).should eq(text_repositories)
+      text_repository.destroy
     end
   end
 
   describe "GET show" do
     it "assigns the requested text_repository as @text_repository" do
-      user = FactoryGirl.create(:user_with_text_repositories)
-      text_repository = user.text_repositories.first
+      user = FactoryGirl.create(:user)
+      text_repository = FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)
       get :show, {user_id: user.to_param,:id => text_repository.to_param}, valid_session
       assigns(:text_repository).should eq(text_repository)
+      text_repository.destroy
     end
   end
 
@@ -42,6 +45,7 @@ describe Admin::TextRepositoriesController do
         text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         get :edit, {user_id: subject.current_user, :id => text_repository}, valid_session
         assigns(:text_repository).should eq(text_repository)
+        text_repository.destroy
       end
     end
     context "When not authenticated" do
@@ -56,12 +60,14 @@ describe Admin::TextRepositoriesController do
         text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         TextRepository.any_instance.should_receive(:update_attributes).with({'description' => 'test', 'name' => 'test'})
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {'description' => 'test','name' => 'test'}}, valid_session
+        text_repository.destroy
       end
 
       it "assigns the requested text_repository as @text_repository" do
         text_repository = FactoryGirl.create(:text_repository, user: @current_user).becomes(TextRepository)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {'description' => 'test' } }, valid_session
         assigns(:text_repository).should eq(text_repository)
+        text_repository.destroy
       end
 
       it "redirects to the text_repository" do
@@ -69,6 +75,7 @@ describe Admin::TextRepositoriesController do
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => valid_attributes}, valid_session
         response.should redirect_to user_text_repository_path(subject.current_user)
         flash[:notice].should eq I18n.t("flash.info.update.notice", model: I18n.t("activerecord.models.text_repository"))
+        text_repository.destroy
       end
     end
 
@@ -78,6 +85,7 @@ describe Admin::TextRepositoriesController do
         TextRepository.any_instance.stub(:save).and_return(false)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {}}, valid_session
         assigns(:text_repository).should eq(text_repository)
+        text_repository.destroy
       end
 
       it "re-renders the 'edit' template" do
@@ -85,6 +93,7 @@ describe Admin::TextRepositoriesController do
         TextRepository.any_instance.stub(:save).and_return(false)
         put :update, {user_id: subject.current_user, :id => text_repository.to_param, :text_repository => {}}, valid_session
         response.should render_template("edit")
+        text_repository.destroy
       end
     end
   end

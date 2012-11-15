@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'grit'
 class RepositoryObserver < ActiveRecord::Observer
   observe Repository, TextRepository
@@ -11,9 +12,12 @@ class RepositoryObserver < ActiveRecord::Observer
     repository.git_init
     branch = repository.branches.create(name:"master")
     branch.posts.create(title:"README", body:"README")
-    #repository.init_readme
     kommit = Kommit.new(message:"First Commit(README)")
     kommit.branches << branch
     kommit.save
+  end
+
+  def before_destroy(repository)
+    FileUtils.rm_r(repository.working_dir, {force:true})
   end
 end

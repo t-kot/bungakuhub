@@ -17,16 +17,6 @@ FactoryGirl.define do
     password "testtest"
     password_confirmation "testtest"
     
-    #factory :user_with_text_repositories do
-    #  ignore do
-    #    text_repositories_count 5
-    #  end
-    #  after(:create) do |user,evaluator|
-    #    FactoryGirl.create_list(:text_repository, evaluator.text_repositories_count,user: user)
-    #  end
-    #end
-
-
     after(:create){|user| user.confirm! }
   end
 
@@ -36,6 +26,10 @@ FactoryGirl.define do
   end
   factory :kommit do
     sequence(:message) {|n| "Commit Message #{n}"}
-    sequence(:revision) {|n| "Commit Revision #{n}"}
+  end
+  factory :post do
+    sequence(:title) {|n| "Title#{n}"}
+    sequence(:body) {|n| "Post body #{n}"}
+    branch
   end
 end

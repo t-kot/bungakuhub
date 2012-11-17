@@ -68,7 +68,12 @@ module Admin
 
     def create_new_post
       branch = Branch.find(params[:branch_id])
-      branch.posts.create(params[:post]) unless blank_post?
+      if blank_post?
+        @new_post = Post.new
+      else
+        @new_post = branch.posts.build(params[:post])
+        format.html { render action: "new"} unless @new_post.save
+      end
     end
 
     def update_post
@@ -80,7 +85,7 @@ module Admin
     end
 
     def blank_post?
-      params[:post].all?{|key, value| value.blank?}
+      params[:post].all?{|key, value| value.blank?} if params[:post].present?
     end
   end
 end

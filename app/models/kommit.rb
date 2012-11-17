@@ -1,6 +1,6 @@
 class Kommit < ActiveRecord::Base
-  attr_accessor :skip_callback
-  attr_accessible :message, :revision, :skip_callback
+  attr_accessor :bare
+  attr_accessible :message, :revision, :bare
 
   has_many :branch_kommits, dependent: :destroy
   has_many :branches, through: :branch_kommits

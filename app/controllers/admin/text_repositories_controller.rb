@@ -1,5 +1,6 @@
 module Admin
   class TextRepositoriesController < ApplicationController
+    before_filter :user_repository_authenticate, only:[:show, :edit, :update]
 
     def index
       @text_repositories = current_user.text_repositories

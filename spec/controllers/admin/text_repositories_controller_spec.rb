@@ -19,9 +19,8 @@ describe Admin::TextRepositoriesController do
   describe "GET index" do
     login_user
     it "assigns all text_repositories as @text_repositories" do
-      user = @current_user
-      @view.stub(:current_user).and_return(subject.current_user)
-      text_repository = FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)
+      subject.current_user.should_not be_nil
+      text_repository = FactoryGirl.create(:text_repository, user:subject.current_user).becomes(TextRepository)
       text_repositories = [text_repository]
       get :index, {}, valid_session
       assigns(:text_repositories).should eq(text_repositories)
@@ -30,10 +29,10 @@ describe Admin::TextRepositoriesController do
   end
 
   describe "GET show" do
+    login_user
     it "assigns the requested text_repository as @text_repository" do
-      user = FactoryGirl.create(:user)
-      text_repository = FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)
-      get :show, {user_id: user.to_param,:id => text_repository.to_param}, valid_session
+      text_repository = FactoryGirl.create(:text_repository, user:@current_user).becomes(TextRepository)
+      get :show, {user_id: subject.current_user,:id => text_repository.to_param}, valid_session
       assigns(:text_repository).should eq(text_repository)
       text_repository.destroy
     end

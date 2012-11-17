@@ -9,7 +9,7 @@ describe KommitsController do
 
   def valid_attributes
     {
-    skip_callback:true,
+    bare:true,
     message:"test",
     revision:"Test"
     }

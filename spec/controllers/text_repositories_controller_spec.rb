@@ -7,7 +7,7 @@ describe TextRepositoriesController do
       repository_type_id: 1,
       description: "Hello,world",
       name: "sample code",
-      skip_callback: true
+      bare: true
     }
   end
 

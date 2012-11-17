@@ -6,7 +6,7 @@ module Admin
       @repositories = current_user.repositories
 
       respond_to do |format|
-        format.html # index.html.erb
+        format.html
         format.json { render json: @repositories }
       end
     end
@@ -15,7 +15,7 @@ module Admin
       @repository = Repository.find(params[:id])
 
       respond_to do |format|
-        format.html # show.html.erb
+        format.html
         format.json { render json: @repository }
       end
     end

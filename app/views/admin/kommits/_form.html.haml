@@ -20,17 +20,18 @@
             = p.label :delete
             = p.check_box :delete, {}, true, false
     .tab-pane#new_post
-      = fields_for @new_post do |f|
-        新しい
+      = fields_for @new_post do |np|
+        New
         .field
-          = f.label :title
-          = f.text_field :title
+          = np.label :title
+          = np.text_field :title
         .field
-          = f.label :body
-          = f.text_area :body
-      .field
-        = f.label :message
-        = f.text_field :message
+          = np.label :body
+          = np.text_area :body
   
+  .clearfix
+  .field
+    = f.label :message
+    = f.text_field :message
   .actions
     = f.submit 'Save'

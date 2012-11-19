@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Branch do
   it "should be valid" do
     repository = FactoryGirl.create(:repository)
-    branch = repository.branches.create(name: "master")
+    branch = repository.branches.create(name: "develop")
     branch.should be_valid
     repository.destroy
   end

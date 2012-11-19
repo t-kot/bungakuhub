@@ -4,19 +4,13 @@ module Admin
 
     def create
       @kommit = Kommit.find(params[:kommit_id])
-      @kommit.revert
       branch = Branch.find(params[:branch_id])
-      kommit = branch.kommits.build(message:@kommit.git_message,
-                           revision:@kommit.git_revision)
-      kommit.bare = true
-      kommit.save
-      branch.delete_all_post
-      @kommit.contents.each do |content|
-        title = content.name.force_encoding("UTF-8").split(".").first
-        branch.posts.create(bare: true,
-                            title: title,
-                            body: content.data.force_encoding("UTF-8"))
-      end
+      @kommit.revert(branch.name)
+      kommit = branch.kommits.create(message:@kommit.git_message,
+                                    revision:@kommit.git_revision,
+                                    bare:true)
+      branch.destroy_all_post
+      branch.create_bare_post_for(@kommit)
       
       redirect_to admin_branch_kommits_path(params[:branch_id])
     end

@@ -14,6 +14,7 @@ module Admin
 
     def show
       @kommit = Kommit.find(params[:id])
+      @branch = Branch.find(params[:branch_id])
       repository = @kommit.repository
 
       respond_to do |format|
@@ -40,10 +41,12 @@ module Admin
       update_post
 
       respond_to do |format|
-        if @kommit.save
-          format.html { redirect_to admin_branch_kommits_path(params[:branch_id]), notice: 'Kommit was successfully created.' }
+        if @new_post.valid? && @kommit.save
+          @new_post.save unless blank_post?
+          format.html { redirect_to admin_branch_kommits_path(params[:branch_id]), notice: t("flash.info.create.notice", model: t("activerecord.models.kommit")) }
           format.json { render json: @kommit, status: :created, location: @kommit }
         else
+          @new_post = Post.new if blank_post?
           format.html { render action: "new" }
           format.json { render json: @kommit.errors, status: :unprocessable_entity }
         end
@@ -67,13 +70,7 @@ module Admin
     end
 
     def create_new_post
-      branch = Branch.find(params[:branch_id])
-      if blank_post?
-        @new_post = Post.new
-      else
-        @new_post = branch.posts.build(params[:post])
-        format.html { render action: "new"} unless @new_post.save
-      end
+      @new_post = @branch.posts.build(params[:post])
     end
 
     def update_post

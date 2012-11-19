@@ -1,7 +1,6 @@
 class KommitObserver < ActiveRecord::Observer
   def before_create(kommit)
-    return if kommit.bare
-    set_revision(kommit)
+    set_revision(kommit) unless kommit.bare
   end
 
   def after_create(kommit)

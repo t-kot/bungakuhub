@@ -30,6 +30,9 @@ module NavigationHelpers
     when /^(.*)のブランチ作成ページ$/
       repo = Repository.find_by_name($1)
       new_admin_repository_branch_path(repo)
+    when /^(.*)の(.*)ブランチのコミット作成ページ$/
+      branch = Repository.find_by_name($1).branches.find_by_name($2)
+      new_admin_branch_kommit_path(branch)
     else
       raise "\"#{page_name}\"にあたるpathが見当たりませんでした．"
     end

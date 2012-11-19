@@ -38,6 +38,7 @@ ja:
       repository: レポジトリ
       text_repository: テキストレポジトリ
       branch: ブランチ
+      kommit: コミット
     attributes:
       user:
         email: メールアドレス

@@ -1,3 +1,4 @@
+require 'grit'
 class Kommit < ActiveRecord::Base
   attr_accessor :bare
   attr_accessible :message, :revision, :bare
@@ -15,8 +16,9 @@ class Kommit < ActiveRecord::Base
     self.repository.repo.commits(self.revision).first
   end
 
-  def revert
+  def revert(branch="master")
     Dir.chdir(self.repository.working_dir) do
+      system("git checkout #{branch}")
       system("git revert --no-edit #{self.revision}")
     end
   end
@@ -31,6 +33,10 @@ class Kommit < ActiveRecord::Base
 
   def contents
     self.info.tree.contents
+  end
+
+  def head?(branch='master')
+    self.revision == self.repository.repo.commits(branch).first.id
   end
 
 

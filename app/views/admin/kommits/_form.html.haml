@@ -8,7 +8,7 @@
 
   .tab-content
     .tab-pane#edit
-      - @branch.posts.each do |post|
+      - @branch.posts.select{|x| x.id.present?}.each do |post|
         = fields_for "update_posts[#{post.id}]", post do |p|
           .field
             = p.label :title

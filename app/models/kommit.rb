@@ -4,9 +4,10 @@ class Kommit < ActiveRecord::Base
   attr_accessible :message, :revision, :bare
 
   has_many :branch_kommits, dependent: :destroy
-  has_many :branches, through: :branch_kommits
+  has_many :branches, through: :branch_kommits, uniq: true
   belongs_to :user
   validates :message, presence: true
+
 
   def repository
     self.branches.first.repository

@@ -70,8 +70,8 @@ describe Admin::KommitsController do
       it "update old post" do
         create_branch_for(@current_user)
         oldpost = FactoryGirl.create(:post, branch: @branch)
-        Post.any_instance.should_receive(:update_attributes).with({"title"=>"test", "body"=>"test"})
-        post :create, {user_id: subject.current_user,repository_id:@repository, branch_id:@branch, kommit:valid_attributes, "update_posts"=>{oldpost.to_param=>{title:"test", body:"test"}}}, valid_session
+        Post.any_instance.should_receive(:update_attributes).with({"title"=>"testttt", "body"=>"test"})
+        post :create, {user_id: subject.current_user,repository_id:@repository, branch_id:@branch, kommit:valid_attributes, "update_posts"=>{oldpost.to_param=>{title:"testttt", body:"test"}}}, valid_session
       end
     end
 

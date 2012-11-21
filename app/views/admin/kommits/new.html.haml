@@ -1,5 +1,21 @@
 %h1 New kommit
 
+%h3 Status
+
+追加されたポスト
+%ul
+- @branch.status.added.each do |key, value|
+  %li= key
+削除されたポスト
+%ul
+- @branch.status.deleted.each do |key, value|
+  %li= key
+更新されたポスト
+%ul
+- @branch.status.changed.each do |key, value|
+  %li= key
+
+
 = render 'form'
 
 = link_to 'Back', admin_branch_kommits_path(params[:branch_id])

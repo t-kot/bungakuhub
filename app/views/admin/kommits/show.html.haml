@@ -24,6 +24,11 @@
     = diff.diff.force_encoding("UTF-8")
   %br
 
+%h3 View Diff with this commit
+- @branch.kommits.each do |kommit|
+  - unless @kommit == kommit
+    = link_to kommit.message, admin_branch_kommit_diff_path(params[:branch_id], @kommit, compare_id: kommit)
+
 - unless @kommit.head?(@branch.name)
   = link_to 'Revert', admin_branch_kommit_revert_path(params[:branch_id], params[:id]), method: :post
 

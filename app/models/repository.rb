@@ -44,4 +44,8 @@ class Repository < ActiveRecord::Base
     self.branches.find_by_name("master")
   end
 
+  def status
+    self.repo.status
+  end
+
 end

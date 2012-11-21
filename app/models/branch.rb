@@ -8,6 +8,7 @@ class Branch < ActiveRecord::Base
   validates :name, presence: true, length: {maximum:30},
             uniqueness: {scope: :repository_id}
 
+  delegate :status, to: :repository
   def destroy_all_post
     self.posts.each{|post| post.bare = true}
     self.posts.destroy_all

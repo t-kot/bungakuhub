@@ -39,6 +39,7 @@ en:
       text_repository: Text Repository
       branch: Branch
       kommit: Commit
+      post: Post
     attributes:
       user:
         email: Email

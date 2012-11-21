@@ -1,34 +1,5 @@
 = form_for [:admin,:branch, @kommit] do |f|
   = render 'common/form_error', record: @kommit
-  %ul.nav.nav-tabs
-    %li.active
-      %a{href:"#new_post", "data-toggle"=>"tab"} New
-    %li
-      %a{href:"#edit", "data-toggle"=>"tab"} Edit
-
-  .tab-content
-    .tab-pane#edit
-      - @branch.posts.select{|x| x.id.present?}.each do |post|
-        = fields_for "update_posts[#{post.id}]", post do |p|
-          .field
-            = p.label :title
-            = p.text_field :title
-          .field
-            = p.label :body
-            = p.text_area :body
-          .field
-            = p.label :delete
-            = p.check_box :delete, {}, true, false
-    .tab-pane#new_post
-      = fields_for @new_post do |np|
-        New
-        .field
-          = np.label :title
-          = np.text_field :title
-        .field
-          = np.label :body
-          = np.text_area :body
-  
   .clearfix
   .field
     = f.label :message

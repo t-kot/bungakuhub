@@ -15,9 +15,22 @@
       |user1    |repo1    |1              |
     かつ メールアドレスが"email1@example.com"のユーザとしてログインしている
     かつ "repo1のブランチ作成ページ"へアクセス
-    もし "Name"に"master"と入力する
+    もし "Name"に"develop"と入力する
     かつ "Save"ボタンをクリックする
     ならば "が作成されました"と表示されていること
+
+  シナリオ: ブランチの作成に失敗する(すでにあるブランチ名)
+    前提 以下のユーザが存在している:
+      |email             |display_name|
+      |email1@example.com|  user1     |
+    かつ 以下のレポジトリが存在している:
+      |user     |name     |repository_type|
+      |user1    |repo1    |1              |
+    かつ メールアドレスが"email1@example.com"のユーザとしてログインしている
+    かつ "repo1のブランチ作成ページ"へアクセス
+    もし "Name"に"master"と入力する
+    かつ "Save"ボタンをクリックする
+    ならば "すでに存在します"と表示されていること
   シナリオ: 異なるユーザとしてブランチを作成しようとする
     前提 以下のユーザが存在している:
       |email             |display_name|

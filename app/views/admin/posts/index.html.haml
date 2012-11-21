@@ -1,0 +1,34 @@
+%ul.nav.nav-tabs
+  %li.active
+    %a{href:"#new_post", "data-toggle"=>"tab"} New
+  %li
+    %a{href:"#edit", "data-toggle"=>"tab"} Edit
+
+.tab-content
+  .tab-pane#new_post
+    = form_for [:admin, @branch, @post] do |f|
+      = render 'common/form_error', record: @post
+      .field
+        = f.label :title
+        = f.text_field :title
+      .field
+        = f.label :body
+        = f.text_area :body
+      .field
+        = f.submit 'Save'
+  .tab-pane#edit
+    編集
+    - @posts.each do |post|
+      - if post.id == @update_post.try(:id)
+        - post = @update_post
+      = form_for [:admin,  post] do |f|
+        = render 'common/form_error', record: post
+        .field
+          = f.label :title
+          = f.text_field :title
+        .field
+          = f.label :body
+          = f.text_area :body
+        .field
+          = f.submit 'Save'
+      = link_to 'Destroy', admin_post_path(post), method: :delete, data: {confirm: 'Are you sure?' }

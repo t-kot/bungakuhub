@@ -30,7 +30,9 @@ Bungaku::Application.routes.draw do
       resources :kommits, only: [:index, :show, :new, :create, :destroy] do
         resource :revert, only: [:create]
       end
+      resources :posts, only: [:index, :create]
     end
+    resources :posts, only: [:update, :destroy]
   end
   root to: "home#index"
 end

@@ -12,11 +12,11 @@ class PostObserver < ActiveRecord::Observer
       File.rename("#{repository.working_dir}/#{post.title_was}.txt", "#{repository.working_dir}/#{post.title}.txt")
       repository.repo.remove("#{post.title_was}.txt")
       update_file = open("#{repository.working_dir}/#{post.title}.txt", "w"){|f| f.write(post.body)}
-      blob = Grit::Blob.create(repository.repo, {name:"#{post.title}.txt", data: update_file})
     else
       update_file = open("#{repository.working_dir}/#{post.title}.txt", "w"){|f| f.write(post.body)}
-      blob = repository.repo.tree / "#{post.title}.txt".force_encoding("ASCII-8BIT")
     end
+    blob = Grit::Blob.create(repository.repo, {name:"#{post.title}.txt", data: update_file})
+    debugger
     Dir.chdir(repository.repo.working_dir){repository.repo.add(blob.name)}
   end
 

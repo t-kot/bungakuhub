@@ -39,6 +39,7 @@ ja:
       text_repository: テキストレポジトリ
       branch: ブランチ
       kommit: コミット
+      post: ポスト
     attributes:
       user:
         email: メールアドレス

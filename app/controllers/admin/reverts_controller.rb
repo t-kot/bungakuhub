@@ -11,9 +11,9 @@ module Admin
                                     bare:true)
       branch.destroy_all_post
       branch.create_bare_post_for(@kommit)
-      
+
       redirect_to admin_branch_kommits_path(params[:branch_id])
     end
-  
+
   end
 end

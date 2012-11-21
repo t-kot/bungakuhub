@@ -34,6 +34,13 @@ end
   end
 end
 
+もし /^以下のポストが存在している:$/ do |table|
+  table.rows.each do |repository, branch, title, body|
+    branch = Repository.find_by_name(repository).branches.find_by_name(branch)
+    branch.posts.create(title:title, body:body)
+  end
+end
+
 もし /^以下のレポジトリが表示されている:$/ do |table|
   table.rows.each do |repo_name,type|
     step %Q["#{repo_name}"と表示されていること]

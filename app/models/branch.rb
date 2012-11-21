@@ -16,7 +16,7 @@ class Branch < ActiveRecord::Base
   def create_bare_post_for(kommit)
     kommit.contents.each do |content|
       title = content.name.force_encoding("UTF-8").split(".").first
-      branch.posts.create(bare: true,
+      self.posts.create(bare: true,
                           title: title,
                           body: content.data.force_encoding("UTF-8"))
     end

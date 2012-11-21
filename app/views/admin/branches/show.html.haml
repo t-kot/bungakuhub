@@ -14,5 +14,7 @@
 %br
 = link_to "Create Kommit", new_admin_branch_kommit_path(params[:id])
 %br
+= link_to "Open Editor", admin_branch_posts_path(params[:id])
+%br
 
 = link_to 'Back', repository_branches_path(@branch.repository)

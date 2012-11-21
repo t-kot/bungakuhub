@@ -52,6 +52,9 @@ ja:
       repository:
         name: レポジトリ名
         description: 説明
+      post:
+        title: タイトル
+        body: 本文
   flash:
     info:
       create:

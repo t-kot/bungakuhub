@@ -10,10 +10,10 @@ module Admin
     def create
       @branch = Branch.find(params[:branch_id])
       @post = Post.new(params[:post])
+      @post.branch = @branch
 
       respond_to do |format|
         if @post.valid?
-          @post.branch = @branch
           @post.save
           format.html {redirect_to admin_branch_posts_path(params[:branch_id]), notice: t("flash.info.create.notice", model: t("activerecord.models.post"))}
         else

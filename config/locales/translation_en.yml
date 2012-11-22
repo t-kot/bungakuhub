@@ -52,6 +52,8 @@ en:
       repository:
         name: Repository Name
         description: Description
+      branch:
+        name: Branch Name
   flash:
     info:
       create:

@@ -55,6 +55,8 @@ ja:
       post:
         title: タイトル
         body: 本文
+      branch:
+        name: ブランチ名
   flash:
     info:
       create:

@@ -1,7 +1,7 @@
 module Admin
   class BranchesController < ApplicationController
     before_filter :user_branch_authenticate, only:[:show, :destroy]
-    before_filter :user_repository_authenticate, only:[:new, :create]
+    #before_filter :user_repository_authenticate, only:[:new, :create]
 
     def show
       @branch = Branch.find(params[:id])
@@ -13,13 +13,14 @@ module Admin
     end
 
     def new
+      @orig_branch = Branch.find(params[:branch_id])
       @branch = Branch.new
-      @branch.repository = Repository.find(params[:repository_id])
     end
 
     def create
+      @orig_branch = Branch.find(params[:branch_id])
       @branch = Branch.new(params[:branch])
-      @branch.repository = Repository.find(params[:repository_id])
+      @branch.repository = @orig_branch.repository
 
       respond_to do |format|
         if @branch.save

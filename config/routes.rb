@@ -23,13 +23,12 @@ Bungaku::Application.routes.draw do
 
   namespace :admin do
     resources :text_repositories, only: [:index, :show, :edit, :update]
-    resources :repositories, only: [:index, :show, :edit, :update, :destroy] do
-      resources :branches, only: [:new, :create]
-    end
+    resources :repositories, only: [:index, :show, :edit, :update, :destroy]
     resources :branches, only: [:show, :destroy] do
+      resources :branches, only: [:new, :create], path: :checkout, as: :checkouts
       resources :kommits, only: [:index, :show, :new, :create, :destroy] do
         resource :revert, only: [:create]
-        resource :diff, only: [:show]
+        resources :diffs, only: [:show]
       end
       resources :posts, only: [:index, :create]
     end

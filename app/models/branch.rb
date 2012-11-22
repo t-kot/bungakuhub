@@ -4,7 +4,6 @@ class Branch < ActiveRecord::Base
   has_many :branch_kommits, dependent: :destroy
   has_many :kommits, through: :branch_kommits, uniq: true
   has_many :posts
-  validates :name, presence: true, length: {maximum: 30}
   validates :name, presence: true, length: {maximum:30},
             uniqueness: {scope: :repository_id}
 

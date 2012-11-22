@@ -4,11 +4,11 @@ describe Admin::BranchesController do
   describe "routing" do
 
     it "routes to #new" do
-      get("/admin/repositories/1/branches/new").should route_to("admin/branches#new", repository_id:"1")
+      get("/admin/branches/1/checkout/new").should route_to("admin/branches#new", branch_id:"1")
     end
 
     it "routes to #create" do
-      post("/admin/repositories/1/branches").should route_to("admin/branches#create", repository_id:"1")
+      post("/admin/branches/1/checkout").should route_to("admin/branches#create", branch_id:"1")
     end
 
     it "routes to #destroy" do

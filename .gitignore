@@ -4,6 +4,6 @@
 /tmp
 .DS_Store
 .rvmrc
-/coverage
+coverage/*
 /public/repositories
 .*\.swp

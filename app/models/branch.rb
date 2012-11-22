@@ -21,4 +21,8 @@ class Branch < ActiveRecord::Base
                           body: content.data.force_encoding("UTF-8"))
     end
   end
+
+  def original
+    Branch.find(self.original_id)
+  end
 end

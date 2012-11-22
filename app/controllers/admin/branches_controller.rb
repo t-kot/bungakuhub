@@ -1,6 +1,6 @@
 module Admin
   class BranchesController < ApplicationController
-    before_filter :user_branch_authenticate, only:[:show, :destroy]
+    before_filter :user_branch_authenticate, only:[:show, :new, :destroy]
     #before_filter :user_repository_authenticate, only:[:new, :create]
 
     def show
@@ -15,15 +15,25 @@ module Admin
     def new
       @orig_branch = Branch.find(params[:branch_id])
       @branch = Branch.new
+
+      respond_to do |format|
+        format.html
+        format.json { render json: @branch }
+      end
     end
 
     def create
       @orig_branch = Branch.find(params[:branch_id])
       @branch = Branch.new(params[:branch])
       @branch.repository = @orig_branch.repository
+      @branch.original_id = @orig_branch.id
 
       respond_to do |format|
         if @branch.save
+          @branch.kommits << @orig_branch.kommits
+          @orig_branch.posts.each do |post|
+            @branch.posts.create(title:post.title, body:post.body)
+          end
           format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.create.notice", model: t("activerecord.models.branch"))}
           format.json { render json: @branch, status: :created, location: @branch}
         else

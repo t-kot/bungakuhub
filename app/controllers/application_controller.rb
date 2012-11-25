@@ -33,9 +33,30 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:locale] if session[:locale]
   end
 
+
+
+
   private
   def access_deny
     flash[:alert] = t("flash.alert.access_denied")
     redirect_to root_path
   end
+  #def checkout_to(branch)
+  #  repo = branch.repository.repo
+  #  repository.lock do
+  #    repo.create_stash
+  #    repo.checkout_to(branch.name)
+  #    repo.pop_first_at(branch.name)
+  #  end
+  #end
+
+  #def checkout_master_from(branch)
+  #  repo = branch.repository.repo
+  #  repository.lock do
+  #    repo.create_stash
+  #    repo.checkout_to("master")
+  #    repo.pop_first_at("master")
+  #  end
+  #end
+
 end

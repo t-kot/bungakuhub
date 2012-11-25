@@ -9,6 +9,7 @@ module Admin
 
     def create
       @branch = Branch.find(params[:branch_id])
+      @branch.repository.checkout_to(@branch.name)
       @post = Post.new(params[:post])
       @post.branch = @branch
 
@@ -21,11 +22,13 @@ module Admin
           format.html { render action: :index}
         end
       end
+      @branch.repository.checkout_to("master")
     end
 
     def update
       @update_post = Post.find(params[:id])
       @branch = @update_post.branch
+      @branch.repository.checkout_to(@branch.name)
       respond_to do |format|
         if @update_post.update_attributes(params[:post])
           format.html {redirect_to admin_branch_posts_path(@branch), notice: t("flash.info.update.notice", model: t("activerecord.models.post"))}
@@ -35,17 +38,20 @@ module Admin
           format.html {render action: :index}
         end
       end
+      @branch.repository.checkout_to("master")
     end
 
     def destroy
       @post = Post.find(params[:id])
       branch = @post.branch
+      branch.repository.checkout_to(branch.name)
       @post.destroy
 
       respond_to do |format|
         format.html { redirect_to admin_branch_posts_path(branch)}
         format.json { head :no_content}
       end
+      branch.repository.checkout_to("master")
     end
   end
 end

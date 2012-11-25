@@ -48,4 +48,35 @@ class Repository < ActiveRecord::Base
     self.repo.status
   end
 
+  def lock(&block)
+    Timeout::timeout(10) do
+      Dir.chdir(self.working_dir) do
+        File.open(".lock", "w") do |f|
+          begin
+            f.flock(File::LOCK_EX)
+            block.call
+          ensure
+            f.flock(File::LOCK_UN)
+            File.unlink(f)
+          end
+        end
+      end
+    end
+  rescue Exception => ex
+    raise AccessDenied.new('timeout')
+  end
+
+  def checkout_master
+    self.checkout_to("master")
+  end
+
+  def checkout_to(branch_name)
+    self.lock do
+      self.repo.create_stash
+      self.repo.checkout_to(branch_name)
+      self.repo.pop_first_at(branch_name)
+      self.repo.stashes(branch_name).each(&:destroy)
+    end
+  end
+
 end

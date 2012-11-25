@@ -1,5 +1,6 @@
 class Branch < ActiveRecord::Base
-  attr_accessible :name, :repository_id
+  attr_accessor :bare
+  attr_accessible :name, :repository_id, :bare
   belongs_to :repository
   has_many :branch_kommits, dependent: :destroy
   has_many :kommits, through: :branch_kommits, uniq: true
@@ -19,6 +20,13 @@ class Branch < ActiveRecord::Base
       self.posts.create(bare: true,
                           title: title,
                           body: content.data.force_encoding("UTF-8"))
+    end
+  end
+
+  def post_initialize
+    repo = self.repository.repo
+    repo.commits.first.tree.contents.each do |content|
+      self.posts.create(title:content.name, body:content.data, bare:true)
     end
   end
 

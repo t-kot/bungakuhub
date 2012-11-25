@@ -4,16 +4,20 @@
 
 追加されたポスト
 %ul
-- @branch.status.added.each do |key, value|
+- @status.added.each do |key, value|
   %li= key
 削除されたポスト
 %ul
-- @branch.status.deleted.each do |key, value|
+- @status.deleted.each do |key, value|
   %li= key
 更新されたポスト
 %ul
-- @branch.status.changed.each do |key, value|
+- @status.changed.each do |key, value|
   %li= key
+
+//%pre
+//  =@status.pretty
+
 
 
 = render 'form'

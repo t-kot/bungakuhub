@@ -3,6 +3,8 @@ module Admin
   class KommitsController < ApplicationController
     before_filter :user_branch_authenticate
     before_filter :load_branch, only: [:index, :new, :create]
+    #before_filter :checkout_target, only: [:new]
+    #after_filter :checkout_master, only: [:new]
     def index
       @kommits = @branch.kommits
 
@@ -23,16 +25,20 @@ module Admin
     end
 
     def new
+      @branch.repository.checkout_to(@branch.name)
       @kommit = Kommit.new
       @post = Post.new
+      @status = @branch.status
 
       respond_to do |format|
         format.html
         format.json { render json: @kommit }
       end
+      @branch.repository.checkout_to("master")
     end
 
     def create
+      @branch.repository.checkout_to(@branch.name)
       @kommit = Kommit.new(params[:kommit])
       @kommit.user = current_user
       @kommit.branches << @branch
@@ -46,6 +52,7 @@ module Admin
           format.json { render json: @kommit.errors, status: :unprocessable_entity }
         end
       end
+      @branch.repository.checkout_to("master")
     end
 
     def destroy
@@ -64,6 +71,7 @@ module Admin
     def load_branch
       @branch = Branch.find(params[:branch_id])
     end
+
 
   end
 end

@@ -31,9 +31,6 @@ module Admin
       respond_to do |format|
         if @branch.save
           @branch.kommits << @orig_branch.kommits
-          @orig_branch.posts.each do |post|
-            @branch.posts.create(title:post.title, body:post.body)
-          end
           format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.create.notice", model: t("activerecord.models.branch"))}
           format.json { render json: @branch, status: :created, location: @branch}
         else

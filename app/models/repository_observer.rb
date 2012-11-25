@@ -10,7 +10,7 @@ class RepositoryObserver < ActiveRecord::Observer
 
   def after_create(repository)
     repository.git_init
-    branch = repository.branches.create(name:"master")
+    branch = repository.branches.create(name:"master", bare:true)
     branch.posts.create(title:"README", body:"README")
     kommit = Kommit.new(message:"First Commit(README)")
     kommit.branches << branch

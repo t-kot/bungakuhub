@@ -21,6 +21,12 @@ module Grit
         system("git checkout #{branch_name}")
       end
     end
+
+    def create_branch(branch_name)
+      Dir.chdir(self.working_dir) do
+        system("git branch #{branch_name}")
+      end
+    end
   end
 
   class Stash

@@ -25,6 +25,7 @@ Bungaku::Application.routes.draw do
     resources :text_repositories, only: [:index, :show, :edit, :update]
     resources :repositories, only: [:index, :show, :edit, :update, :destroy]
     resources :branches, only: [:show, :destroy] do
+      resource :merge, only: [:new, :create]
       resources :branches, only: [:new, :create], path: :checkout, as: :checkouts
       resources :kommits, only: [:index, :show, :new, :create, :destroy] do
         resource :revert, only: [:create]

@@ -1,0 +1,7 @@
+hoge
+
+= form_tag(admin_branch_merge_path) do
+  hoge
+  = collection_select(:merge, :target, @targets, :id, :name)
+
+  = submit_tag([:merge])

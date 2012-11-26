@@ -11,6 +11,7 @@ class BranchObserver < ActiveRecord::Observer
 
   private
   def git_checkout_b(branch)
+    branch.repository.repo.create_branch(branch.name)
     branch.repository.checkout_to(branch.name)
   end
 end

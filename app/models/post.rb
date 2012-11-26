@@ -8,16 +8,16 @@ class Post < ActiveRecord::Base
 
   def delete_file
     repository = self.branch.repository
-    File.unlink("#{repository.working_dir}/#{self.title}.txt")
+    File.unlink("#{repository.working_dir}/#{self.title}")
   end
 
   def remove_index
     repository = self.branch.repository
-    repository.repo.remove("#{self.title}.txt")
+    repository.repo.remove("#{self.title}")
   end
 
   def path
     repository = self.branch.repository
-    "#{repository.working_dir}/#{self.title}.txt"
+    "#{repository.working_dir}/#{self.title}"
   end
 end

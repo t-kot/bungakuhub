@@ -33,4 +33,11 @@ class Branch < ActiveRecord::Base
   def original
     Branch.find(self.original_id)
   end
+
+  def checkout(params)
+    branch = Branch.new(params)
+    branch.original_id = self.id
+    branch.repository = self.repository
+    branch
+  end
 end

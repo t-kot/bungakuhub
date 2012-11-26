@@ -34,6 +34,26 @@ end
   end
 end
 
+もし /^以下のブランチが存在している:$/ do |table|
+  table.rows.each do |repo, branch|
+    Repository.find_by_name(repo).branches.create(name:branch)
+  end
+end
+
+もし /^以下のブランチを作成する:$/ do |table|
+  table.rows.each do |repo, branch|
+    Repository.find_by_name(repo).branches.create(name:branch)
+  end
+end
+
+もし /^"(.*)"の"(.*)"ブランチから"(.*)"ブランチを作成する$/ do |repo, orig_branch, new_branch|
+  orig_branch = Repository.find_by_name(repo).branches.find_by_name(orig_branch)
+  new_branch = orig_branch.checkout({name:new_branch})
+  new_branch.save
+end
+
+
+
 もし /^以下のポストが存在している:$/ do |table|
   table.rows.each do |repository, branch, title, body|
     branch = Repository.find_by_name(repository).branches.find_by_name(branch)

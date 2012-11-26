@@ -24,9 +24,10 @@ module Admin
 
     def create
       @orig_branch = Branch.find(params[:branch_id])
-      @branch = Branch.new(params[:branch])
-      @branch.repository = @orig_branch.repository
-      @branch.original_id = @orig_branch.id
+      #@branch = Branch.new(params[:branch])
+      #@branch.repository = @orig_branch.repository
+      #@branch.original_id = @orig_branch.id
+      @branch = @orig_branch.checkout(params[:branch])
 
       respond_to do |format|
         if @branch.save

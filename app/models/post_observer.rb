@@ -17,6 +17,9 @@ class PostObserver < ActiveRecord::Observer
     end
     blob = Grit::Blob.create(repository.repo, {name:"#{post.title}", data: update_file})
     Dir.chdir(repository.repo.working_dir){repository.repo.add(blob.name)}
+    #Dir.chdir(repository.working_dir) do
+    #  system(%Q[git add "#{blob.name}"])
+    #end
   end
 
   def after_update(post)
@@ -28,14 +31,25 @@ class PostObserver < ActiveRecord::Observer
     post.delete_file
     ##TODO commitされている場合に外す処理は下でよいが、commitされずにステージされているものを削除するにはcheckoutしないといけない
     post.remove_index
+    #remove_index(post)
   end
 
   private
   def add_index(post)
     repository = post.branch.repository
+    #Dir.chdir(repository.working_dir) do
+    #  system(%Q[git add "#{post.title}"])
+    #end
     new_file = open(post.path, "w"){|f| f.write(post.body)}
     new_blob = Grit::Blob.create(repository.repo, {name:"#{post.title}", data:new_file})
     Dir.chdir(repository.repo.working_dir){repository.repo.add(new_blob.name)}
   end
+
+  #def remove_index(post)
+  #  repository = post.branch.repository
+  #  Dir.chdir(repository.working_dir) do
+  #    system(%Q[git rm "#{post.title}"])
+  #  end
+  #end
 
 end

@@ -42,6 +42,7 @@ module Admin
       @kommit = Kommit.new(params[:kommit])
       @kommit.user = current_user
       @kommit.branches << @branch
+      @kommit.init_at = @branch
       @status = @branch.status
 
       respond_to do |format|

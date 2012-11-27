@@ -1,7 +1,7 @@
 require 'grit'
 class Kommit < ActiveRecord::Base
-  attr_accessor :bare
-  attr_accessible :message, :revision, :bare
+  attr_accessor :bare, :init_at
+  attr_accessible :message, :revision, :bare, :init_at
 
   has_many :branch_kommits, dependent: :destroy
   has_many :branches, through: :branch_kommits, uniq: true
@@ -14,7 +14,7 @@ class Kommit < ActiveRecord::Base
   end
 
   def info
-    self.repository.repo.commits(self.revision).first
+    self.repository.repo.commits.detect{|commit| commit.id == self.revision}
   end
 
   def revert(branch="master")
@@ -37,7 +37,11 @@ class Kommit < ActiveRecord::Base
   end
 
   def head?(branch='master')
-    self.revision == self.repository.repo.commits(branch).first.id
+    Dir.chdir(self.repository.working_dir) do
+      output = `git rev-list #{branch}`
+      newest_revision = output.split("\n").first
+      self.revision == newest_revision
+    end
   end
 
 

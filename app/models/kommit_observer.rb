@@ -9,15 +9,10 @@ class KommitObserver < ActiveRecord::Observer
 
   private
   def set_revision(kommit)
-    repo = kommit.repository.repo
-    #repo.commit_index(kommit.message)
-    Dir.chdir(repo.working_dir) do
+    Dir.chdir(kommit.repository.working_dir) do
       `git commit -m "#{kommit.message}"`
-      branch_name = kommit.init_at.try(:name) ||  "master"
-      output = `git rev-list #{branch_name}`
-      newest_revision = output.split("\n").first
-      kommit.revision = newest_revision
     end
+    kommit.revision = kommit.init_at.try(:head) || kommit.repository.master.head
   rescue Exception => ex
     p ex
     raise Exception.new('cannot set revision')

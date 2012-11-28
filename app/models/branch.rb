@@ -31,7 +31,7 @@ class Branch < ActiveRecord::Base
   end
 
   def original
-    Branch.find(self.original_id)
+    Branch.find(self.original_id) if self.original_id
   end
 
   def checkout(params)
@@ -40,4 +40,25 @@ class Branch < ActiveRecord::Base
     branch.repository = self.repository
     branch
   end
+
+
+  def rev_list
+    Dir.chdir(self.repository.working_dir) do
+      output = `git rev-list #{self.name}`
+      output.split("\n")
+    end
+  end
+
+  def head
+    self.rev_list.first
+  end
+
+  def create_kommit(params)
+    kommit = Kommit.new(params)
+    kommit.branches << self
+    kommit.init_at = self
+    kommit
+  end
+
+
 end

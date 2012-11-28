@@ -39,10 +39,8 @@ module Admin
 
     def create
       @branch.repository.checkout_to(@branch.name)
-      @kommit = Kommit.new(params[:kommit])
+      @kommit = @branch.create_kommit(params[:kommit])
       @kommit.user = current_user
-      @kommit.branches << @branch
-      @kommit.init_at = @branch
       @status = @branch.status
 
       respond_to do |format|

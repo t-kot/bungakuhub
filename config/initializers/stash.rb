@@ -12,19 +12,19 @@ module Grit
 
     def create_stash
       Dir.chdir(self.working_dir) do
-        system("git stash")
+        `git stash`
       end
     end
 
     def checkout_to(branch_name)
       Dir.chdir(self.working_dir) do
-        system("git checkout #{branch_name}")
+        `git checkout #{branch_name}`
       end
     end
 
     def create_branch(branch_name)
       Dir.chdir(self.working_dir) do
-        system("git branch #{branch_name}")
+        `git branch #{branch_name}`
       end
     end
   end
@@ -53,13 +53,13 @@ module Grit
 
     def pop
       Dir.chdir(@repo.working_dir) do
-        system("git stash pop #{@rev}")
+        `git stash pop #{@rev}`
       end
     end
 
     def destroy
       Dir.chdir(@repo.working_dir) do
-        system("git stash drop #{@rev}")
+        `git stash drop #{@rev}`
       end
     end
   end

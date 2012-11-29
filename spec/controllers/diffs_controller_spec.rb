@@ -5,7 +5,7 @@ describe DiffsController do
   before(:each) do
     @user = create(:user)
     create_repository_for(@user)
-    3.times{create_post_and_kommit_for(@repository)}
+    3.times{create_post_and_kommit_for(@repository.master)}
     @kommit1 = @repository.master.kommits[0]
     @kommit2 = @repository.master.kommits[1]
   end

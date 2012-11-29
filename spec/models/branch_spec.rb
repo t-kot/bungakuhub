@@ -46,7 +46,7 @@ describe Branch do
       p @repository.master.rev_list.size
       @repository.master.posts.create({title:"hoge", body:"fuga"})
       #expect {
-      #  kommit = @repository.master.create_kommit({message:"hogehoge"})
+      #  kommit = @repository.master.build_kommit({message:"hogehoge"})
       #  kommit.user = create(:user)
       #  kommit.save
       #}.to change(@repository.master.rev_list, :size).by(1)

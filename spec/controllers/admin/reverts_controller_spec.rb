@@ -5,7 +5,7 @@ describe Admin::RevertsController do
   before(:each) do
     create_repository_for(subject.current_user)
     post = create(:post, branch:@repository.master)
-    @kommit = @repository.master.create_kommit(message:"second")
+    @kommit = @repository.master.build_kommit(message:"second")
     @kommit.save
   end
   after(:each) do

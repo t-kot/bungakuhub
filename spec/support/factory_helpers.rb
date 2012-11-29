@@ -13,9 +13,10 @@ module FactoryHelpers
     @branch = FactoryGirl.create(:branch, repository: @repository)
   end
 
-  def create_post_and_kommit_for(repository)
-    create(:post, branch:repository.master)
-    repository.master.create_kommit(message:"hogehoge").save
+  def create_post_and_kommit_for(branch)
+    create(:post, branch:branch)
+    branch.build_kommit(message:"hogehoge").save
   end
+
 
 end

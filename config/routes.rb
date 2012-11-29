@@ -31,7 +31,6 @@ Bungaku::Application.routes.draw do
       resources :branches, only: [:new, :create], path: :checkout, as: :checkouts
       resources :kommits, only: [:index, :show, :new, :create, :destroy] do
         resource :revert, only: [:create]
-        resources :diffs, only: [:show]
       end
       resources :posts, only: [:index, :create]
     end

@@ -53,7 +53,7 @@ class Branch < ActiveRecord::Base
     self.rev_list.first
   end
 
-  def create_kommit(params)
+  def build_kommit(params)
     kommit = Kommit.new(params)
     kommit.branches << self
     kommit.init_at = self

@@ -4,25 +4,14 @@ describe Kommit do
   before(:each) do
     @user = create(:user)
     create_repository_for(@user)
-    @repository.master.posts.create({title:"hoge", body:"fuga"})
-    @kommit = build(:kommit, message:"Test")
-    @kommit.user = @user
-    @kommit.branches << @repository.master
-    @kommit.init_at = @repository.master
-    @kommit.save
-    @repository.master.posts.create({title:"fuga", body:"piyo"})
-    @kommit2 = build(:kommit, message:"Second")
-    @kommit2.branches << @repository.master
-    @kommit2.init_at = @repository.master
-    @kommit2.save
+    2.times{create_post_and_kommit_for(@repository.master)}
+    @kommit = @repository.master.kommits[1]
+    @kommit2 = @repository.master.kommits[2]
     @branch2 = @repository.master.checkout({name:"branch2"})
     @branch2.save
-    @branch2.posts.create({title:"piyo", body:"hoge"})
     @branch2.kommits << @repository.master.kommits
-    @kommit3 = build(:kommit, message:"Third at branch2")
-    @kommit3.branches << @branch2
-    @kommit3.init_at = @branch2
-    @kommit3.save
+    1.times{create_post_and_kommit_for(@branch2)}
+    @kommit3 = @branch2.kommits.last
   end
   after(:each) do
     @repository.destroy

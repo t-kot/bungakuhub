@@ -41,7 +41,7 @@ module Admin
     def create
       @branch.repository.lock do
         @branch.repository.checkout_to(@branch.name)
-        @kommit = @branch.create_kommit(params[:kommit])
+        @kommit = @branch.build_kommit(params[:kommit])
         @kommit.user = current_user
         @status = @branch.status
 

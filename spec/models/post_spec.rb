@@ -22,13 +22,5 @@ describe Post do
     lambda{ File.open(@post.path)}.should raise_error(Errno::ENOENT)
   end
 
-  #it "can remove index" do
-  #  @post = @repository.master.posts.create({title:"Test", body:"Test"})
-  #  kommit = Kommit.new({message:"HOGEHOGE"})
-  #  kommit.branches << @repository.master
-  #  kommit.save
-  #  @post.delete_file
-  #  @repository.repo.status.untracked["Test"].should_not be_nil
-  #end
 
 end

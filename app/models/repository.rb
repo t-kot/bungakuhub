@@ -63,6 +63,7 @@ class Repository < ActiveRecord::Base
       end
     end
   rescue Exception => ex
+    p ex
     raise AccessDenied.new('timeout')
   end
 
@@ -71,10 +72,16 @@ class Repository < ActiveRecord::Base
   end
 
   def checkout_to(branch_name)
-    self.repo.create_stash
-    self.repo.checkout_to(branch_name)
-    self.repo.pop_first_at(branch_name)
-    self.repo.stashes(branch_name).each(&:destroy)
+    unless self.current_branch == branch_name
+      self.repo.create_stash
+      self.repo.checkout_to(branch_name)
+      self.repo.pop_first_at(branch_name)
+      self.repo.stashes(branch_name).each(&:destroy)
+    end
+  end
+
+  def current_branch
+    `git rev-parse --abbrev-ref HEAD`.chomp
   end
 
 end

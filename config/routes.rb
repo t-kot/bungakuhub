@@ -19,6 +19,7 @@ Bungaku::Application.routes.draw do
   end
   resources :branches, only: [:show] do
     resources :kommits, only: [:index, :show]
+    resources :diffs, only: [:show]
   end
 
   namespace :admin do

@@ -12,6 +12,10 @@
   %b Description:
   = @text_repository.description
 
+- @text_repository.branches.each_with_index do |branch, i|
+  = link_to "#{i+1}:#{branch.name}", branch_path(branch)
+  %br
+
 - if current_user == @text_repository.user
   = link_to 'Edit', edit_admin_text_repository_path(@text_repository)
   \|

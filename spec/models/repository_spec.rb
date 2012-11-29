@@ -50,7 +50,7 @@ describe Repository do
   end
 
   it "mkdirで新しくディレクトリを作ること" do
-    repository = build(:repository, name:"Repo3")
+    repository = build(:repository, name:"HOGEHOGEHOGE")
     lambda{ Dir.open(repository.working_dir) }.should raise_error(Errno::ENOENT)
     repository.mkdir
     dir = Dir.open(repository.working_dir)

@@ -12,7 +12,7 @@
     %tr
       %td= kommit.message
       %td= kommit.revision
-      %td= link_to 'Show', user_repository_branch_kommit_path(params[:user_id], params[:repository_id], params[:branch_id], kommit)
+      %td= link_to 'Show', branch_kommit_path(params[:branch_id], kommit)
 
 %br
 

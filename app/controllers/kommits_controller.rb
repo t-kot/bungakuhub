@@ -10,6 +10,7 @@ class KommitsController < ApplicationController
 
   def show
     @kommit = Kommit.find(params[:id])
+    @branch = Branch.find(params[:branch_id])
 
     respond_to do |format|
       format.html

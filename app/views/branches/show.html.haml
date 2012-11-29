@@ -7,4 +7,9 @@
   %b Name:
   = @branch.name
 
-= link_to 'Back', repository_path(@branch.repository)
+- @branch.kommits.each_with_index do |kommit,i|
+  = link_to "#{i+1}:#{kommit.message}", branch_kommit_path(@branch, kommit)
+  %br
+= link_to "Listing Kommit", branch_kommits_path(params[:id])
+
+= link_to 'Back', repository_branches_path(@branch.repository)

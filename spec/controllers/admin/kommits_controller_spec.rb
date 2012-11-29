@@ -10,6 +10,7 @@ describe Admin::KommitsController do
   end
   def valid_session;{};end
 
+
   after(:each) do
     @repository.destroy
   end

@@ -3,8 +3,7 @@ module Admin
   class KommitsController < ApplicationController
     before_filter :user_branch_authenticate
     before_filter :load_branch, only: [:index, :new, :create]
-    #before_filter :checkout_target, only: [:new]
-    #after_filter :checkout_master, only: [:new]
+    before_filter :status_has_changes?, only:[:create]
     def index
       @kommits = @branch.kommits
 
@@ -25,34 +24,38 @@ module Admin
     end
 
     def new
-      @branch.repository.checkout_to(@branch.name)
-      @kommit = Kommit.new
-      @post = Post.new
-      @status = @branch.status
+      @branch.repository.lock do
+        @branch.repository.checkout_to(@branch.name)
+        @kommit = Kommit.new
+        @post = Post.new
+        @status = @branch.status
 
-      respond_to do |format|
-        format.html
-        format.json { render json: @kommit }
+        respond_to do |format|
+          format.html
+          format.json { render json: @kommit }
+        end
+        @branch.repository.checkout_to("master")
       end
-      @branch.repository.checkout_to("master")
     end
 
     def create
-      @branch.repository.checkout_to(@branch.name)
-      @kommit = @branch.create_kommit(params[:kommit])
-      @kommit.user = current_user
-      @status = @branch.status
+      @branch.repository.lock do
+        @branch.repository.checkout_to(@branch.name)
+        @kommit = @branch.create_kommit(params[:kommit])
+        @kommit.user = current_user
+        @status = @branch.status
 
-      respond_to do |format|
-        if @kommit.save
-          format.html { redirect_to admin_branch_kommits_path(params[:branch_id]), notice: t("flash.info.create.notice", model: t("activerecord.models.kommit")) }
-          format.json { render json: @kommit, status: :created, location: @kommit }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @kommit.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          if @kommit.save
+            format.html { redirect_to admin_branch_kommits_path(params[:branch_id]), notice: t("flash.info.create.notice", model: t("activerecord.models.kommit")) }
+            format.json { render json: @kommit, status: :created, location: @kommit }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @kommit.errors, status: :unprocessable_entity }
+          end
         end
+        @branch.repository.checkout_to("master")
       end
-      @branch.repository.checkout_to("master")
     end
 
     def destroy

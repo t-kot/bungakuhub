@@ -71,12 +71,10 @@ class Repository < ActiveRecord::Base
   end
 
   def checkout_to(branch_name)
-    self.lock do
-      self.repo.create_stash
-      self.repo.checkout_to(branch_name)
-      self.repo.pop_first_at(branch_name)
-      self.repo.stashes(branch_name).each(&:destroy)
-    end
+    self.repo.create_stash
+    self.repo.checkout_to(branch_name)
+    self.repo.pop_first_at(branch_name)
+    self.repo.stashes(branch_name).each(&:destroy)
   end
 
 end

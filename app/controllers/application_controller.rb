@@ -41,22 +41,23 @@ class ApplicationController < ActionController::Base
     flash[:alert] = t("flash.alert.access_denied")
     redirect_to root_path
   end
-  #def checkout_to(branch)
-  #  repo = branch.repository.repo
-  #  repository.lock do
-  #    repo.create_stash
-  #    repo.checkout_to(branch.name)
-  #    repo.pop_first_at(branch.name)
-  #  end
-  #end
 
-  #def checkout_master_from(branch)
-  #  repo = branch.repository.repo
-  #  repository.lock do
-  #    repo.create_stash
-  #    repo.checkout_to("master")
-  #    repo.pop_first_at("master")
-  #  end
-  #end
+  def status_has_no_changes?
+    branch_id = params[:branch_id] || params[:id]
+    branch = Branch.find(branch_id)
+    unless branch.nothing_to_commit?
+      flash[:alert] = "You should commit current edition before continue"
+      redirect_to :back
+    end
+  end
+
+  def status_has_changes?
+    branch_id = params[:branch_id] || params[:id]
+    branch = Branch.find(branch_id)
+    if branch.nothing_to_commit?
+      flash[:alert] = "You don't have to do this action"
+      redirect_to :back
+    end
+  end
 
 end

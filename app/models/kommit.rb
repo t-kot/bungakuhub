@@ -19,7 +19,7 @@ class Kommit < ActiveRecord::Base
 
   def revert(branch="master")
     Dir.chdir(self.repository.working_dir) do
-      `git checkout #{branch}"`
+      `git checkout #{branch}`
       `git revert --no-edit #{self.revision}`
     end
   end

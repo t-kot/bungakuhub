@@ -60,5 +60,9 @@ class Branch < ActiveRecord::Base
     kommit
   end
 
+  def nothing_to_commit?
+    self.status.added.blank? && self.status.deleted.blank? && self.status.changed.blank?
+  end
+
 
 end

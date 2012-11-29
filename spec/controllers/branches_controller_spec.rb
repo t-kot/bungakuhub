@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe BranchesController do
+  before(:each) do
+    @user = create(:user)
+    create_branch_for(@user)
+  end
   after(:each) do
     @repository.destroy
   end
@@ -17,19 +21,15 @@ describe BranchesController do
 
   describe "GET index" do
     it "assigns all branches as @branches" do
-      user = FactoryGirl.create(:user)
-      create_branch_for(user)
       branches = @repository.branches
-      get :index, {user_id: user, repository_id: @repository}, valid_session
+      get :index, {user_id: @user, repository_id: @repository}, valid_session
       assigns(:branches).should eq(branches)
     end
   end
 
   describe "GET show" do
     it "assigns the requested branch as @branch" do
-      user = FactoryGirl.create(:user)
-      create_branch_for(user)
-      get :show, {user_id: user, repository_id: @repository, :id => @branch.to_param}, valid_session
+      get :show, {user_id: @user, repository_id: @repository, :id => @branch.to_param}, valid_session
       assigns(:branch).should eq(@branch)
     end
   end

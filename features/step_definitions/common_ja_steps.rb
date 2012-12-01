@@ -86,8 +86,12 @@ end
   click_button("merge")
 end
 
-ならば /^"(.*)"の"(.*)"ブランチに"(.*)"コミットが存在すること$/ do |repo, branch, commit|
+ならば /^(.*?)の(.*?)ブランチに(.*?)コミットが存在すること$/ do |repo, branch, commit|
   step %Q["#{repo}の#{branch}ブランチのコミット一覧ページ"へアクセス]
   step %Q["#{commit}"コミットが存在すること]
 
+end
+
+ならば /^"(.*)"コミットが存在すること$/ do |kommit|
+  step %Q["#{kommit}"と表示されていること]
 end

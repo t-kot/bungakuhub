@@ -37,7 +37,7 @@ class Repository < ActiveRecord::Base
   end
 
   def git_init
-    repo = Grit::Repo.init("#{self.working_dir}/")
+    Grit::Repo.init("#{self.working_dir}/")
   end
 
   def master
@@ -68,7 +68,9 @@ class Repository < ActiveRecord::Base
   end
 
   def checkout_master
-    self.checkout_to("master")
+    unless self.current_branch == "master"
+      self.checkout_to("master")
+    end
   end
 
   def checkout_to(branch_name)
@@ -82,6 +84,10 @@ class Repository < ActiveRecord::Base
 
   def current_branch
     `git rev-parse --abbrev-ref HEAD`.chomp
+  end
+
+  def nothing_to_commit?
+    self.status.added.blank? && self.status.deleted.blank? && self.status.changed.blank?
   end
 
 end

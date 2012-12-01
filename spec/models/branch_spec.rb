@@ -60,6 +60,41 @@ describe Branch do
     end
   end
 
+  describe "nothing_to_commit" do
+    it "return false" do
+      @repository.master.nothing_to_commit?.should be_false
+    end
+
+    it "return true" do
+      @repository.master.build_kommit(message:"commit1").save
+      @repository.master.nothing_to_commit?.should be_true
+    end
+
+    context "another branch" do
+      it "return true" do
+        @repository.master.build_kommit(message:"commit1").save
+        another = @repository.master.checkout(name:"another")
+        another.save
+        @repository.lock do
+          @repository.checkout_to(another.name)
+          create(:post, branch:another)
+          @repository.checkout_master
+        end
+        @repository.master.nothing_to_commit?.should be_true
+      end
+      it "return false" do
+        another = @repository.master.checkout(name:"another")
+        another.save
+        @repository.lock do
+          @repository.checkout_to(another.name)
+          create(:post, branch:another)
+          @repository.checkout_master
+        end
+        another.nothing_to_commit?.should be_false
+      end
+    end
+  end
+
 
 
 end

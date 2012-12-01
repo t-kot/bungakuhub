@@ -36,6 +36,12 @@ module NavigationHelpers
     when /^(.*)の(.*)ブランチのポスト一覧ページ$/
       branch = Repository.find_by_name($1).branches.find_by_name($2)
       admin_branch_posts_path(branch)
+    when /^(.*)の(.*)ブランチのマージ作成ページ$/
+      branch = Repository.find_by_name($1).branches.find_by_name($2)
+      new_admin_branch_merge_path(branch)
+    when /^(.*)の(.*)ブランチのコミット一覧ページ$/
+      branch = Repository.find_by_name($1).branches.find_by_name($2)
+      branch_kommits_path(branch)
     else
       raise "\"#{page_name}\"にあたるpathが見当たりませんでした．"
     end

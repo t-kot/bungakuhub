@@ -20,4 +20,8 @@
 = link_to 'Back', repository_branches_path(@branch.repository)
 
 %br
+
+= link_to 'Merge', new_admin_branch_merge_path(@branch)
+
+%br
 = link_to 'Create Branch', new_admin_branch_checkout_path(@branch)

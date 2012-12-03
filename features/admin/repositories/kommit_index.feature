@@ -1,11 +1,11 @@
 #coding: utf-8
 #language: ja
 
-機能: レポジトリをrevertする
-  レポジトリ所有者として
-  特定の時点にコミットを巻き戻したい
+機能: レポジトリのコミット一覧を表示する
+  すべてのユーザとして
+  レポジトリのコミット履歴を見たい
 
-  シナリオ: 正常にRevertする
+  シナリオ: コミット履歴が表示される
     前提 以下のユーザが存在している:
       |email             |display_name|
       |email1@example.com|  user1     |
@@ -17,3 +17,5 @@
       |repository|branch|msg|
       |repo1     |master|commit1|
       |repo1     |master|commit2|
+    もし "repo1のmasterブランチのコミット一覧ページ"へアクセス
+    ならば "commit1"コミットが存在すること

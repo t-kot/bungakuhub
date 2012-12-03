@@ -61,7 +61,14 @@ class Branch < ActiveRecord::Base
   end
 
   def nothing_to_commit?
-    self.status.added.blank? && self.status.deleted.blank? && self.status.changed.blank?
+    repository = self.repository
+    bool=nil
+    repository.lock do
+      repository.checkout_to(self.name)
+      bool = self.status.added.blank? && self.status.deleted.blank? && self.status.changed.blank?
+      repository.checkout_master
+    end
+    bool
   end
 
 

@@ -71,5 +71,14 @@ class Branch < ActiveRecord::Base
     bool
   end
 
+  def merge(merged_branch)
+    if merged_branch.nothing_to_commit? && self.nothing_to_commit?
+      output = `git merge --no-ff #{merged_branch.name}`
+      self
+    else
+      false
+    end
+  end
+
 
 end

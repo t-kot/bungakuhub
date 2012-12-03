@@ -1,5 +1,7 @@
 class BranchObserver < ActiveRecord::Observer
 
+  #createはcheckoutのときしか呼ばれないことに注意
+  #なぜならmasterの作成時はbare=trueされるため
   def before_create(branch)
     git_checkout_b(branch) unless branch.bare
   end

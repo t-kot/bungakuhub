@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Branch do
   before(:each) do
     @repository = create(:repository)
-    @repository.master.posts.create(body:"hoge", title:"fuga")
+    create_post_and_kommit_for(@repository.master)
+    
   end
   after(:each) do
     @repository.destroy
@@ -43,13 +44,9 @@ describe Branch do
       @repository.master.rev_list.should be_an_instance_of Array
     end
     it "increases count when commit added" do
-      p @repository.master.rev_list.size
-      @repository.master.posts.create({title:"hoge", body:"fuga"})
-      #expect {
-      #  kommit = @repository.master.build_kommit({message:"hogehoge"})
-      #  kommit.user = create(:user)
-      #  kommit.save
-      #}.to change(@repository.master.rev_list, :size).by(1)
+      @repository.master.rev_list.should have(2).items
+      create_post_and_kommit_for(@repository.master)
+      @repository.master.rev_list.should have(3).items
     end
   end
 
@@ -62,6 +59,7 @@ describe Branch do
 
   describe "nothing_to_commit" do
     it "return false" do
+      create(:post, branch:@repository.master)
       @repository.master.nothing_to_commit?.should be_false
     end
 
@@ -83,6 +81,7 @@ describe Branch do
         @repository.master.nothing_to_commit?.should be_true
       end
       it "return false" do
+        @repository.master.build_kommit(message:"commit1").save
         another = @repository.master.checkout(name:"another")
         another.save
         @repository.lock do

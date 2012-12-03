@@ -9,9 +9,18 @@ module Admin
     end
 
     def create
-      flash[:notice] = "マージされました"
-      redirect_to :root
-    end
+      @merging_branch = Branch.find(params[:branch_id])
+      @merged_branch = Branch.find(params[:merge][:target])
 
+      respond_to do |format|
+        if @merging_branch.merge(@merged_branch)
+          flash[:notice] = "マージされました"
+          format.html {redirect_to branch_path(@merging_branch), notice: "マージされました"}
+          format.json {render json: @merging_branch, status: :created, location: @merging_branch }
+        else
+          format.html {render action: "new"}
+        end
+      end
+    end
   end
 end

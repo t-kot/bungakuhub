@@ -23,4 +23,4 @@
     もし "repo1のmasterブランチのマージ作成ページ"へアクセス
     かつ "dev"をマージする
     ならば "マージされました"と表示されていること
-    かつ repo1のmasterブランチにcommit2コミットが存在すること
+    かつ repo1のmasterブランチにMerge branch devコミットが存在すること

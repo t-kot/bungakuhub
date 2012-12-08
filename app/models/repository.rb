@@ -9,6 +9,12 @@ class Repository < ActiveRecord::Base
 
   validates :name,  presence: true, length: {maximum:30}, uniqueness: true
 
+  def current_files
+    Dir.entries(self.working_dir) - [".", "..", ".git"]
+  end
+
+
+
   def owner
     self.user
   end
@@ -49,7 +55,7 @@ class Repository < ActiveRecord::Base
   end
 
   def lock(&block)
-    Timeout::timeout(10) do
+    Timeout::timeout(30) do
       Dir.chdir(self.working_dir) do
         File.open(".lock", "w") do |f|
           begin
@@ -63,31 +69,43 @@ class Repository < ActiveRecord::Base
       end
     end
   rescue Exception => ex
-    p ex
-    raise AccessDenied.new('timeout')
+    raise ex
+    #raise AccessDenied.new('timeout')
   end
 
   def checkout_master
-    unless self.current_branch == "master"
-      self.checkout_to("master")
-    end
+    self.checkout_to("master")
   end
 
   def checkout_to(branch_name)
     unless self.current_branch == branch_name
-      self.repo.create_stash
+      make_current_repository_checkoutable unless nothing_to_commit?
       self.repo.checkout_to(branch_name)
-      self.repo.pop_first_at(branch_name)
-      self.repo.stashes(branch_name).each(&:destroy)
+      if self.repo.stashes(branch_name).present?
+        self.repo.pop_first_at(branch_name)
+        #restoreしたあとにstashは存在してはいけない
+        #self.repo.add_all
+        self.repo.add_u
+        self.repo.stashes(branch_name).each(&:destroy)
+      end
     end
   end
 
+  def make_current_repository_checkoutable
+    self.repo.create_stash unless nothing_to_commit?
+  end
+
+
   def current_branch
-    `git rev-parse --abbrev-ref HEAD`.chomp
+    Dir.chdir(self.working_dir) do
+      `git rev-parse --abbrev-ref HEAD`.chomp
+    end
   end
 
   def nothing_to_commit?
     self.status.added.blank? && self.status.deleted.blank? && self.status.changed.blank?
   end
+
+
 
 end

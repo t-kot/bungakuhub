@@ -14,8 +14,12 @@ module FactoryHelpers
   end
 
   def create_post_and_kommit_for(branch)
-    create(:post, branch:branch)
-    branch.build_kommit(message:"hogehoge").save
+    branch.repository.lock do
+      branch.repository.checkout_to(branch.name)
+      create(:post, branch:branch)
+      branch.build_kommit(message:"hoge#{branch.id}").save
+      branch.repository.checkout_master
+    end
   end
 
 

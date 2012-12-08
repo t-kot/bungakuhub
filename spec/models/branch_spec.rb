@@ -101,17 +101,20 @@ describe Branch do
   end
 
   describe "merge" do
+    before do
+      create_another_branch
+    end
     context "when merge succeeded" do
       context "no-conflicted" do
+        before do
+          2.times{create_post_and_kommit_for(@repository.master)}
+          2.times{create_post_and_kommit_for(@another)}
+        end
         it "returns merging branch " do
-          create_another_branch
           @repository.master.merge(@another).should eq @repository.master
         end
 
         it "merging commit" do
-          create_another_branch
-          2.times{create_post_and_kommit_for(@repository.master)}
-          2.times{create_post_and_kommit_for(@another)}
           @repository.master.kommits.should have(4).items
           @repository.master.merge(@another)
           @repository.master.kommits.should have(5).items
@@ -119,25 +122,28 @@ describe Branch do
         end
       end
       context "conflicted" do
+        before do
+          @repository.master.posts.first.body = "modify at master"
+          @repository.master.posts.first.save
+          @repository.master.build_kommit(message:"modify at master").save
+          @another.posts.first.body = "modify at another"
+          @another.posts.first.save
+          @another.build_kommit(message:"modify at another").save
+        end
         it "should not increase kommit count" do
-          create_another_branch
-          2.times{create_post_and_kommit_for(@repository.master)}
-          2.times{create_post_and_kommit_for(@another)}
-          @repository.master.kommits.should have(4).items
+          @repository.master.kommits.should have(3).items
           @repository.master.merge(@another)
-          @repository.master.kommits.should have(4).items
+          @repository.master.kommits.should have(3).items
         end
       end
 
     end
     context "when merge failed" do
       it "returns false if merged branch not commited" do
-        create_another_branch
         create(:post, branch:@another)
         @repository.master.merge(@another).should be_false
       end
       it "returns false if merging branch not commited" do
-        create_another_branch
         create(:post, branch:@another)
         @repository.master.merge(@another).should be_false
       end

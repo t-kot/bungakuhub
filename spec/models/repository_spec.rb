@@ -59,4 +59,24 @@ describe Repository do
     Dir.rmdir(repository.working_dir)
   end
 
+  describe "current_branch" do
+    before do
+      user = create(:user)
+      @repository = create(:repository, user:user)
+      @dev = @repository.master.checkout(name:"dev")
+      @dev.save
+    end
+
+    it "should return 'master'" do
+      @repository.current_branch.should == "master"
+    end
+
+    it "should return 'dev'" do
+      @repository.lock do
+        @repository.checkout_to("dev")
+        @repository.current_branch.should == "dev"
+      end
+    end
+  end
+
 end

@@ -9,6 +9,7 @@ class Branch < ActiveRecord::Base
             uniqueness: {scope: :repository_id}
 
   delegate :status, to: :repository
+  delegate :current_files, to: :repository
   def destroy_all_post
     self.posts.each{|post| post.bare = true}
     self.posts.destroy_all
@@ -23,10 +24,13 @@ class Branch < ActiveRecord::Base
     end
   end
 
-  def post_initialize
-    repo = self.repository.repo
-    repo.commits.first.tree.contents.each do |content|
-      self.posts.create(title:content.name, body:content.data, bare:true)
+  def create_posts_by_current_file
+    Dir.chdir(self.repository.working_dir) do
+      current_files.each do |file|
+        File.open(file, "r") do |f|
+          self.posts.create(title:file, body:f.read, bare:true)
+        end
+      end
     end
   end
 
@@ -73,7 +77,16 @@ class Branch < ActiveRecord::Base
 
   def merge(merged_branch)
     if merged_branch.nothing_to_commit? && self.nothing_to_commit?
-      output = `git merge --no-ff #{merged_branch.name}`
+      output=nil
+      Dir.chdir(self.repository.working_dir) do
+        output = `git merge --no-ff --no-edit #{merged_branch.name}`
+      end
+      result = output.split("\n").first
+      self.destroy_all_post
+      create_posts_by_current_file
+      if /^Merge (.*) strategy.$/.match result
+        self.build_kommit(message:"Merge branch #{merged_branch.name}", revision: head).save
+      end
       self
     else
       false

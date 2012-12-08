@@ -2,6 +2,7 @@ module Admin
   class BranchesController < ApplicationController
     before_filter :user_branch_authenticate, only:[:show, :new, :destroy]
     #before_filter :user_repository_authenticate, only:[:new, :create]
+    before_filter :status_has_no_changes?, only: [:new, :create]
 
     def show
       @branch = Branch.find(params[:id])

@@ -19,6 +19,6 @@
 %h3 View Diff with this commit
 - @branch.kommits.each do |kommit|
   - unless @kommit == kommit
-    = link_to kommit.message, admin_branch_kommit_diff_path(params[:branch_id], @kommit, kommit)
+    = link_to kommit.message, branch_kommit_diff_path(params[:branch_id], @kommit, kommit)
 
 = link_to 'Back', branch_kommits_path(params[:branch_id])

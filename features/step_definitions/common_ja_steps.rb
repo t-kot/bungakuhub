@@ -76,8 +76,12 @@ end
 もし /^以下のコミットが存在している:$/ do |table|
   table.rows.each do |repository, branch, msg|
     branch = Repository.find_by_name(repository).branches.find_by_name(branch)
-    FactoryGirl.create(:post, branch:branch)
-    branch.build_kommit(message:msg).save
+    branch.repository.lock do
+      branch.repository.checkout_to(branch.name)
+      FactoryGirl.create(:post, branch:branch)
+      branch.build_kommit(message:msg).save
+      branch.repository.checkout_master
+    end
   end
 end
 

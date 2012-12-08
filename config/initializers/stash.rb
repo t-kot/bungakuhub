@@ -2,7 +2,7 @@ module Grit
 
   class Repo
 
-    def stashes(branch='')
+    def stashes(branch='master')
       Grit::Stash.find_all(self, branch)
     end
 
@@ -25,6 +25,11 @@ module Grit
     def create_branch(branch_name)
       Dir.chdir(self.working_dir) do
         `git branch #{branch_name}`
+      end
+    end
+    def add_u
+      Dir.chdir(self.working_dir) do
+        `git add -u`
       end
     end
   end

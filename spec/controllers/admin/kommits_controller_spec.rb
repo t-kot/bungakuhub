@@ -11,7 +11,8 @@ describe Admin::KommitsController do
   def valid_session;{};end
 
   before(:each) do
-    create_branch_for(subject.current_user)
+    create_repository_for(subject.current_user)
+    @branch = @repository.master
   end
 
 

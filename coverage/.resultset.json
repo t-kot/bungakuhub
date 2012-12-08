@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/kotohata/Projects/bungakuhub/app/models/user.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/user.rb": [
         1,
         1,
         1,
@@ -28,7 +28,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/lib/validators/email_validator.rb": [
+      "/Users/kotohata/Dropbox/bungaku/lib/validators/email_validator.rb": [
         1,
         1,
         17,
@@ -37,7 +37,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/application_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/application_controller.rb": [
         1,
         1,
         null,
@@ -102,39 +102,40 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/application_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/branches_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/branches_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/home_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/home_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/kommits_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/kommits_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/repositories_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/repositories_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/text_repositories_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/text_repositories_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/helpers/users_helper.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/helpers/users_helper.rb": [
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/branches_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/branches_controller.rb": [
         1,
         1,
         1,
         null,
+        1,
         null,
         1,
         0,
@@ -183,7 +184,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/branch.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/branch.rb": [
         1,
         1,
         1,
@@ -196,8 +197,9 @@
         null,
         1,
         1,
-        3,
         1,
+        16,
+        4,
         null,
         null,
         1,
@@ -210,9 +212,12 @@
         null,
         null,
         1,
-        8,
-        8,
-        9,
+        11,
+        11,
+        30,
+        30,
+        null,
+        null,
         null,
         null,
         null,
@@ -229,38 +234,47 @@
         null,
         null,
         1,
-        49,
-        49,
-        49,
+        55,
+        55,
+        55,
         null,
         null,
         null,
         1,
-        46,
+        52,
         null,
         null,
         1,
-        29,
-        29,
-        29,
-        29,
+        33,
+        33,
+        33,
+        33,
         null,
         null,
         1,
-        12,
-        12,
-        12,
-        12,
-        12,
-        12,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
         null,
-        12,
+        14,
         null,
         null,
         1,
         5,
         3,
         3,
+        3,
+        null,
+        3,
+        3,
+        3,
+        3,
+        2,
+        null,
+        3,
         null,
         2,
         null,
@@ -269,7 +283,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/kommits_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/kommits_controller.rb": [
         1,
         1,
         1,
@@ -351,7 +365,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/kommit.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/kommit.rb": [
         1,
         1,
         1,
@@ -364,11 +378,12 @@
         null,
         null,
         1,
-        63,
+        67,
         null,
         null,
         1,
         0,
+        null,
         null,
         null,
         1,
@@ -402,7 +417,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/merges_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/merges_controller.rb": [
         null,
         1,
         1,
@@ -430,7 +445,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/posts_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/posts_controller.rb": [
         1,
         1,
         null,
@@ -493,7 +508,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/post.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/post.rb": [
         1,
         1,
         1,
@@ -534,7 +549,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/repositories_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/repositories_controller.rb": [
         1,
         1,
         1,
@@ -587,7 +602,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/repository.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository.rb": [
         1,
         1,
         1,
@@ -598,6 +613,12 @@
         1,
         null,
         1,
+        null,
+        1,
+        11,
+        null,
+        null,
+        null,
         null,
         1,
         0,
@@ -618,12 +639,12 @@
         null,
         null,
         1,
-        460,
+        670,
         null,
         null,
         null,
         1,
-        204,
+        267,
         null,
         null,
         1,
@@ -631,82 +652,94 @@
         null,
         null,
         1,
-        72,
+        75,
         null,
         null,
         1,
-        28,
+        101,
         null,
         null,
         1,
-        14,
-        14,
-        14,
-        14,
-        14,
-        14,
+        42,
+        42,
+        42,
+        42,
+        42,
+        42,
         null,
-        14,
-        14,
+        42,
+        42,
         null,
         null,
         null,
         null,
         null,
         0,
-        0,
-        null,
-        null,
-        1,
-        14,
-        8,
         null,
         null,
         null,
         1,
-        30,
-        16,
-        16,
-        16,
-        16,
+        42,
+        null,
+        null,
+        1,
+        84,
+        24,
+        24,
+        24,
+        3,
+        null,
+        null,
+        3,
+        3,
+        null,
         null,
         null,
         null,
         1,
-        44,
+        5,
+        null,
+        null,
+        null,
+        1,
+        84,
+        84,
+        null,
         null,
         null,
         1,
-        0,
-        null,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/reverts_controller.rb": [
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        0,
-        null,
-        0,
+        29,
         null,
         null,
         null,
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/admin/text_repositories_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/reverts_controller.rb": [
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/text_repositories_controller.rb": [
         1,
         1,
         1,
@@ -750,116 +783,14 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/text_repository.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/text_repository.rb": [
         1,
         1,
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/branches_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/branches_controller.rb": [
         1,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/diffs_controller.rb": [
-        1,
-        null,
-        1,
-        0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/home/repositories_controller.rb": [
-        1,
-        1,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/home/text_repositories_controller.rb": [
-        1,
-        1,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/home_controller.rb": [
-        1,
-        1,
-        0,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/kommits_controller.rb": [
-        1,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null
-      ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/repositories_controller.rb": [
-        1,
-        1,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        null,
         1,
         0,
         null,
@@ -880,7 +811,109 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/text_repositories_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/diffs_controller.rb": [
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/home/repositories_controller.rb": [
+        1,
+        1,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/home/text_repositories_controller.rb": [
+        1,
+        1,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/home_controller.rb": [
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/kommits_controller.rb": [
+        1,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/repositories_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/text_repositories_controller.rb": [
         1,
         1,
         1,
@@ -927,7 +960,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/controllers/users_controller.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/users_controller.rb": [
         1,
         1,
         null,
@@ -970,14 +1003,14 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/branch_kommit.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/branch_kommit.rb": [
         1,
         1,
         1,
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/branch_observer.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/branch_observer.rb": [
         1,
         null,
         null,
@@ -987,6 +1020,7 @@
         null,
         null,
         1,
+        null,
         25,
         null,
         null,
@@ -994,59 +1028,59 @@
         1,
         1,
         8,
-        8,
+        null,
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/kommit_observer.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/kommit_observer.rb": [
         1,
         1,
-        46,
+        50,
         null,
         null,
         1,
-        46,
+        50,
         null,
         null,
         1,
         1,
-        46,
-        46,
+        50,
+        50,
         null,
-        46,
+        50,
         null,
         0,
         0,
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/language.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/language.rb": [
         1,
         1,
         null,
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/post_observer.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/post_observer.rb": [
         1,
         1,
-        57,
+        78,
         48,
         null,
         null,
         1,
+        2,
+        2,
         0,
-        0,
-        0,
-        0,
-        null,
-        null,
-        1,
         0,
         null,
         null,
         1,
         2,
+        null,
+        null,
+        1,
+        12,
         0,
         null,
         0,
@@ -1055,7 +1089,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/repository_observer.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository_observer.rb": [
         1,
         1,
         1,
@@ -1080,7 +1114,7 @@
         null,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/repository_type.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository_type.rb": [
         1,
         1,
         1,
@@ -1089,7 +1123,7 @@
         1,
         null
       ],
-      "/Users/kotohata/Projects/bungakuhub/app/models/sex.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/sex.rb": [
         1,
         1,
         1,
@@ -1100,6 +1134,6 @@
         null
       ]
     },
-    "timestamp": 1354525574
+    "timestamp": 1354947913
   }
 }

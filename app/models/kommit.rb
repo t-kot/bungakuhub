@@ -15,6 +15,7 @@ class Kommit < ActiveRecord::Base
 
   def info
     self.repository.repo.commits.detect{|commit| commit.id == self.revision}
+    #self.repository.repo.commits(self.revision).first
   end
 
   def revert(branch="master")
@@ -36,9 +37,9 @@ class Kommit < ActiveRecord::Base
     self.info.tree.contents
   end
 
-  def head?(branch='master')
+  def head?(branch_name='master')
     Dir.chdir(self.repository.working_dir) do
-      output = `git rev-list #{branch}`
+      output = `git rev-list #{branch_name}`
       newest_revision = output.split("\n").first
       self.revision == newest_revision
     end

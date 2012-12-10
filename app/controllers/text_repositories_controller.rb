@@ -1,5 +1,6 @@
 class TextRepositoriesController < ApplicationController
-  before_filter :authenticate_user!, except:[:index, :show]
+  before_filter :authenticate_user!, only: [:new, :create]
+  before_filter :valid_user_authenticate, only: [:new, :create]
   def index
     @text_repositories = User.find(params[:user_id]).text_repositories
 
@@ -20,7 +21,7 @@ class TextRepositoriesController < ApplicationController
 
   def new
     @text_repository = TextRepository.new
-    @text_repository.user = current_user
+    #@text_repository.user = current_user
 
     respond_to do |format|
       format.html
@@ -29,7 +30,8 @@ class TextRepositoriesController < ApplicationController
   end
 
   def create
-    @text_repository = TextRepository.new(params[:text_repository])
+    #@text_repository = TextRepository.new(params[:text_repository])
+    @text_repository = current_user.text_repositories.build(params[:text_repository])
 
     respond_to do |format|
       if @text_repository.save

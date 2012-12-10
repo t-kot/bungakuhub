@@ -9,7 +9,6 @@
     前提 以下のユーザが存在している:
       |email             |display_name|
       |email1@example.com|  user1     |
-    かつ メールアドレスが"email1@example.com"のユーザとしてログインしている
     かつ 以下のレポジトリが存在している:
       |user     |name     |repository_type|
       |user1    |repo1    |1              |

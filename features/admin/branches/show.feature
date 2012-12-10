@@ -13,3 +13,4 @@
     かつ 以下のレポジトリが存在している:
       |owner | name | repository_type|
       |user1 | repo1| 1              |
+    もし "repo1のmasterブランチ詳細ページ"へアクセス

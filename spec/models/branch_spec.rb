@@ -25,6 +25,17 @@ describe Branch do
     branch.should be_invalid
   end
 
+  describe "destroyable?" do
+    it "returns false" do
+      @repository.master.destroyable?.should_not eq true
+    end
+
+    it "returns true" do
+      create_another_branch
+      @another.destroyable?.should eq true
+    end
+  end
+
   describe "checkout" do
     it "returns new branch object" do
       new_branch = @repository.master.checkout({name:"hoge"})
@@ -146,6 +157,20 @@ describe Branch do
       it "returns false if merging branch not commited" do
         create(:post, branch:@another)
         @repository.master.merge(@another).should be_false
+      end
+    end
+  end
+
+  describe "git_branch_d" do
+    before(:each) do
+      create_another_branch
+      @another.git_branch_d
+    end
+
+    it "should destroy git branch" do
+      output = nil
+      Dir.chdir(@another.repository.working_dir) do
+        output = `git branch`
       end
     end
   end

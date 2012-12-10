@@ -76,15 +76,27 @@ describe Admin::BranchesController do
 
   describe "DELETE destroy" do
     login_user
-    it "destroys the requested branch" do
-      expect {
-        delete :destroy, {:id => @repository.master}, valid_session
-      }.to change(Branch, :count).by(-1)
-    end
+    context "try to destroy master" do
+      it "destroys the requested branch" do
+        Branch.any_instance.should_receive(:destroyable?).and_return(false)
+        expect {
+          delete :destroy, {:id => @repository.master}, valid_session
+        }.to change(Branch, :count).by(0)
+      end
 
-    it "redirects to the branches list" do
-      delete :destroy, {:id => @repository.master}, valid_session
-      response.should redirect_to repository_path(@repository)
+      it "redirects to the branches list" do
+        delete :destroy, {:id => @repository.master}, valid_session
+        response.should redirect_to repository_path(@repository)
+      end
+    end
+    context "try to destroy another" do
+      it "destroyes the requested branch" do
+        Branch.any_instance.should_receive(:destroyable?).and_return(true)
+        expect {
+          delete :destroy, {:id => @repository.master}, valid_session
+        }.to change(Branch, :count).by(-1)
+      end
+
     end
   end
 

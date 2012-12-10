@@ -4,43 +4,41 @@ require 'grit'
 require 'fileutils'
 
 describe Repository do
+  before(:each) do
+    user = create(:user)
+    @repository = create(:repository, user:user)
+  end
+  after(:each) do
+    @repository.destroy
+  end
   it "ownerはUserを返すこと" do
-    repository = create(:repository)
-    repository.owner.should be_an_instance_of(User)
-    repository.owner.should_not be_nil
-    repository.destroy
+    @repository.owner.should be_an_instance_of(User)
+    @repository.owner.should_not be_nil
   end
 
   it "ownerに別のUserを代入できること" do
-    repository = create(:repository)
     user = create(:user)
-    repository.owner = user
-    repository.owner.should == user
-    repository.destroy
+    @repository.owner = user
+    @repository.owner.should == user
   end
 
   it "originalのとき" do
-    repository = build(:repository, forked_from:nil)
-    repository.original?.should == true
-    repository.forked?.should == false
+    @repository.original?.should == true
+    @repository.forked?.should == false
   end
   it "forkedのとき" do
-    repository = build(:repository, forked_from:1)
-    repository.original?.should == false
-    repository.forked?.should == true
+    @repository.forked_from = 1
+    @repository.original?.should == false
+    @repository.forked?.should == true
   end
 
   it "working_dirは文字列を返すこと" do
-    repository = create(:repository, name:"WorkingDir")
-    repository.working_dir.should == "#{Rails.root}/public/repositories/WorkingDir"
-    repository.destroy
+    @repository.working_dir.should == "#{Rails.root}/public/repositories/#{@repository.name}"
   end
 
   it "repoでGrit::Repoオブジェクトを得られること" do
-    repository = create(:repository, name:"Repo1")
-    repository.repo.should be_instance_of(Grit::Repo)
-    repository.repo.should_not be_nil
-    repository.destroy
+    @repository.repo.should be_instance_of(Grit::Repo)
+    @repository.repo.should_not be_nil
   end
 
   it "git initでGrit::Repoオブジェクトを作成すること" do
@@ -61,8 +59,6 @@ describe Repository do
 
   describe "current_branch" do
     before do
-      user = create(:user)
-      @repository = create(:repository, user:user)
       @dev = @repository.master.checkout(name:"dev")
       @dev.save
     end

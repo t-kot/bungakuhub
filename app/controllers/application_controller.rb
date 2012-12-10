@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
     branch_id = params[:branch_id] || params[:id]
     branch = Branch.find(branch_id)
     unless branch.nothing_to_commit?
-      flash[:alert] = "You should commit current edition before continue"
+      flash[:alert] = t("flash.alert.kommit_to_continue")
       redirect_to :back
     end
   end
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     branch_id = params[:branch_id] || params[:id]
     branch = Branch.find(branch_id)
     if branch.nothing_to_commit?
-      flash[:alert] = "You don't have to do this action"
+      flash[:alert] = t("flash.alert.no_status_change")
       redirect_to :back
     end
   end

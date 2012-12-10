@@ -10,7 +10,7 @@ class Repository < ActiveRecord::Base
   validates :name,  presence: true, length: {maximum:30}, uniqueness: true
 
   def current_files
-    Dir.entries(self.working_dir) - [".", "..", ".git"]
+    Dir.entries(self.working_dir) - [".", "..", ".git", ".lock"]
   end
 
 

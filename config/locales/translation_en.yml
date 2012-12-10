@@ -65,6 +65,9 @@ en:
       delete_user: See you next time!
     alert:
       access_denied: You don't have permittion
+      cannot_destroy_branch: You cannot destroy branch
+      no_status_change: You don't have to do this action because you have no changes.
+      kommit_to_continue: You have to kommit current edition before continue.
   errors:
     create:
       one: "%{model} was not saved for 1 error."

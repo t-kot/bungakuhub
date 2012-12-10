@@ -4,7 +4,9 @@ describe PostObserver do
 
   before(:each) do
     @user = create(:user)
-    create_branch_for(@user)
+    #create_branch_for(@user)
+    create_repository_for(@user)
+    @branch = @repository.master
   end
 
   after(:each) do

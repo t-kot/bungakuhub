@@ -2,18 +2,21 @@
 
 %h3 Status
 
-追加されたポスト
-%ul
-- @status.added.each do |key, value|
-  %li= key
-削除されたポスト
-%ul
-- @status.deleted.each do |key, value|
-  %li= key
-更新されたポスト
-%ul
-- @status.changed.each do |key, value|
-  %li= key
+%div#added_post
+  %p 追加されたポスト
+  %ul
+  - @status.added.each do |key, value|
+    %li= key
+%div#deleted_post
+  %p 削除されたポスト
+  %ul
+  - @status.deleted.each do |key, value|
+    %li= key
+%div#updated_post
+  %p 更新されたポスト
+  %ul
+  - @status.changed.each do |key, value|
+    %li= key
 
 //%pre
 //  =@status.pretty

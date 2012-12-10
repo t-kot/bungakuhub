@@ -5,97 +5,11 @@
   visit "?locale=#{language}"
 end
 
-もし 'ユーザとしてログインしている' do
-  visit new_user_session_path
-  fill_in "メールアドレス", with:"email1@example.com"
-  fill_in "パスワード", with:"testtest"
-  click_button("ログイン")
-  @current_user = User.find_by_email("email1@example.com")
+ならば /^ログインを要求すること$/ do
+  step %Q["ログインしてください"と表示されていること]
 end
 
-もし /^以下のユーザが存在している:$/ do |table|
-  table.rows.each do |email, display_name|
-    FactoryGirl.create(:user, email:email, display_name:display_name)
-  end
+ならば /^許可されていないアクションであること$/ do
+  step %Q["許可されていないアクションです"と表示されていること]
 end
 
-もし /^メールアドレスが"(.*)"のユーザとしてログインしている$/  do |email|
-  visit new_user_session_path
-  fill_in "メールアドレス", with: email
-  fill_in "パスワード", with: "testtest"
-  click_button("ログイン")
-  @current_user = User.find_by_email(email)
-end
-
-もし /^以下のレポジトリが存在している:$/ do |table|
-  table.rows.each do |user, name, repository_type|
-    user = User.find_by_display_name(user)
-    FactoryGirl.create(:repository, user: user, name: name, repository_type_id: 1)
-  end
-end
-
-もし /^以下のブランチが存在している:$/ do |table|
-  table.rows.each do |repo, branch|
-    Repository.find_by_name(repo).branches.create(name:branch)
-  end
-end
-
-もし /^以下のブランチを作成する:$/ do |table|
-  table.rows.each do |repo, branch|
-    Repository.find_by_name(repo).branches.create(name:branch)
-  end
-end
-
-もし /^"(.*)"の"(.*)"ブランチから"(.*)"ブランチを作成する$/ do |repo, orig_branch, new_branch|
-  orig_branch = Repository.find_by_name(repo).branches.find_by_name(orig_branch)
-  new_branch = orig_branch.checkout({name:new_branch})
-  new_branch.save
-end
-
-
-
-もし /^以下のポストが存在している:$/ do |table|
-  table.rows.each do |repository, branch, title, body|
-    branch = Repository.find_by_name(repository).branches.find_by_name(branch)
-    branch.posts.create(title:title, body:body)
-  end
-end
-
-もし /^以下のレポジトリが表示されている:$/ do |table|
-  table.rows.each do |repo_name,type|
-    step %Q["#{repo_name}"と表示されていること]
-
-  end
-end
-もし /^以下のレポジトリが表示されていない:$/ do |table|
-  table.rows.each do |repo_name,type|
-    step %Q["#{repo_name}"と表示されていないこと]
-  end
-end
-
-もし /^以下のコミットが存在している:$/ do |table|
-  table.rows.each do |repository, branch, msg|
-    branch = Repository.find_by_name(repository).branches.find_by_name(branch)
-    branch.repository.lock do
-      branch.repository.checkout_to(branch.name)
-      FactoryGirl.create(:post, branch:branch)
-      branch.build_kommit(message:msg).save
-      branch.repository.checkout_master
-    end
-  end
-end
-
-もし /^"(.*)"をマージする$/ do |branch|
-  select(branch, from: "merge_target")
-  click_button("merge")
-end
-
-ならば /^(.*?)の(.*?)ブランチに(.*?)コミットが存在すること$/ do |repo, branch, commit|
-  step %Q["#{repo}の#{branch}ブランチのコミット一覧ページ"へアクセス]
-  step %Q["#{commit}"コミットが存在すること]
-
-end
-
-ならば /^"(.*)"コミットが存在すること$/ do |kommit|
-  step %Q["#{kommit}"と表示されていること]
-end

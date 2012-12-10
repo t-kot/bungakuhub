@@ -93,5 +93,15 @@ class Branch < ActiveRecord::Base
     end
   end
 
+  def destroyable?
+    self.name != "master"
+  end
+
+  def git_branch_d
+    Dir.chdir(self.repository.working_dir) do
+      `git branch -d #{self.name}`
+    end
+  end
+
 
 end

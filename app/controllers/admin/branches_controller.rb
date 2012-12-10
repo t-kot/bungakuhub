@@ -41,11 +41,18 @@ module Admin
 
     def destroy
       @branch = Branch.find(params[:id])
-      @branch.destroy
+      if @branch.destroyable?
+        @branch.destroy
 
-      respond_to do |format|
-        format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.destroy.notice", model: t("activerecord.models.branch")) }
-        format.json { head :no_content }
+        respond_to do |format|
+          format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.destroy.notice", model: t("activerecord.models.branch")) }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to repository_path(@branch.repository), notice: t("flash.alert.cannot_destroy_branch") }
+          format.json { head :no_content }
+        end
       end
     end
   end

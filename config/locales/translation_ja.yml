@@ -60,15 +60,18 @@ ja:
   flash:
     info:
       create:
-        notice: "%{model} が作成されました"
+        notice: "%{model}が作成されました"
       update:
-        notice: "%{model} が更新されました"
+        notice: "%{model}が更新されました"
       delete_user: またのご利用をお待ちしております。
       destroy:
-        notice: "%{model} が削除されました"
+        notice: "%{model}が削除されました"
     alert:
       access_denied: 許可されていないアクションです
+      cannot_destroy_branch: Masterブランチは削除できません
+      no_status_change: 変更がないのでコミットする必要はありません
+      kommit_to_continue: 現在の変更を一度コミットする必要があります
   errors:
     create:
         one: "１つのエラーによって%{model}は保存されませんでした"
-        other: "%{count} つのエラーにより %{model} は保存されませんでした。"
+        other: "%{count}つのエラーにより %{model}は保存されませんでした。"

@@ -11,9 +11,16 @@ module NavigationHelpers
       new_user_session_path
     when /ユーザ登録ページ/
       new_user_registration_path
+    when /^レポジトリ作成ページ$/
+      new_repository_path
+    when /^(.*)のレポジトリページ$/
+      repository = Repository.find_by_name($1)
+      repository_path(repository)
+    when /^(.*)の(.*)ブランチページ$/
+      branch = Repository.find_by_name($1).branches.find_by_name($2)
+      branch_path(branch)
     when /^(.*)のテキストレポジトリ作成ページ/
-      @user = User.find_by_display_name($1)
-      new_user_text_repository_path(@user)
+      "/users/#{$1}/text_repositories/new"
     when /自分のプロフィール編集ページ/
       edit_user_path(@current_user)
     when /^(.*)のプロフィール編集ページ$/
@@ -24,6 +31,9 @@ module NavigationHelpers
     when /^(.*)のレポジトリ詳細ページ$/
       repo = Repository.find_by_name($1)
       admin_repository_path(repo)
+    when /^(.*)の(.*)ブランチ詳細ページ$/
+      branch = Repository.find_by_name($1).branches.find_by_name($2)
+      admin_branch_path(branch)
     when /^(.*)のレポジトリ編集ページ$/
       repo = Repository.find_by_name($1)
       edit_admin_repository_path(repo)
@@ -34,6 +44,9 @@ module NavigationHelpers
       branch = Repository.find_by_name($1).branches.find_by_name($2)
       new_admin_branch_kommit_path(branch)
     when /^(.*)の(.*)ブランチのポスト一覧ページ$/
+      branch = Repository.find_by_name($1).branches.find_by_name($2)
+      admin_branch_posts_path(branch)
+    when /^(.*)の(.*)ブランチのエディタ$/
       branch = Repository.find_by_name($1).branches.find_by_name($2)
       admin_branch_posts_path(branch)
     when /^(.*)の(.*)ブランチのマージ作成ページ$/

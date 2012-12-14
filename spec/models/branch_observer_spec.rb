@@ -7,6 +7,9 @@ describe BranchObserver do
     @another = @repository.master.checkout(name:"another")
     @another.save
   end
+  after(:each) do
+    @repository.destroy
+  end
 
   it "should callback git_branch_d" do
     @another.should_receive(:git_branch_d)

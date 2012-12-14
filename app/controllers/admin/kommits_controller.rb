@@ -2,8 +2,9 @@ require 'grit'
 module Admin
   class KommitsController < ApplicationController
     before_filter :user_branch_authenticate
-    before_filter :load_branch, only: [:index, :new, :create]
+    before_filter :load_branch, only: [:index, :show, :new, :create]
     before_filter :status_has_changes?, only:[:create]
+    #before_filter :head_has_no_conflicts?, only:[:new, :create]
     def index
       @kommits = @branch.kommits
 
@@ -15,8 +16,6 @@ module Admin
 
     def show
       @kommit = Kommit.find(params[:id])
-      @branch = Branch.find(params[:branch_id])
-
       respond_to do |format|
         format.html
         format.json { render json: @kommit }

@@ -8,12 +8,12 @@
   = @kommit.revision
 %p
   %b Commit Date:
-  = @kommit.info.authored_date
+  = @kommit.info(@branch.name).authored_date
 %p
   %b Author:
   = @kommit.user.try(:display_name)
 
-- @kommit.info.diffs.each do |diff|
+- @kommit.info(@branch.name).diffs.each do |diff|
   - if diff.new_file
     新規ファイル
   - elsif diff.renamed_file

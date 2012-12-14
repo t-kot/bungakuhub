@@ -1,3 +1,4 @@
+require 'open3'
 require 'grit'
 class Kommit < ActiveRecord::Base
   attr_accessor :bare, :init_at
@@ -13,15 +14,22 @@ class Kommit < ActiveRecord::Base
     self.branches.first.repository
   end
 
-  def info
-    self.repository.repo.commits.detect{|commit| commit.id == self.revision}
-    #self.repository.repo.commits(self.revision).first
+  def info(branch_name=nil)
+    if branch_name
+      self.repository.repo.commits(branch_name).detect{|commit| commit.id == self.revision}
+    else
+      self.repository.repo.commits.detect{|commit| commit.id == self.revision}
+    end
   end
 
   def revert(branch="master")
     Dir.chdir(self.repository.working_dir) do
-      `git checkout #{branch}`
-      `git revert --no-edit #{self.revision}`
+      Open3.popen3("git checkout #{branch}") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+      end
+      Open3.popen3("git revert --no-edit #{self.revision}") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+      end
     end
   end
 
@@ -39,9 +47,11 @@ class Kommit < ActiveRecord::Base
 
   def head?(branch_name='master')
     Dir.chdir(self.repository.working_dir) do
-      output = `git rev-list #{branch_name}`
-      newest_revision = output.split("\n").first
-      self.revision == newest_revision
+      Open3.popen3("git rev-list #{branch_name}") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+        bol = stdout.read.split("\n").first
+        self.revision == bol
+      end
     end
   end
 

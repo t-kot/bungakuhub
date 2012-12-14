@@ -90,10 +90,14 @@ describe Admin::BranchesController do
       end
     end
     context "try to destroy another" do
+      before do
+        @another = @repository.master.checkout(name:"another")
+        @another.save
+      end
       it "destroyes the requested branch" do
         Branch.any_instance.should_receive(:destroyable?).and_return(true)
         expect {
-          delete :destroy, {:id => @repository.master}, valid_session
+          delete :destroy, {:id => @another}, valid_session
         }.to change(Branch, :count).by(-1)
       end
 

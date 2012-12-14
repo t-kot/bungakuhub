@@ -1,3 +1,4 @@
+require 'open3'
 module Grit
 
   class Repo
@@ -18,13 +19,14 @@ module Grit
 
     def checkout_to(branch_name)
       Dir.chdir(self.working_dir) do
-        `git checkout #{branch_name}`
+        Open3.popen3("git checkout #{branch_name}")
       end
     end
 
     def create_branch(branch_name)
       Dir.chdir(self.working_dir) do
-        `git branch #{branch_name}`
+        #`git branch #{branch_name}`
+        Open3.popen3("git branch #{branch_name}")
       end
     end
     def add_u

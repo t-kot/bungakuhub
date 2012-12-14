@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'open3'
 require 'grit'
 class Repository < ActiveRecord::Base
   attr_accessor :repo, :bare
@@ -98,7 +99,11 @@ class Repository < ActiveRecord::Base
 
   def current_branch
     Dir.chdir(self.working_dir) do
-      `git rev-parse --abbrev-ref HEAD`.chomp
+      #`git rev-parse --abbrev-ref HEAD`.chomp
+      Open3.popen3("git rev-parse --abbrev-ref HEAD") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+        stdout.read.chomp
+      end
     end
   end
 

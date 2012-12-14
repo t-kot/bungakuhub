@@ -21,8 +21,9 @@ describe Admin::RevertsController do
     end
 
     it "invoke revert" do
-      Kommit.any_instance.should_receive(:revert).with(@repository.master.name)
-      post :create, {branch_id:@repository.master, kommit_id:@repository.master.kommits.first}
+      kommit = @repository.master.kommits.first
+      Branch.any_instance.should_receive(:revert).with(kommit)
+      post :create, {branch_id:@repository.master, kommit_id:kommit}
     end
 
     it "renews current post" do

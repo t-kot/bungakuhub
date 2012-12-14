@@ -3,11 +3,29 @@
 
 もし /^以下のポストが存在している:$/ do |table|
   table.rows.each do |repository, branch, title, body|
-    branch = Repository.find_by_name(repository).branches.find_by_name(branch)
-    branch.repository.lock do
-      branch.repository.checkout_to(branch.name)
-      branch.posts.create(title:title, body:body)
-      branch.repository.checkout_master
+    step %Q["#{repository}"の"#{branch}"ブランチにタイトルが"#{title}"で本文が"#{body}"のポストを作成する]
+  end
+end
+
+もし /^"(.*?)"の"(.*?)"ブランチにタイトルが"(.*?)"で本文が"(.*?)"のポストを作成する$/ do |repo, branch, title, body|
+  repository = Repository.find_by_name(repo)
+  branch = repository.branches.find_by_name(branch)
+  repository.lock do
+    repository.checkout_to(branch.name)
+    branch.posts.create(title:title, body:body)
+    repository.checkout_master
+  end
+end
+
+もし /^"(.*?)"の"(.*?)"ブランチのポストを以下のように編集する:$/ do |repo, branch, table|
+  table.rows.each do |title_before, title_after, body|
+    repository = Repository.find_by_name(repo)
+    branch = repository.branches.find_by_name(branch)
+    repository.lock do
+      repository.checkout_to(branch.name)
+      post = Post.find_by_title(title_before)
+      post.update_attributes(title:title_after, body: body)
+      repository.checkout_master
     end
   end
 end

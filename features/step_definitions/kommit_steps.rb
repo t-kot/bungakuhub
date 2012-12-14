@@ -1,11 +1,14 @@
 #coding: utf-8
 #language: ja
 
-もし /^タイトルが"(.*?)",本文が"(.*?)"のポストを作成する$/ do |title, body|
-  within("#new_post") do
-    fill_in "post_title", with: title
-    fill_in "post_body", with: body
-    click_button("Save")
+
+もし /^"(.*)"の"(.*)"ブランチを"(.*)"というメッセージでコミットする$/ do |repo, branch, message|
+  repository = Repository.find_by_name(repo)
+  branch = repository.branches.find_by_name(branch)
+  repository.lock do
+    repository.checkout_to(branch.name)
+    branch.build_kommit(message:message).save
+    repository.checkout_master
   end
 end
 
@@ -30,11 +33,19 @@ end
 ならば /^(.*?)の(.*?)ブランチに(.*?)コミットが存在すること$/ do |repo, branch, commit|
   step %Q["#{repo}の#{branch}ブランチのコミット一覧ページ"へアクセス]
   step %Q["#{commit}"コミットが存在すること]
+end
 
+ならば /^(.*?)の(.*?)ブランチに(.*?)コミットが存在しないこと$/ do |repo, branch, commit|
+  step %Q["#{repo}の#{branch}ブランチのコミット一覧ページ"へアクセス]
+  step %Q["#{commit}"コミットが存在しないこと]
 end
 
 ならば /^"(.*)"コミットが存在すること$/ do |kommit|
   step %Q["#{kommit}"と表示されていること]
+end
+
+ならば /^"(.*)"コミットが存在しないこと$/ do |kommit|
+  step %Q["#{kommit}"と表示されていないこと]
 end
 
 ならば /^ステータスで"(.*)"が(.*)されていること$/ do |title, action|

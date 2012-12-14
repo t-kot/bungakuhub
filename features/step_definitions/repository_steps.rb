@@ -21,11 +21,6 @@ end
 end
 
 
-もし /^"(.*)"をマージする$/ do |branch|
-  select(branch, from: "merge_target")
-  click_button("merge")
-end
-
 もし /^レポジトリタイプ"(.*)",レポジトリ名"(.*)"の"(.*)"レポジトリを作成する$/ do |setting, name, type|
   if type=="テキスト"
     click_link("テキストレポジトリ")

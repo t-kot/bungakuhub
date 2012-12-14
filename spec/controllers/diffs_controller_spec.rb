@@ -9,6 +9,9 @@ describe DiffsController do
     @kommit1 = @repository.master.kommits[0]
     @kommit2 = @repository.master.kommits[1]
   end
+  after do
+    @repository.destroy
+  end
 
   it "assigns kommits as @kommit1 and @kommit2" do
     get :show, {branch_id:@repository.master, kommit_id:@kommit1, id:@kommit2}

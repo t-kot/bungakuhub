@@ -70,8 +70,7 @@ class Repository < ActiveRecord::Base
       end
     end
   rescue Exception => ex
-    raise ex
-    #raise AccessDenied.new('timeout')
+    raise BungakuHub::GitAccessDenied.new(ex)
   end
 
   def checkout_master
@@ -99,7 +98,6 @@ class Repository < ActiveRecord::Base
 
   def current_branch
     Dir.chdir(self.working_dir) do
-      #`git rev-parse --abbrev-ref HEAD`.chomp
       Open3.popen3("git rev-parse --abbrev-ref HEAD") do |stdin, stdout, stderr|
         BungakuHub::Error.new(stderr).try_raise
         stdout.read.chomp

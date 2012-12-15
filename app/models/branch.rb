@@ -118,5 +118,14 @@ class Branch < ActiveRecord::Base
     end
   end
 
+  def enter(&block)
+    repository = self.repository
+    repository.lock do
+      repository.checkout_to(self.name)
+      block.call
+      repository.checkout_master
+    end
+  end
+
 
 end

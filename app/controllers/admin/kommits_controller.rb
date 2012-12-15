@@ -4,7 +4,6 @@ module Admin
     before_filter :user_branch_authenticate
     before_filter :load_branch, only: [:index, :show, :new, :create]
     before_filter :status_has_changes?, only:[:create]
-    #before_filter :head_has_no_conflicts?, only:[:new, :create]
     def index
       @kommits = @branch.kommits
 
@@ -23,8 +22,7 @@ module Admin
     end
 
     def new
-      @branch.repository.lock do
-        @branch.repository.checkout_to(@branch.name)
+      @branch.enter do
         @kommit = Kommit.new
         @post = Post.new
         @status = @branch.status
@@ -33,13 +31,11 @@ module Admin
           format.html
           format.json { render json: @kommit }
         end
-        @branch.repository.checkout_to("master")
       end
     end
 
     def create
-      @branch.repository.lock do
-        @branch.repository.checkout_to(@branch.name)
+      @branch.enter do
         @kommit = @branch.build_kommit(params[:kommit])
         @kommit.user = current_user
         @status = @branch.status
@@ -53,7 +49,6 @@ module Admin
             format.json { render json: @kommit.errors, status: :unprocessable_entity }
           end
         end
-        @branch.repository.checkout_to("master")
       end
     end
 

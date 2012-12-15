@@ -8,6 +8,7 @@ class Kommit < ActiveRecord::Base
   has_many :branches, through: :branch_kommits, uniq: true
   belongs_to :user
   validates :message, presence: true
+  validates :revision, uniqueness: true
 
 
   def repository

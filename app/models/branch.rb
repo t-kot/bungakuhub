@@ -90,6 +90,9 @@ class Branch < ActiveRecord::Base
           if /^Merge (.*) strategy.$/.match bol
             self.build_kommit(message:"Merge branch #{merged_branch.name}", revision: head).save
           end
+          #p `git status`
+          self.repository.repo.add_u
+          #p `git status`
           self
         end
       end

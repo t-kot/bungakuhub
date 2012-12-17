@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121122055410) do
+ActiveRecord::Schema.define(:version => 20121217082521) do
 
   create_table "branch_kommits", :force => true do |t|
     t.integer  "kommit_id"
@@ -26,6 +26,23 @@ ActiveRecord::Schema.define(:version => 20121122055410) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "original_id"
+  end
+
+  create_table "feeds", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.text     "body"
+    t.integer  "repository_id"
+    t.integer  "target_user_id"
+  end
+
+  create_table "following_ships", :force => true do |t|
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "kommits", :force => true do |t|

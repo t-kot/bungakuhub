@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
   has_many :text_repositories
   has_many :repositories
   has_many :kommits
+  has_many :following_ships, foreign_key: :follower_id
+  has_many :followings, through: :following_ships, class_name: "User"#, source: :following
+  has_many :inverse_following_ships, foreign_key: :following_id, class_name: "FollowingShip"
+  has_many :followers, through: :inverse_following_ships, class_name: "User"#, source: :follower
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id
 

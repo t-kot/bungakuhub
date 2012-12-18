@@ -36,5 +36,11 @@ Bungaku::Application.routes.draw do
     end
     resources :posts, only: [:update, :destroy]
   end
+
+  namespace :timeline do
+    resources :feeds, only: [:index]
+    resources :tweets, only: [:index]
+    resources :news, only: [:index]
+  end
   root to: "home#index"
 end

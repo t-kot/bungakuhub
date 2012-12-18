@@ -12,9 +12,13 @@ class User < ActiveRecord::Base
   has_many :repositories
   has_many :kommits
   has_many :following_ships, foreign_key: :follower_id
-  has_many :followings, through: :following_ships, class_name: "User"#, source: :following
+  has_many :followings, through: :following_ships, class_name: "User"
   has_many :inverse_following_ships, foreign_key: :following_id, class_name: "FollowingShip"
-  has_many :followers, through: :inverse_following_ships, class_name: "User"#, source: :follower
+  has_many :followers, through: :inverse_following_ships, class_name: "User"
+  has_many :feeds
+  has_many :news
+  has_many :tweets
+  has_many :repository_create_news
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id
 
@@ -25,5 +29,13 @@ class User < ActiveRecord::Base
 
   def full_name
     self.first_name+" "+self.last_name
+  end
+
+  def follow!(user)
+    self.followings << user
+  end
+
+  def follows?(user)
+    self.followings.include?(user)
   end
 end

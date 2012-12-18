@@ -86,8 +86,19 @@ UsersControllerにfollowingsとfollowersアクションを定義　
 
 ◯Routing
 
-- (GET) /users/1/feeds feeds#index
+- (GET) /timeline/feeds timeline/feeds#index 自分がフォローしているユーザのfeed一覧(要ログイン)
+- (GET) /timeline/tweets timeline/tweets#index 自分がフォローしているユーザのtweet一覧(要ログイン)
+- (GET) /timeline/news timeline/news#index 自分がフォローしているユーザのnews一覧(要ログイン)
+- (GET) /users/1/feeds feeds#index user1のフィード
+- (GET) /users/1/tweets tweets#index user1のtweet一覧
+- (GET) /users/1/news news#index user1のnews一覧
+- (POST) /tweets ログインしているユーザが自分のtweetを投稿する
+- (DELETE) /tweets/1 tweet1を削除する
 
+
+
+
+ 
 (n+1)問題・・・current_user.followings.map{|following| following.feeds} #=>これじゃダメ
 
 	class Feed

@@ -15,23 +15,39 @@
         1,
         1,
         1,
-        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         1,
         null,
         1,
         null,
         1,
         null,
+        1,
+        null,
         null,
         1,
-        0,
+        1,
+        null,
+        null,
+        1,
+        3,
+        null,
+        null,
+        1,
+        2,
         null,
         null
       ],
       "/Users/kotohata/Dropbox/bungaku/lib/validators/email_validator.rb": [
         1,
         1,
-        0,
+        7,
         0,
         null,
         null,
@@ -69,8 +85,8 @@
         0,
         null,
         1,
-        0,
-        0,
+        1,
+        1,
         null,
         null,
         null,
@@ -1014,6 +1030,65 @@
         null,
         null
       ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/timeline/feeds_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/feed.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/timeline/news_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/news.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/timeline/tweets_controller.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/tweet.rb": [
+        1,
+        1,
+        1,
+        null
+      ],
       "/Users/kotohata/Dropbox/bungaku/app/controllers/users_controller.rb": [
         1,
         1,
@@ -1095,9 +1170,19 @@
         null,
         null
       ],
-      "/Users/kotohata/Dropbox/bungaku/app/models/feed.rb": [
+      "/Users/kotohata/Dropbox/bungaku/app/models/following_ship.rb": [
         1,
         1,
+        1,
+        1,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/get_reputation_news.rb": [
+        null,
+        1,
+        1,
+        0,
+        null,
         null
       ],
       "/Users/kotohata/Dropbox/bungaku/app/models/kommit_observer.rb": [
@@ -1157,6 +1242,24 @@
         null,
         null
       ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository_create_news.rb": [
+        null,
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository_forked_news.rb": [
+        null,
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
       "/Users/kotohata/Dropbox/bungaku/app/models/repository_observer.rb": [
         1,
         1,
@@ -1183,6 +1286,15 @@
         null,
         null
       ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository_reputate_news.rb": [
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
       "/Users/kotohata/Dropbox/bungaku/app/models/repository_type.rb": [
         1,
         1,
@@ -1190,6 +1302,15 @@
         1,
         null,
         1,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/repository_update_news.rb": [
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
         null
       ],
       "/Users/kotohata/Dropbox/bungaku/app/models/sex.rb": [
@@ -1201,8 +1322,16 @@
         null,
         1,
         null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/models/start_follow_news.rb": [
+        null,
+        1,
+        1,
+        0,
+        null,
+        null
       ]
     },
-    "timestamp": 1355651577
+    "timestamp": 1355798471
   }
 }

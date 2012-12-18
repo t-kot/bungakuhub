@@ -52,6 +52,9 @@ en:
       repository:
         name: Repository Name
         description: Description
+      post:
+        title: Title
+        body: Body
       branch:
         name: Branch Name
   flash:
@@ -60,8 +63,10 @@ en:
         notice: "%{model} was successfully created."
       update:
         notice: "%{model} was successfully updated."
+        following: "Start following %{user_name}!"
       destroy:
         notice: "%{model} was successfully deleted."
+        following: "Unfollow %{user_name} ... "
       delete_user: See you next time!
     alert:
       access_denied: You don't have permittion

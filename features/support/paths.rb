@@ -23,6 +23,9 @@ module NavigationHelpers
       "/users/#{$1}/text_repositories/new"
     when /自分のプロフィール編集ページ/
       edit_user_path(@current_user)
+    when /^(.*)のプロフィールページ$/
+      user = User.find_by_display_name($1)
+      user_path(user)
     when /^(.*)のプロフィール編集ページ$/
       @user = User.find_by_display_name($1)
       edit_user_path(@user)
@@ -55,6 +58,12 @@ module NavigationHelpers
     when /^(.*)の(.*)ブランチのコミット一覧ページ$/
       branch = Repository.find_by_name($1).branches.find_by_name($2)
       branch_kommits_path(branch)
+    when /^(.*)のフォロー対象一覧ページ$/
+      user = User.find_by_display_name($1)
+      user_followings_path(user)
+    when /^(.*)のフォロワー一覧ページ$/
+      user = User.find_by_display_name($1)
+      user_followers_path(user)
     else
       raise "\"#{page_name}\"にあたるpathが見当たりませんでした．"
     end

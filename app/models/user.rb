@@ -35,7 +35,12 @@ class User < ActiveRecord::Base
     self.followings << user
   end
 
+  def unfollow!(user)
+    self.following_ships.find(:first, conditions: {follower_id:self, following_id:user}).destroy
+  end
+
   def follows?(user)
     self.followings.include?(user)
   end
+
 end

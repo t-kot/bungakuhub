@@ -9,3 +9,4 @@
   = @user.last_name
 
 = link_to 'Edit', edit_user_path(@user)
+= render 'common/follow_button', user: @user

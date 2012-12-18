@@ -7,7 +7,7 @@ describe FollowingsController do
     end
 
     it "routes to #create" do
-      post("/followings").should route_to("followings#create")
+      post("/users/1/followings").should route_to("followings#create", user_id:"1")
     end
 
     it"routes to #destroy" do

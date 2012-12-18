@@ -32,22 +32,22 @@
         null,
         null,
         1,
-        1,
+        0,
         null,
         null,
         1,
-        3,
+        0,
         null,
         null,
         1,
-        2,
+        0,
         null,
         null
       ],
       "/Users/kotohata/Dropbox/bungaku/lib/validators/email_validator.rb": [
         1,
         1,
-        7,
+        0,
         0,
         null,
         null,
@@ -85,8 +85,8 @@
         0,
         null,
         1,
-        1,
-        1,
+        0,
+        0,
         null,
         null,
         null,
@@ -891,6 +891,22 @@
         null,
         null
       ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/followers_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/followings_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        null,
+        null
+      ],
       "/Users/kotohata/Dropbox/bungaku/app/controllers/home/repositories_controller.rb": [
         1,
         1,
@@ -1046,11 +1062,20 @@
         1,
         1,
         1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        0,
+        null,
         null,
         1,
         1,
-        null,
-        1,
+        0,
         null,
         null
       ],
@@ -1077,7 +1102,7 @@
         1,
         null,
         1,
-        1,
+        0,
         null,
         null,
         null,
@@ -1330,8 +1355,23 @@
         0,
         null,
         null
+      ],
+      "/Users/kotohata/Dropbox/bungaku/lib/bungaku_hub/error.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null
       ]
     },
-    "timestamp": 1355798471
+    "timestamp": 1355803666
   }
 }

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe Feed do
+
+  it "cannot create because Feed is abstract class" do
+    lambda{Feed.create}.should raise_error
+  end
+
   describe "Feed.followed_by" do
     before do
       @user = create(:user)

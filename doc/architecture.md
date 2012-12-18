@@ -92,8 +92,8 @@ UsersControllerにfollowingsとfollowersアクションを定義　
 - (GET) /users/1/feeds feeds#index user1のフィード
 - (GET) /users/1/tweets tweets#index user1のtweet一覧
 - (GET) /users/1/news news#index user1のnews一覧
-- (POST) /tweets ログインしているユーザが自分のtweetを投稿する
-- (DELETE) /tweets/1 tweet1を削除する
+- (POST) /tweets tweets#create ログインしているユーザが自分のtweetを投稿する
+- (DELETE) /tweets/1 tweets#destroy tweet1を削除する
 
 
 

@@ -17,11 +17,11 @@ describe Branch do
 
 
   it "should be valid" do
-    branch = @repository.branches.create(name: "develop")
+    branch = @repository.branches.build(name: "develop")
     branch.should be_valid
   end
   it "should be invalid" do
-    branch = @repository.branches.create(name: "")
+    branch = @repository.branches.build(name: "")
     branch.should be_invalid
   end
 

@@ -9,9 +9,12 @@ Bungaku::Application.routes.draw do
     resources :repositories, only: [:index]
     resources :text_repositories, only: [:index]
   end
+  resources :followings, only:[:create, :destroy]
   resources :users, only: [:show, :edit, :update, :destroy] do
     resources :repositories, only: [:index]
     resources :text_repositories, only: [:index, :new, :create]
+    resources :followers, only: [:index]
+    resources :followings, only:[:index]
   end
   resources :text_repositories, only: [:show]
   resources :repositories, only: [:show, :new] do

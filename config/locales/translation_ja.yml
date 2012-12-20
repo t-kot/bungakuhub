@@ -68,6 +68,8 @@ ja:
       destroy:
         notice: "%{model}が削除されました"
         following: "%{user_name}をアンフォローしました"
+      rollback:
+        success: レポジトリをロールバックしました
     alert:
       access_denied: 許可されていないアクションです
       cannot_destroy_branch: Masterブランチは削除できません

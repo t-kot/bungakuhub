@@ -123,6 +123,20 @@ UsersControllerにfollowingsとfollowersアクションを定義　
 ファイルの一つ、あるいは複数を選択して(チェックボックス)以前のコミットの状態に戻すことができる
 
 
+#### レポジトリの全体をあるコミット時点に巻き戻せる
+- (POST) /admin/branches/1/kommits/1/rollback
+
+これでBranch.find(1)のpostsを全てKommit.find(1)の時点に書き直す
+
+コミットするかどうかは将来的にはオプションにしたいが、現行ではコミットしないでもよいか。
+
+#### Revertができる
+
+機能をすべて見直す必要がある
+
+
+
+
 
 
 

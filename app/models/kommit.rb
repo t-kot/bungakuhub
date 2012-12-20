@@ -74,6 +74,13 @@ class Kommit < ActiveRecord::Base
     end
   end
 
+  def restore_all_files
+    self.files.each do |file_name|
+      body = self.inspect(file_name)
+      Post.create(title:file_name, body:body)
+    end
+  end
+
   private
   def files_from_string(str)
     lines = str.split("\n")

@@ -64,10 +64,12 @@ en:
       update:
         notice: "%{model} was successfully updated."
         following: "Start following %{user_name}!"
+      delete_user: See you next time!
       destroy:
         notice: "%{model} was successfully deleted."
         following: "Unfollow %{user_name} ... "
-      delete_user: See you next time!
+      rollback:
+        success: Successfully rollbacked!
     alert:
       access_denied: You don't have permittion
       cannot_destroy_branch: You cannot destroy branch

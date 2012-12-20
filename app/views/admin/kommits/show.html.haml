@@ -36,5 +36,9 @@
   このコミットの時点のファイルの内容を見る
   = link_to "File Index", admin_branch_kommit_files_path(params[:branch_id], params[:id])
 
+%h4
+  このコミット時点に巻き戻す
+  = link_to "Rollback", admin_branch_kommit_rollback_path(params[:branch_id], params[:id]), method: :post
+
 
 = link_to 'Back', admin_branch_kommits_path(params[:branch_id])

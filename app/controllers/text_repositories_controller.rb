@@ -30,12 +30,11 @@ class TextRepositoriesController < ApplicationController
   end
 
   def create
-    #@text_repository = TextRepository.new(params[:text_repository])
     @text_repository = current_user.text_repositories.build(params[:text_repository])
 
     respond_to do |format|
       if @text_repository.save
-        format.html { redirect_to text_repository_path(@text_repository), notice: t("flash.info.create.notice", model: t("activerecord.models.text_repository")) }
+        format.html { redirect_to admin_repository_path(@text_repository), notice: t("flash.info.create.notice", model: t("activerecord.models.text_repository")) }
         format.json { render json: @text_repository, status: :created, location: @text_repository }
       else
         format.html { render action: "new" }

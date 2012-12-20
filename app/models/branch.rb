@@ -101,6 +101,18 @@ class Branch < ActiveRecord::Base
     end
   end
 
+  def rollback_to(kommit)
+    self.destroy_all_post
+    self.restore_all_files_at(kommit)
+  end
+
+  def restore_all_files_at(kommit)
+    kommit.files.each do |file_name|
+      body = kommit.inspect(file_name)
+      self.posts.create(title:file_name, body:body)
+    end
+  end
+
   def destroyable?
     self.name != "master"
   end

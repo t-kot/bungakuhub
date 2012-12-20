@@ -1,0 +1,4 @@
+%h3 Files
+- @kommit.files.each do |file|
+  = link_to file, admin_branch_kommit_file_path(params[:branch_id], params[:kommit_id], file)
+  %br

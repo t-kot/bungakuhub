@@ -347,6 +347,22 @@
         null,
         null
       ],
+      "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/files_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
       "/Users/kotohata/Dropbox/bungaku/app/controllers/admin/kommits_controller.rb": [
         1,
         1,
@@ -445,7 +461,7 @@
         13,
         0,
         null,
-        34,
+        44,
         null,
         null,
         null,
@@ -478,6 +494,33 @@
         4,
         4,
         4,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        0,
+        0,
+        0,
         null,
         null,
         null,
@@ -1404,6 +1447,6 @@
         null
       ]
     },
-    "timestamp": 1355904129
+    "timestamp": 1355979237
   }
 }

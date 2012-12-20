@@ -109,7 +109,18 @@ UsersControllerにfollowingsとfollowersアクションを定義　
 		end
 	end
 	
+#### 特定のバージョン時のファイルの内容を表示できる
+- (GET) /admin/branches/1/kommits/1/files/(ファイル名)
 
+	def show
+		
+
+
+#### ファイルの一部だけを前のバージョンに戻すことができる
+
+- (PUT) /admin/branches/1/kommits/1/files/(ファイル名)/checkout
+
+ファイルの一つ、あるいは複数を選択して(チェックボックス)以前のコミットの状態に戻すことができる
 
 
 

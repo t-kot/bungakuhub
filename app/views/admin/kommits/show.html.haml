@@ -32,5 +32,9 @@
 - unless @kommit.head?(@branch.name)
   = link_to 'Revert', admin_branch_kommit_revert_path(params[:branch_id], params[:id]), method: :post
 
+%h4
+  このコミットの時点のファイルの内容を見る
+  = link_to "File Index", admin_branch_kommit_files_path(params[:branch_id], params[:id])
+
 
 = link_to 'Back', admin_branch_kommits_path(params[:branch_id])

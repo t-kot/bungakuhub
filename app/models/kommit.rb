@@ -56,6 +56,33 @@ class Kommit < ActiveRecord::Base
     end
   end
 
+  def files
+    Dir.chdir(self.repository.working_dir) do
+      Open3.popen3("git show #{self.revision}:./") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+        files_from_string(stdout.read)
+      end
+    end
+  end
+
+  def inspect(name)
+    Dir.chdir(self.repository.working_dir) do
+      Open3.popen3("git show #{self.revision}:#{name}") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+        stdout.read
+      end
+    end
+  end
+
+  private
+  def files_from_string(str)
+    lines = str.split("\n")
+    2.times{lines.shift}
+    lines
+  end
+
+
+
 
 
 end

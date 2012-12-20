@@ -36,6 +36,7 @@ Bungaku::Application.routes.draw do
         resource :revert, only: [:create]
         resources :files, only: [:index]
         get 'files/:name', to: "files#show", as: "file"
+        put 'files/:name', to: "files#update", as: "file"
       end
       resources :posts, only: [:index, :create]
     end

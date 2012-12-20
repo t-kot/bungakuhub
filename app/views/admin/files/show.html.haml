@@ -1,3 +1,6 @@
 Files#show
 %br
-= @file
+%pre
+  = @file
+%br
+= link_to '(このブランチにおいて)このファイルをこのコミット時点に巻き戻す', admin_branch_kommit_file_path, method: :put

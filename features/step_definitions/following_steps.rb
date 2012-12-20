@@ -9,6 +9,12 @@ When /^以下のフォロー関係が成立している:$/ do |table|
   end
 end
 
+When /^(.*)のプロフィールからフォローする$/ do |user|
+  user = User.find_by_display_name(user)
+  visit user_path(user)
+  click_button("Follow")
+end
+
 Then /^以下のユーザが一覧に表示されていること:$/ do |table|
   table.rows.each do |user_name|
     step %Q["#{user_name.first}"と表示されていること]

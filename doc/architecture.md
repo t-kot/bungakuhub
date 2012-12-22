@@ -135,6 +135,46 @@ UsersControllerにfollowingsとfollowersアクションを定義　
 機能をすべて見直す必要がある
 
 
+#### カテゴリ登録
+
+◯model
+
+Category 
+
+- name:{ja:"文学", en:"Literature"}
+- type STIのためのtype
+
+	Category
+	|- TextCategory
+	|- ComicCategory
+
+
+Category has_many => Repository
+
+Repositoryを作成するときに、対応するRepository_typeのCategoryを選択する
+
+
+#### Tag登録
+TagとRepositoryは多対多関係。中間のモデルにRepositoryTagRelationshipなどを作る。
+
+◯Model
+
+Tag
+
+- name: "エンタテインメント"
+
+RepositoryTagRelationship
+
+- tag_id
+- repository_id
+
+インクリメンタルサーチなどの実装がけっこうチャレンジングなので後回し。
+
+
+
+
+
+
 
 
 

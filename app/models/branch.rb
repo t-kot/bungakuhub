@@ -142,5 +142,9 @@ class Branch < ActiveRecord::Base
     end
   end
 
+  def has_mergeable_branch?
+    self.repository.branches.size !=1
+  end
+
 
 end

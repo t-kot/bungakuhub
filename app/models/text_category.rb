@@ -1,0 +1,2 @@
+class TextCategory < Category
+end

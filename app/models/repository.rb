@@ -7,8 +7,13 @@ class Repository < ActiveRecord::Base
   belongs_to :repository_type
   belongs_to :user
   has_many :branches
+  belongs_to :category
 
   validates :name,  presence: true, length: {maximum:30}, uniqueness: true
+
+  delegate :name, to: :repository_type, prefix: true
+  delegate :display_name, to: :user, prefix: true
+  delegate :name, to: :category, prefix: true
 
   def current_files
     Dir.entries(self.working_dir) - [".", "..", ".git", ".lock"]

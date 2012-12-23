@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222132643) do
+ActiveRecord::Schema.define(:version => 20121223031115) do
 
   create_table "branch_kommits", :force => true do |t|
     t.integer  "kommit_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20121222132643) do
     t.string   "unconfirmed_email"
     t.integer  "sex_id"
     t.string   "slug"
+    t.boolean  "hidden"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

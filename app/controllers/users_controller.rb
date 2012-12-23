@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
+    @user.hide
 
     respond_to do |format|
       format.html { redirect_to root_path, notice: I18n.t("flash.info.delete_user")}

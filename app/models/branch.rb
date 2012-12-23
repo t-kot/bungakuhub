@@ -80,24 +80,18 @@ class Branch < ActiveRecord::Base
   end
 
   def merge(merged_branch)
-    if merged_branch.nothing_to_commit? && self.nothing_to_commit?
-      Dir.chdir(self.repository.working_dir) do
-        Open3.popen3("git merge --no-ff --no-edit #{merged_branch.name}") do |stdin, stdout, stderr|
-          BungakuHub::Error.new(stderr).try_raise
-          bol = stdout.read.split("\n").first
-          self.destroy_all_post
-          create_posts_by_current_file
-          if /^Merge (.*) strategy.$/.match bol
-            self.build_kommit(message:"Merge branch #{merged_branch.name}", revision: head).save
-          end
-          #p `git status`
-          self.repository.repo.add_u
-          #p `git status`
-          self
+    Dir.chdir(self.repository.working_dir) do
+      Open3.popen3("git merge --no-ff --no-edit #{merged_branch.name}") do |stdin, stdout, stderr|
+        BungakuHub::Error.new(stderr).try_raise
+        bol = stdout.read.split("\n").first
+        self.destroy_all_post
+        create_posts_by_current_file
+        if /^Merge (.*) strategy.$/.match bol
+          self.build_kommit(message:"Merge branch #{merged_branch.name}", revision: head).save
         end
+        self.repository.repo.add_u
+        self
       end
-    else
-      false
     end
   end
 

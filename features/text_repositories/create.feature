@@ -22,6 +22,7 @@
     もし メールアドレスが"email1@example.com"のユーザとしてログインしている
     かつ "user1のテキストレポジトリ作成ページ"へアクセス
     かつ "text_repository_repository_type_id_1"を選択する
+    かつ "text_repository_category_id_1"を選択する
     かつ "レポジトリ名"に"テストのレポジトリ"と入力する
     かつ "説明"に"これはcucumberによって作成しました"と入力する
     かつ "作成"ボタンをクリックする

@@ -3,7 +3,7 @@ require 'open3'
 require 'grit'
 class Repository < ActiveRecord::Base
   attr_accessor :repo, :bare
-  attr_accessible :description, :name, :repository_type_id, :type, :user_id, :bare
+  attr_accessible :description, :name, :repository_type_id, :type, :user_id, :bare, :category_id
   belongs_to :repository_type
   belongs_to :user
   has_many :branches

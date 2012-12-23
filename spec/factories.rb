@@ -1,3 +1,4 @@
+#coding: utf-8
 FactoryGirl.define do
   factory :repository  do
     user
@@ -5,6 +6,10 @@ FactoryGirl.define do
     sequence(:name) {|n|  "TextRepo#{n}"}
     repository_type_id 1
     description "Created by factory_girl"
+    category_id 1
+    #before(:create) do |repository|
+    #  repository.category = TextCategory.first
+    #end
   end
   factory :text_repository , parent: :repository do
     type "TextRepository"

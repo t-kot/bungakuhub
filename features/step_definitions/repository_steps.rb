@@ -4,7 +4,7 @@
 もし /^以下のレポジトリが存在している:$/ do |table|
   table.rows.each do |user, name, repository_type|
     user = User.find_by_display_name(user)
-    FactoryGirl.create(:repository, user: user, name: name, repository_type_id: 1)
+    FactoryGirl.create(:repository, user: user, name: name, repository_type_id: 1, category_id:1)
   end
 end
 
@@ -29,6 +29,7 @@ end
   end
   setting=="公開" ? choose("text_repository_repository_type_id_1") : choose("text_repository_repository_type_id_2")
   fill_in("レポジトリ名", with: name)
+  choose("text_repository_category_id_1")
   click_button("作成")
 end
 

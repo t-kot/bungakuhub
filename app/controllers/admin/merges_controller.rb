@@ -1,7 +1,6 @@
 #coding:utf-8
 module Admin
   class MergesController < ApplicationController
-    before_filter :status_has_no_changes?
 
     def new
       @branch = Branch.find(params[:branch_id])
@@ -11,17 +10,18 @@ module Admin
     def create
       @merging_branch = Branch.find(params[:branch_id])
       @merged_branch = Branch.find(params[:merge][:target])
-      @merging_branch.enter do
-
-        respond_to do |format|
-          if @merging_branch.merge(@merged_branch)
+      if @merging_branch.nothing_to_commit? && @merged_branch.nothing_to_commit?
+        @merging_branch.enter do
+          @merging_branch.merge(@merged_branch)
+          respond_to do |format|
             flash[:notice] = "マージされました"
             format.html {redirect_to branch_path(@merging_branch), notice: "マージされました"}
             format.json {render json: @merging_branch, status: :created, location: @merging_branch }
-          else
-            format.html {render action: "new"}
           end
         end
+      else
+        flash[:alert] = t("flash.alert.kommit_to_continue")
+        redirect_to :back
       end
     end
   end

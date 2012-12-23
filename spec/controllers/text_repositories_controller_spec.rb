@@ -62,7 +62,7 @@ describe TextRepositoriesController do
 
       it "redirects to the created text_repository" do
         post :create, {user_id: subject.current_user, :text_repository => valid_attributes}, valid_session
-        response.should redirect_to text_repository_path(TextRepository.last)
+        response.should redirect_to admin_repository_path(TextRepository.last)
         TextRepository.last.destroy
       end
     end

@@ -14,8 +14,7 @@ module Admin
         @post.branch = @branch
 
         respond_to do |format|
-          if @post.valid?
-            @post.save
+          if @post.save
             format.html {redirect_to admin_branch_posts_path(params[:branch_id]), notice: t("flash.info.create.notice", model: t("activerecord.models.post"))}
           else
             @posts = @branch.posts

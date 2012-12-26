@@ -12,8 +12,9 @@ describe UsersController do
 
   describe "GET show" do
     it "assigns the requested user as @user" do
-      user = FactoryGirl.create(:user)
-      get :show, {id: user.to_param}, valid_session
+      user = mock_model(User, id:1)
+      User.should_receive(:find).with("1").and_return(user)
+      get :show, {id: user}
       assigns(:user).should eq(user)
     end
   end
@@ -27,8 +28,8 @@ describe UsersController do
     end
     context "when edit by invalid user" do
       it "redirects to root" do
-        user = FactoryGirl.create(:user)
-        get :edit, {id:user.to_param}, valid_session
+        user = mock_model(User, id:1)
+        get :edit, {id:user}, valid_session
         response.should redirect_to(root_path)
       end
     end

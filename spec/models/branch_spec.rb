@@ -163,4 +163,14 @@ describe Branch do
     end
   end
 
+  describe "has_mergeable_branch?" do
+    it "return true" do
+      repository = double("Repository")
+      repository.stub(:branches).and_return([double("Branch"), double("Branch")])
+      branch = Branch.new
+      branch.stub(:repository).and_return(repository)
+      branch.has_mergeable_branch?.should be_true
+    end
+  end
+
 end

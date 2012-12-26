@@ -19,13 +19,13 @@ describe Admin::RepositoriesController do
 
   describe "GET index" do
     login_user
-    before do
-      create_repository_for(subject.current_user)
-      @repository = @repository.becomes(TextRepository)
-    end
-    it "assigns all repositories as @repositories" do
-      repositories = [@repository]
+    let(:repositories){ [mock_model(Repository)] }
 
+    before do
+      subject.current_user.stub(:repositories).and_return repositories
+    end
+
+    it "assigns all repositories as @repositories" do
       get :index, {user_id: subject.current_user}, valid_session
       assigns(:repositories).should eq(repositories)
     end
@@ -33,36 +33,40 @@ describe Admin::RepositoriesController do
 
   describe "GET show" do
     login_user
+    let(:repository){ mock_model(Repository, id:1, owner:subject.current_user) }
     before do
-      create_repository_for(subject.current_user)
-      @repository = @repository.becomes(TextRepository)
+      Repository.stub(:find).with("1").and_return repository
     end
     it "assigns the requested repository as @repository" do
-      get :show, {user_id: subject.current_user, id: @repository}, valid_session
-      assigns(:repository).should eq(@repository)
+      get :show, {user_id: subject.current_user, id: repository}, valid_session
+      assigns(:repository).should eq(repository)
     end
   end
 
   describe "GET edit" do
     login_user
     context "when valid user" do
+      let(:repository){ mock_model(Repository, id:1, owner:subject.current_user)}
       before do
-        create_repository_for(subject.current_user)
-        @repository = @repository.becomes(TextRepository)
+        Repository.stub(:find).with("1").and_return repository
       end
       it "assigns the requested repository as @repository" do
-        get :edit, {user_id:@repository.user, id:@repository}, valid_session
-        assigns(:repository).should eq(@repository)
+        get :edit, {user_id:repository.owner, id:repository}, valid_session
+        assigns(:repository).should eq(repository)
       end
     end
     context "When invalid user" do
+      let(:repository){ mock_model(Repository, id:1, owner:mock_model(User, id:100) )}
       before do
-        create_repository_for(create(:user))
-        @repository = @repository.becomes(TextRepository)
+        Repository.stub(:find).with("1").and_return repository
       end
       it "redirects to root" do
-        get :edit, {user_id:@repository.user,id:@repository}, valid_session
+        get :edit, {user_id:repository.owner,id:repository}, valid_session
         response.should redirect_to root_path
+      end
+
+      it "display flash alert" do
+        get :edit, {user_id:repository.owner,id:repository}, valid_session
         flash[:alert].should eq I18n.t("flash.alert.access_denied")
       end
     end
@@ -110,30 +114,35 @@ describe Admin::RepositoriesController do
   describe "DELETE destroy" do
     login_user
     context "When valid user" do
+      let(:repository){ mock_model(Repository, id:1, owner:subject.current_user) }
       before do
-        create_repository_for(subject.current_user)
-        @repository = @repository.becomes(TextRepository)
+        Repository.stub(:find).with("1").and_return repository
       end
       it "destroys the requested repository" do
-        expect {
-          delete :destroy, {user_id: @repository.user,:id => @repository}, valid_session
-        }.to change(Repository, :count).by(-1)
+        repository.should_receive(:destroy)
+        delete :destroy, {user_id: repository.owner,:id => repository}, valid_session
       end
 
       it "redirects to the repositories list" do
-        user = @repository.user
-        delete :destroy, {user_id: @repository.user, :id => @repository}, valid_session
-        response.should redirect_to(user_repositories_url(user))
+        delete :destroy, {user_id: repository.owner, :id => repository}, valid_session
+        response.should redirect_to(user_repositories_url(subject.current_user))
       end
     end
     context "When invalid user" do
+
+      let(:repository){ mock_model(Repository, id:1, owner:mock_model(User, id:100) )}
+
       before do
-        create_repository_for(create(:user))
-        @repository = @repository.becomes(TextRepository)
+        Repository.stub(:find).and_return repository
       end
+
       it "redirects to root" do
-        delete :destroy, {user_id:@repository.user, :id => @repository}, valid_session
+        delete :destroy, {user_id:repository.owner, :id => repository}, valid_session
         response.should redirect_to root_path
+      end
+
+      it "display flash alert" do
+        delete :destroy, {user_id:repository.owner, :id => repository}, valid_session
         flash[:alert].should eq I18n.t("flash.alert.access_denied")
       end
     end

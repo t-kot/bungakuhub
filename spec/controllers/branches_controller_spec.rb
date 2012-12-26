@@ -1,36 +1,28 @@
 require 'spec_helper'
 
 describe BranchesController do
-  before(:each) do
-    @user = create(:user)
-    create_branch_for(@user)
-  end
-  after(:each) do
-    @repository.destroy
-  end
-
-  def valid_attributes
-    {
-      name: "Branch1"
-    }
-  end
-
-  def valid_session
-    {}
-  end
+  let(:repository){ mock_model(Repository, id:1)}
 
   describe "GET index" do
+    let(:branches){ [mock_model(Branch)] }
+    before do
+      repository.stub(:branches).and_return branches
+      Repository.should_receive(:find).with("1").and_return(repository)
+    end
     it "assigns all branches as @branches" do
-      branches = @repository.branches
-      get :index, {user_id: @user, repository_id: @repository}, valid_session
-      assigns(:branches).should eq(branches)
+      get :index, {repository_id: repository}
+      assigns(:branches).should eq branches
     end
   end
 
   describe "GET show" do
+    let(:branch){ mock_model(Branch, id:1) }
+    before do
+      Branch.should_receive(:find).with("1").and_return(branch)
+    end
     it "assigns the requested branch as @branch" do
-      get :show, {user_id: @user, repository_id: @repository, :id => @branch.to_param}, valid_session
-      assigns(:branch).should eq(@branch)
+      get :show, {:id => branch}
+      assigns(:branch).should eq(branch)
     end
   end
 

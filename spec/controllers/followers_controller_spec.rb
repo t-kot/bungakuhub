@@ -1,20 +1,21 @@
 require 'spec_helper'
 
 describe FollowersController do
+  let(:user){ mock_model(User, id:1)}
+  let(:followers){ [mock_model(User)]}
   before do
-    5.times{|n| eval "@user#{n} = create(:user)"}
-    @user2.follow!(@user1)
-    @user3.follow!(@user1)
+    User.should_receive(:find).with("1").and_return(user)
+    user.stub(:followers).and_return followers
   end
 
   describe "GET index" do
     it "should assign the requested user as @user" do
-      get :index, {user_id:@user1}
-      assigns(:user).should eq @user1
+      get :index, {user_id:user}
+      assigns(:user).should eq user
     end
     it "should assigns the requested followers as @followers" do
-      get :index, {user_id:@user1}
-      assigns(:followers).should eq [@user2, @user3]
+      get :index, {user_id:user}
+      assigns(:followers).should eq followers
     end
   end
 

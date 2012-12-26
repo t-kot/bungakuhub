@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Sex do
-  it "sexは３つ存在すること" do
+  it "has 3 records" do
     Sex.all.length.should == 3
   end
 end

@@ -21,7 +21,6 @@ class TextRepositoriesController < ApplicationController
 
   def new
     @text_repository = TextRepository.new
-    #@text_repository.user = current_user
 
     respond_to do |format|
       format.html

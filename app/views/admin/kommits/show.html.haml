@@ -30,7 +30,7 @@
     = link_to kommit.message, branch_kommit_diff_path(params[:branch_id], @kommit, kommit)
 
 - unless @kommit.head?(@branch.name)
-  = link_to 'Revert', admin_branch_kommit_revert_path(params[:branch_id], params[:id]), method: :post
+  //= link_to 'Revert', admin_branch_kommit_revert_path(params[:branch_id], params[:id]), method: :post
 
 %h4
   このコミットの時点のファイルの内容を見る

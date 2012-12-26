@@ -5,9 +5,7 @@ describe 'email_validator' do
   before do
     @validator = EmailValidator.new({attributes: {}})
     @mock = mock('model')
-    @mock.stub("errors").and_return([])
-    @mock.errors.stub('[]').and_return({})
-    @mock.errors[].stub('<<')
+    @mock.stub_chain(:errors, "[]", "<<")
   end
   it 'should validate valid address(1)' do
     @mock.should_not_receive('errors')

@@ -57,7 +57,7 @@ module Admin
       @kommit.destroy
 
       respond_to do |format|
-        format.html { redirect_to user_admin_repository_branch_kommits_url(params[:user_id], params[:repository_id], params[:branch_id])}
+        format.html { redirect_to admin_branch_kommits_url(params[:branch_id])}
         format.json { head :no_content }
       end
     end

@@ -3,40 +3,36 @@ require 'spec_helper'
 
 describe KommitsController do
 
-  after(:each) do
-    @repository.destroy
-  end
-
-  def valid_attributes
-    {
-    bare:true,
-    message:"test",
-    revision:"Test"
-    }
-  end
-
-  def valid_session
-    {}
-  end
-
   describe "GET index" do
+    let(:branch){ mock_model(Branch, id:1) }
+    let(:kommits){ [double(Kommit)] }
+    before do
+      branch.stub(:kommits).and_return kommits
+      Branch.should_receive(:find).with("1").and_return branch
+    end
     it "assigns all kommits as @kommits" do
-      user = FactoryGirl.create(:user)
-      create_branch_for(user)
-      @branch.kommits.create valid_attributes
-      
-      get :index, {user_id:user, repository_id:@repository, branch_id:@branch}, valid_session
-      assigns(:kommits).should eq(@branch.kommits)
+      get :index, {branch_id:branch}
+      assigns(:kommits).should eq kommits
+
     end
   end
 
   describe "GET show" do
+    let(:branch){ mock_model(Branch, id:1)}
+    let(:kommit){ mock_model(Kommit, id:1)}
+    before do
+      Kommit.should_receive(:find).with("1").and_return(kommit)
+      Branch.should_receive(:find).with("1").and_return(branch)
+    end
+
     it "assigns the requested kommit as @kommit" do
-      user = FactoryGirl.create(:user)
-      create_branch_for(user)
-      kommit = @branch.kommits.create valid_attributes
-      get :show, {:id => kommit.to_param, user_id:user, repository_id:@repository, branch_id:@branch}, valid_session
-      assigns(:kommit).should eq(kommit)
+      get :show, {branch_id:branch, id:kommit}
+      assigns(:kommit).should eq kommit
+    end
+
+    it "assigns the requested branch as @branch" do
+      get :show, {branch_id:branch, id:kommit}
+      assigns(:branch).should eq branch
     end
   end
 end

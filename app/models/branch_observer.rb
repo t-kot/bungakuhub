@@ -8,13 +8,7 @@ class BranchObserver < ActiveRecord::Observer
 
   def after_create(branch)
     ##TODO master以外からのチェックアウトのことを考えよ
-    unless branch.bare
-      branch.repository.lock do
-        branch.repository.checkout_to(branch.name)
-        branch.create_posts_by_current_file
-        branch.repository.checkout_master
-      end
-    end
+    branch.enter{branch.create_posts_by_current_file} unless branch.bare
   end
 
   def before_destroy(branch)

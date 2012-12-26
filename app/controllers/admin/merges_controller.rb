@@ -4,7 +4,8 @@ module Admin
 
     def new
       @branch = Branch.find(params[:branch_id])
-      @targets = @branch.repository.branches - [@branch]
+      #@targets = @branch.repository.branches - [@branch]
+      @targets = @branch.brothers
     end
 
     def create
@@ -21,7 +22,7 @@ module Admin
         end
       else
         flash[:alert] = t("flash.alert.kommit_to_continue")
-        redirect_to :back
+        redirect_to new_admin_branch_merge_path(@merging_branch)
       end
     end
   end

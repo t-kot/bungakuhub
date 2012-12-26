@@ -13,6 +13,7 @@ module Bungaku
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
+    config.action_view.field_error_proc = proc {|input, instance| input}
     config.active_record.whitelist_attributes = true
     config.active_record.observers = [:repository_observer, :post_observer, :kommit_observer, :branch_observer]
     config.assets.enabled = true

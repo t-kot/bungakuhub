@@ -5,8 +5,9 @@ describe TextRepositoriesController do
     {
       type: "TextRepository",
       repository_type_id: 1,
+      category_id: 1,
       description: "Hello,world",
-      name: "sample code",
+      name: "samplecode",
       bare: true
     }
   end
@@ -16,12 +17,25 @@ describe TextRepositoriesController do
   end
 
   describe "GET index" do
+    let(:text_repositories){ [mock_model(TextRepository)]}
+    let(:user){ mock_model(User, id:1, text_repositories:text_repositories) }
+    before do
+      User.should_receive(:find).with("1").and_return(user)
+    end
     it "assigns all text_repositories as @text_repositories" do
-      user = FactoryGirl.create(:user)
-      text_repositories = [FactoryGirl.create(:text_repository, user:user).becomes(TextRepository)]
       get :index,{user_id: user},  valid_session
       assigns(:text_repositories).should eq(text_repositories)
-      text_repositories.each(&:destroy)
+    end
+  end
+
+  describe "GET show" do
+    let(:text_repository){ mock_model(TextRepository, id:1)}
+    before do
+      TextRepository.should_receive(:find).with("1").and_return(text_repository)
+    end
+    it "assigns requested text_repository as @text_repository" do
+      get :show, {id: text_repository}
+      assigns(:text_repository).should eq text_repository
     end
   end
 

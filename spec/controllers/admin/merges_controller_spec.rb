@@ -2,64 +2,63 @@ require 'spec_helper'
 
 describe Admin::MergesController do
 
-  before(:each) do
-    create_repository_for(subject.current_user)
-    create_post_and_kommit_for(@repository.master)
-    @another = @repository.master.checkout(name:"another")
-    @another.save
-    2.times{create_post_and_kommit_for(@another)}
-  end
-
-  after(:each) do
-    @repository.destroy
-  end
-
   describe "GET new" do
-
-
-    it "assigns requested branch as @branch" do
-      get :new, {branch_id: @repository.master}
-      assigns(:branch).should eq @repository.master
+    let(:branch){ mock_model(Branch, id:1).as_null_object}
+    let(:targets){ [double(Branch)] }
+    before do
+      branch.stub(:brothers).and_return targets
+      Branch.should_receive(:find).with("1").and_return(branch)
     end
 
-    it "assigns targets without the branch itself" do
-      targets = @repository.branches - [@repository.master]
-      get :new, {branch_id: @repository.master}
-      assigns(:targets).should_not include @repository.master
+    it "assigns requested branch as @branch" do
+      get :new, {branch_id: branch}
+      assigns(:branch).should eq branch
+    end
+
+
+    it "assigns targets as @targets" do
+      get :new, {branch_id: branch}
+      assigns(:targets).should eq targets
     end
 
   end
 
   describe "POST create" do
+    let(:merging){ mock_model(Branch, id:1).as_null_object}
+    let(:merged){ mock_model(Branch, id:2).as_null_object}
+    before do
+      merging.stub(:enter).and_yield
+      Branch.should_receive(:find).with("1").and_return(merging)
+      Branch.should_receive(:find).with("2").and_return(merged)
+    end
 
     it "assigns merging branch as @merging_branch" do
-      Branch.any_instance.stub(:merge).and_return(true)
-      post :create, {branch_id: @repository.master, merge:{target:@another}}
-      assigns(:merging_branch).should eq @repository.master
+      post :create, {branch_id: merging, merge:{target:merged}}
+      assigns(:merging_branch).should eq merging
     end
 
     it "assigns merged branch as @merged_branch" do
-      Branch.any_instance.stub(:merge).and_return(true)
-      post :create, {branch_id: @repository.master, merge:{target:@another}}
-      assigns(:merged_branch).should eq @another
+      post :create, {branch_id: merging, merge:{target:merged}}
+      assigns(:merged_branch).should eq merged
     end
 
-    context "when merge succeeded" do
-      it "redirects to the merging branch page" do
-        Branch.any_instance.stub(:merge).and_return(true)
-        post :create, {branch_id: @repository.master, merge:{target:@another}}
-        response.should redirect_to branch_path(@repository.master)
+    it "redirects to the merging branch page" do
+      post :create, {branch_id: merging, merge:{target:merged}}
+      response.should redirect_to branch_path(merging)
+    end
+
+    context "status has changes" do
+      before do
+        merging.stub(:nothing_to_commit?).and_return false
+      end
+      it "redirects to back" do
+        post :create, {branch_id: merging, merge:{target:merged}}
+        response.should redirect_to new_admin_branch_merge_path(merging)
+      end
+      it "displays status has changes flash" do
+        post :create, {branch_id: merging, merge:{target:merged}}
+        flash[:alert].should eq I18n.t("flash.alert.kommit_to_continue")
       end
     end
-
-    #context "when merge failed" do
-    #  it "re-renders the 'new' template" do
-    #    Branch.any_instance.stub(:merge).and_return(false)
-    #    post :create, {branch_id: @repository.master, merge:{target:@another}}
-    #    response.should render_template("new")
-    #  end
-    #end
-
   end
-
 end

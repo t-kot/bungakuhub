@@ -140,5 +140,9 @@ class Branch < ActiveRecord::Base
     self.repository.branches.size !=1
   end
 
+  def brothers
+    self.repository.branches - [self]
+  end
+
 
 end

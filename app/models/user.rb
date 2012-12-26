@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :news
   has_many :tweets
   has_many :repository_create_news
+  has_many :repository_update_news
 
 
   validates :display_name,  presence: true, length: {maximum:30},

@@ -50,7 +50,7 @@ module Admin
         end
       else
         respond_to do |format|
-          format.html { redirect_to repository_path(@branch.repository), notice: t("flash.alert.cannot_destroy_branch") }
+          format.html { redirect_to repository_path(@branch.repository), alert: t("flash.alert.cannot_destroy_branch") }
           format.json { head :no_content }
         end
       end

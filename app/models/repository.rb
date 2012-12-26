@@ -15,6 +15,10 @@ class Repository < ActiveRecord::Base
   delegate :display_name, to: :user, prefix: true
   delegate :name, to: :category, prefix: true
 
+  validates :name, alpha_numeric: true
+  validates :repository_type_id, presence: true
+  validates :category_id, presence: true
+
   def current_files
     Dir.entries(self.working_dir) - [".", "..", ".git", ".lock"]
   end

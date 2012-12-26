@@ -44,4 +44,23 @@ describe User do
       @user.unfollow!(@user2)
     end
   end
+
+  describe "hide" do
+    it "should update hidden column" do
+      @user.hidden.should_not be_true
+      @user.hide
+      @user.hidden.should be_true
+    end
+  end
+
+  describe "recover" do
+    before do
+      @user.hide
+    end
+    it "should update hidden column" do
+      @user.hidden.should be_true
+      @user.recover
+      @user.hidden.should_not be_true
+    end
+  end
 end

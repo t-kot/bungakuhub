@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
 
   validates :title, presence: true, length: {maximum:30},
                     uniqueness: {scope: :branch_id}
+  #validates :name, alpha_numeric: true
 
   def delete_file
     repository = self.branch.repository

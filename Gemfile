@@ -11,6 +11,7 @@ gem 'grit', require: false
 group :development do
   gem 'erb2haml'
   gem 'rails-erd'
+  gem 'meta_request'
 end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

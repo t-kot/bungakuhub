@@ -5,21 +5,18 @@
 %div#added_post
   %p 追加されたポスト
   %ul
-  - @status.added.each do |key, value|
+  - @status[:added].each do |key|
     %li= key
 %div#deleted_post
   %p 削除されたポスト
   %ul
-  - @status.deleted.each do |key, value|
+  - @status[:deleted].each do |key|
     %li= key
 %div#updated_post
   %p 更新されたポスト
   %ul
-  - @status.changed.each do |key, value|
+  - @status[:changed].each do |key|
     %li= key
-
-//%pre
-//  =@status.pretty
 
 
 

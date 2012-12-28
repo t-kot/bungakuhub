@@ -24,8 +24,7 @@ module Admin
     def new
       @branch.enter do
         @kommit = Kommit.new
-        @post = Post.new
-        @status = @branch.status
+        @status = @branch.statuses
 
         respond_to do |format|
           format.html

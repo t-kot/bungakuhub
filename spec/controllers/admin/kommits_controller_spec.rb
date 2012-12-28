@@ -51,7 +51,8 @@ describe Admin::KommitsController do
     login_user
     let(:branch){ mock_model(Branch, id:1).as_null_object}
     before do
-      branch.stub_chain(:repository, :owner).and_return subject.current_user
+      repository = mock_model(Repository, owner: subject.current_user).as_null_object
+      branch.stub(:repository).and_return repository
       branch.stub(:enter).and_yield
       Branch.stub(:find).with("1").and_return(branch)
     end

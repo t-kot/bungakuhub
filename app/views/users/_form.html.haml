@@ -1,18 +1,20 @@
-= form_for @user do |f|
+= form_for @user, html:{class: "form-forizontal"} do |f|
   = render 'common/form_error', record: @user
 
-  .field
-    = f.label :display_name
-    = f.text_field :display_name
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
+  .control-group
+    = f.label :display_name, class:"control-label", for:"user_display_name"
+    .controls= f.text_field :display_name
+  .control-group
+    = f.label :first_name, class:"control-label", for:"user_first_name"
+    .controls= f.text_field :first_name
+  .control-group
+    = f.label :last_name, class:"control-label", for:"user_last_name"
+    .controls= f.text_field :last_name
+  .control-group
     - Sex.all.each do |sex|
       = f.radio_button :sex_id,sex.id
       %span= sex.name[current_locale]
-  .actions
-    = f.submit t("label.user.update")
+  .control-group
+    .controls
+      .form-actions
+        = f.submit t("label.user.update"), class: "btn btn-primary"

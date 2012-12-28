@@ -8,6 +8,7 @@ class Branch < ActiveRecord::Base
   has_many :posts, dependent: :delete_all
   validates :name, presence: true, length: {maximum:30},
             uniqueness: {scope: :repository_id}
+  #validates :name#, alpha_numeric: true
 
   delegate :status, to: :repository
   delegate :current_files, to: :repository
@@ -142,6 +143,22 @@ class Branch < ActiveRecord::Base
 
   def brothers
     self.repository.branches - [self]
+  end
+
+  def status_added
+    self.status.added.map{|key, value| key.dup.force_encoding("UTF-8")}
+  end
+
+  def status_deleted
+    self.status.deleted.map{|key, value| key.dup.force_encoding("UTF-8")}
+  end
+
+  def status_changed
+    self.status.changed.map{|key, value| key.dup.force_encoding("UTF-8")}
+  end
+
+  def statuses
+    {added: self.status_added, deleted:status_deleted, changed: self.status_changed}
   end
 
 

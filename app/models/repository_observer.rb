@@ -13,6 +13,7 @@ class RepositoryObserver < ActiveRecord::Observer
     branch = repository.branches.create(name:"master", bare:true)
     branch.posts.create(title:"README", body:"README")
     branch.build_kommit(message:"First Commit(README)").save
+    RepositoryCreateNews.create(repository_id:repository, user_id:repository.user)
   end
 
   def before_destroy(repository)

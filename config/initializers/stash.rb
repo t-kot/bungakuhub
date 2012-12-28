@@ -8,7 +8,12 @@ module Grit
     end
 
     def pop_first_at(branch_name)
-      self.stashes(branch_name).first.try(:pop)
+      stashes = self.stashes(branch_name)
+      if stashes.length > 1
+        raise Exception.new("branch has too many stashes")
+      else
+        stashes.first.try(:pop)
+      end
     end
 
     def create_stash

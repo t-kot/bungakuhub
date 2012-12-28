@@ -24,6 +24,13 @@ describe RepositoryObserver do
     before do
       branches.stub(:create).and_return branch
     end
+    it "should create repository_create_news" do
+      repository.stub(:repository).and_return 1
+      repository.stub(:user).and_return 1
+      expect {
+        @observer.after_create(repository)
+      }.to change(RepositoryCreateNews, :count).by(1)
+    end
     it "should call git_init" do
       repository.should_receive(:git_init)
       @observer.after_create(repository)

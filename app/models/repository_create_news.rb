@@ -1,8 +1,7 @@
 #coding: utf-8
 class RepositoryCreateNews < News
-  belongs_to :user
 
   def body
-    "#{self.user}が#{self.repository}を作成しました"
+    "#{self.user.display_name}が「#{self.repository.name}」を作成しました"
   end
 end

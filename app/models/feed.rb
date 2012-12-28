@@ -1,6 +1,7 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :type, :user_id
+  attr_accessible :type, :user_id, :repository_id
   belongs_to :user
+  belongs_to :repository
   before_save :is_concrete_class?
 
 

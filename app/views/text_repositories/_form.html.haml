@@ -1,26 +1,26 @@
-= form_for [current_user, @text_repository] do |f|
+= form_for [current_user, @text_repository], html:{class: "form-forizontal"} do |f|
   = render 'common/form_error', record: @text_repository
 
-  .field
-    = f.hidden_field :user_id
-  .field
-    %label 公開設定
+  = f.hidden_field :user_id
+  .control-group
+    %label.control-label 公開設定
     - RepositoryType.all.each do |repo_type|
-      //= f.label :repository_type_id, repo_type.name[current_locale]
       = f.radio_button :repository_type_id,repo_type.id
       %span= repo_type.name[current_locale]
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
+  .control-group
+    = f.label :name,  class:"control-label", for:"text_repository_name"
+    .controls= f.text_field :name
+  .control-group
+    = f.label :description, class:"control-label", for:"text_repository_description"
+    .controls= f.text_field :description
+  .control-group
     %label カテゴリ
     - TextCategory.all.each do |category|
       = f.radio_button :category_id, category.id
       %span= category.name[current_locale]
+  .control-group
+    .controls
+      .form-actions
+        = f.submit t("label.button.create"), class: "btn btn-primary"
   %br
 
-  .actions
-    = f.submit t("label.button.create")

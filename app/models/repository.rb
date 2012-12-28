@@ -7,6 +7,7 @@ class Repository < ActiveRecord::Base
   belongs_to :repository_type
   belongs_to :user
   has_many :branches
+  has_many :feeds
   belongs_to :category
 
   validates :name,  presence: true, length: {maximum:30}, uniqueness: true
@@ -15,7 +16,6 @@ class Repository < ActiveRecord::Base
   delegate :display_name, to: :user, prefix: true
   delegate :name, to: :category, prefix: true
 
-  validates :name, alpha_numeric: true
   validates :repository_type_id, presence: true
   validates :category_id, presence: true
 

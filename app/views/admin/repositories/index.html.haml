@@ -1,17 +1,15 @@
-%h1 管理用の自分のレポジトリ一覧
+%legend レポジトリ管理
 
 %table.table.table-hover.table-striped
   %tr
-    %th Type
-    %th User
-    %th Name
-    %th Description
+    %th= t("activerecord.attributes.repository.type")
+    %th= t("activerecord.attributes.repository.name")
+    %th= t("activerecord.attributes.repository.description")
     %th Action
 
   - @repositories.each do |repository|
     %tr
-      %td= repository.type
-      %td= repository.user_id
+      %td= repository.type_name[current_locale]
       %td= repository.name
       %td= repository.description
       %td= link_to 'Show', admin_repository_path(repository)

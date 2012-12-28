@@ -37,7 +37,7 @@
                 %li
                   != link_to "タイムライン", timeline_feeds_path
                 %li
-                  != link_to t("label.user.edit"),edit_user_path(current_user)
+                  = link_to t("label.user.edit"), edit_user_path(current_user)
                 %li
                   != link_to t("label.user.profile"),user_path(current_user)
                 %li

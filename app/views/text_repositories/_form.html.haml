@@ -2,25 +2,8 @@
   = render 'common/form_error', record: @text_repository
 
   = f.hidden_field :user_id
-  .control-group
-    %label.control-label 公開設定
-    - RepositoryType.all.each do |repo_type|
-      = f.radio_button :repository_type_id,repo_type.id
-      %span= repo_type.name[current_locale]
-  .control-group
-    = f.label :name,  class:"control-label", for:"text_repository_name"
-    .controls= f.text_field :name
-  .control-group
-    = f.label :description, class:"control-label", for:"text_repository_description"
-    .controls= f.text_field :description
-  .control-group
-    %label カテゴリ
-    - TextCategory.all.each do |category|
-      = f.radio_button :category_id, category.id
-      %span= category.name[current_locale]
-  .control-group
-    .controls
-      .form-actions
-        = f.submit t("label.button.create"), class: "btn btn-primary"
-  %br
-
+  = render 'repositories/forms/repository_type', f:f
+  = render 'repositories/forms/repository_name', f:f
+  = render 'repositories/forms/repository_description', f:f
+  = render 'repositories/forms/text_category', f:f
+  = render 'common/create_button', f:f

@@ -34,7 +34,7 @@ end
   within("#new_post") do
     step %Q["タイトル"に"#{title}"と入力する]
     step %Q["本文"に"#{body}"と入力する]
-    click_button("Save")
+    click_button("作成")
   end
 end
 
@@ -47,7 +47,7 @@ end
     when "本文"
       step %Q["本文"に"#{update_value}"と入力する]
     end
-    click_button("Save")
+    click_button("更新")
   end
 end
 

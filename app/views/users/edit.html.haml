@@ -1,7 +1,25 @@
-%h1 Editing user
-
-= render 'form'
-
-= link_to 'Show', @user
-\|
-= link_to 'Delete', user_path, method: :delete , data: { confirm: "Are you sure?" }
+.container#user_edit
+  %legend プロフィール編集
+  .row
+    .span3
+      %ul.nav.nav-tabs.nav-stacked.nav-pills
+        %li.active
+          %a{href:"#basic"}
+            プロフィール情報
+            %i.icon-chevron-right
+        %li
+          %a{href:"#system"}
+            システム登録情報
+            %i.icon-chevron-right
+    .span9
+      = render 'common/form_error', record: @user
+      #basic
+        %legend プロフィール情報
+        = render 'users/form'
+      #system
+        %legend システム登録情報
+        = render 'users/devise_form'
+      #others
+        %legend その他
+        = link_to '自分のページを見る', user_path(current_user)
+        = link_to '退会する', user_path(current_user), method: :delete , data: { confirm: "Are you sure?" }

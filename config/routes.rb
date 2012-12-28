@@ -1,4 +1,5 @@
 Bungaku::Application.routes.draw do
+  get 'users/edit' => redirect('/404.html')
   devise_for :users
   devise_scope :user do
     get "/users/sign_in", to: 'devise/sessions#new', as: :new_user_session

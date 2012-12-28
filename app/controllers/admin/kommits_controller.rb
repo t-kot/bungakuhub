@@ -37,7 +37,7 @@ module Admin
       @branch.enter do
         @kommit = @branch.build_kommit(params[:kommit])
         @kommit.user = current_user
-        @status = @branch.status
+        @status = @branch.statuses
 
         respond_to do |format|
           if @kommit.save

@@ -1,0 +1,24 @@
+= form_for @user,url: registration_path(@user), html:{method: :put, class:"form-horizontal"} do |f|
+  .control-group
+    .control-label= f.label :email
+    .controls= f.email_field :email
+  .control-group
+    .control-label= f.label :password
+    .controls
+      = f.password_field :password, :autocomplete => "off"
+      %br
+      ※
+      = t("text.user.leave_password_blank")
+  .control-group
+    .control-label= f.label :password_confirmation
+    .controls= f.password_field :password_confirmation
+  .control-group
+    .control-label= f.label :current_password
+    .controls
+      = f.password_field :current_password
+      %br
+      ※
+      = t("text.user.need_current_password")
+  .control-group
+    .form-actions
+      = f.submit t("label.button.update"), class: 'btn btn-primary'

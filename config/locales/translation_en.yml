@@ -24,12 +24,16 @@ en:
       admin: Repository Admin
     button:
       create: Create
+      update: Update
+      destroy: Destroy
   text:
     user:
       forgot_password: Forgot your password?
       not_receive_confirmation: Didn't receive confirmation instructions?
       send_password_instructions: Send me reset password instructions
       resend_confirmation_instructions: Resend confirmation instructions
+      leave_password_blank: leave blank if you don't want to change it
+      need_current_password: we need your current password to confirm your changes
   activerecord:
     models:
       user: User #g
@@ -46,10 +50,12 @@ en:
         display_name: User Name
         password: Password
         password_confirmation: Password Confirmation
+        current_password: Current Password
         remember_me: Remember me
         first_name: First Name
         last_name: Last Name
       repository:
+        type: Repository Type
         name: Repository Name
         description: Description
       post:

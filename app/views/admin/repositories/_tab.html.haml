@@ -1,0 +1,16 @@
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{href:"tab1", "data-toggle"=>"tab1"}Section 1
+    %li
+      %a{href:"tab2", "data-toggle"=>"tab2"}Section 2
+    %li
+      %a{href:"tab3", "data-toggle"=>"tab3"}Section3
+  .tab-content
+    .tab-pane.active#tab1
+      %p I'm in section1
+    .tab-pane#tab2
+      %p I'm in section2
+    .tab-pane#tab3
+      %p I'm in Section3
+

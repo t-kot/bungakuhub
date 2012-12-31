@@ -1,6 +1,5 @@
 .control-group
-  .controls
-    .form-actions
-      = f.submit t("label.button.update"), class: "btn btn-primary"
-      = link_to t("label.button.destroy"), admin_post_path(post), method: :delete, data: {confirm:"Are you sure?"}, class:"btn btn-danger"
+  .form-actions
+    = f.submit t("label.button.update"), class: "btn btn-primary"
+    = link_to t("label.button.destroy"), admin_post_path(post), method: :delete, data: {confirm:"Are you sure?"}, class:"btn btn-danger"
 

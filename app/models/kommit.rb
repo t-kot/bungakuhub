@@ -67,7 +67,7 @@ class Kommit < ActiveRecord::Base
 
   def inspect(name)
     Dir.chdir(self.repository.working_dir) do
-      Open3.popen3("git show #{self.revision}:#{name}") do |stdin, stdout, stderr|
+      Open3.popen3("git show #{self.revision}:'#{name}'") do |stdin, stdout, stderr|
         BungakuHub::Error.new(stderr).try_raise
         stdout.read
       end

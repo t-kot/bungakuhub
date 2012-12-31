@@ -1,7 +1,6 @@
-= form_for [current_user, @text_repository], html:{class: "form-forizontal"} do |f|
+= form_for [current_user, @text_repository], html:{class: "form-horizontal"} do |f|
   = render 'common/form_error', record: @text_repository
 
-  = f.hidden_field :user_id
   = render 'repositories/forms/repository_type', f:f
   = render 'repositories/forms/repository_name', f:f
   = render 'repositories/forms/repository_description', f:f

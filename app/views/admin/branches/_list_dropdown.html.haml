@@ -1,0 +1,9 @@
+.btn-group
+  %a.btn.dropdown-toggle{"data-toggle"=>"dropdown", href:"#"}
+    Branch
+    %span.caret
+  %ul.dropdown-menu
+    - repository.branches.each do |branch|
+      %li
+        =link_to branch.name, admin_branch_path(branch)
+

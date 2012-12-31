@@ -7,15 +7,7 @@
 .tab-content
   .tab-pane#new_post.active
     %legend 新しいドキュメントを作る
-    = form_for [:admin, @branch, @post] do |f|
-      = render 'common/form_error', record: @post
-      .field
-        = f.label :title
-        = f.text_field :title
-      .field
-        = f.label :body
-        = f.text_area :body
-      = render 'common/create_button', f:f
+    = render 'new_post'
   .tab-pane#edit
     %legend すでにあるドキュメントを編集する
     - @posts.each_with_index do |post, i|
@@ -27,13 +19,4 @@
             .accordion-inner
               - if post.id == @update_post.try(:id)
                 - post = @update_post
-              = form_for [:admin,  post] do |f|
-                = render 'common/form_error', record: post
-                .field
-                  = f.label :title
-                  = f.text_field :title
-                .field
-                  = f.label :body
-                  = f.text_area :body
-                = render 'action_menu', f:f, post:post
-              //= link_to 'Destroy', admin_post_path(post), method: :delete, data: {confirm: 'Are you sure?' }
+              = render 'edit_post', post: post

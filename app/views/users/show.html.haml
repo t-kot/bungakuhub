@@ -8,5 +8,7 @@
   %b Last name:
   = @user.last_name
 
-= link_to 'Edit', edit_user_path(@user)
+= link_to 'Following', user_followings_path(@user)
+= link_to 'Follower', user_followers_path(@user)
+
 = render 'common/follow_button', user: @user

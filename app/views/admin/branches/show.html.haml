@@ -1,28 +1,16 @@
-%p#notice= notice
+.span12
+  #repository_header.span9
+    %h3
+      = link_to @repository.name, admin_repository_path(@repository)
+      @
+      = link_to @branch.name, admin_branch_path(@branch)
+  
+  #repository_body.span9
+    = render 'admin/branches/menu', branch:@branch
+    = render 'admin/branches/list_dropdown', repository:@repository
+    = render 'admin/branches/tab', branch:@branch
 
-%p
-  %b Repository:
-  = @branch.repository_id
 %p
   %b Name:
   = @branch.name
 
-- @branch.kommits.each_with_index do |kommit,i|
-  = link_to "#{i+1}:#{kommit.message}", admin_branch_kommit_path(@branch, kommit)
-  %br
-= link_to "Listing Kommit", admin_branch_kommits_path(params[:id])
-%br
-= link_to "Create Kommit", new_admin_branch_kommit_path(params[:id])
-%br
-= link_to "Open Editor", admin_branch_posts_path(params[:id])
-%br
-
-= link_to 'Back', repository_branches_path(@branch.repository)
-
-%br
-
-- if @branch.has_mergeable_branch?
-  = link_to 'Merge', new_admin_branch_merge_path(@branch)
-
-%br
-= link_to 'Create Branch', new_admin_branch_checkout_path(@branch)

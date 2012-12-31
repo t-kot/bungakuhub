@@ -1,5 +1,9 @@
 %legend フィード
-= link_to "News", timeline_news_index_path
-= link_to "Tweet", timeline_tweets_path
-- @feeds.each do |feed|
-  = feed.body
+= render 'timeline/feed_header'
+%table
+  - @feeds.each do |feed|
+    %tr
+      - if feed.is_a?(Tweet)
+        %td= raw(feed.body)
+      - else
+        %td= raw(feed.body[current_locale])

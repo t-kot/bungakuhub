@@ -1,5 +1,6 @@
 .control-group
-  %label カテゴリ
-  - TextCategory.all.each do |category|
-    = f.radio_button :category_id, category.id
-    %span= category.name[current_locale]
+  %label.control-label カテゴリ
+  .controls
+    - TextCategory.all.each do |category|
+      = f.label category.name[current_locale], class:"radio inline"
+      = f.radio_button :category_id, category.id

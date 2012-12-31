@@ -10,7 +10,7 @@ class FollowingsController < ApplicationController
     user = User.find(params[:user_id])
     current_user.follow!(user)
     respond_to do |format|
-      format.html {redirect_to root_path, notice: t("flash.info.create.following", user_name: user.display_name)}
+      format.html {redirect_to user_path(user), notice: t("flash.info.create.following", user_name: user.display_name)}
       format.json { render json: no_content }
     end
   end
@@ -19,7 +19,7 @@ class FollowingsController < ApplicationController
     user = User.find(params[:id])
     current_user.unfollow!(user)
     respond_to do |format|
-      format.html {redirect_to root_path, notice: t("flash.info.destroy.following", user_name: user.display_name)}
+      format.html {redirect_to user_path(user), notice: t("flash.info.destroy.following", user_name: user.display_name)}
       format.json {render json: no_content }
     end
   end

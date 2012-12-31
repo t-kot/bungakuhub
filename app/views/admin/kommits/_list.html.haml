@@ -1,0 +1,3 @@
+- branch.kommits.each do |kommit|
+  = link_to kommit.message, admin_branch_kommit_path(branch, kommit)
+  = kommit.revision

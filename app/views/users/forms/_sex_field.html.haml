@@ -2,5 +2,6 @@
   .control-label= f.label :sex
   .controls
     - Sex.all.each do |sex|
+      = f.label sex.name[current_locale], class:"radio inline"
       = f.radio_button :sex_id,sex.id
-      %span= sex.name[current_locale]
+      //%span= sex.name[current_locale]

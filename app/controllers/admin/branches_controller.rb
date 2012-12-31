@@ -6,6 +6,7 @@ module Admin
 
     def show
       @branch = Branch.find(params[:id])
+      @repository = @branch.repository
 
       respond_to do |format|
         format.html

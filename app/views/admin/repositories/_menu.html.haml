@@ -1,0 +1,13 @@
+.navbar
+  .navbar-inner
+    #ul.nav
+      %li.active 
+        %a{href:"#"} Content
+      %li
+        = link_to 'Settings', edit_admin_repository_path(repository)
+      %li.divider-vertical
+        %a{href:"#"} Network
+      %li
+        %a{href:"#"} Issues
+      %li.divider-vertical
+        %a{href:"#"} Wiki

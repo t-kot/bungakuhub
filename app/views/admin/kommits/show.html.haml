@@ -20,8 +20,8 @@
     名前の変更
   - elsif diff.deleted_file
     削除されたファイル
-  %pre
-    = diff.diff.force_encoding("UTF-8")
+  //= diff.diff.force_encoding("UTF-8").split("\n")
+  = render 'diffs/diff_table', diff:diff
   %br
 
 %h3 View Diff with this commit

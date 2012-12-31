@@ -1,5 +1,6 @@
 .control-group
   %label.control-label 公開設定
-  - RepositoryType.all.each do |repo_type|
-    = f.radio_button :repository_type_id,repo_type.id
-    %span= repo_type.name[current_locale]
+  .controls
+    - RepositoryType.all.each do |repo_type|
+      = f.label repo_type.name[current_locale], class: "radio inline"
+      = f.radio_button :repository_type_id,repo_type.id

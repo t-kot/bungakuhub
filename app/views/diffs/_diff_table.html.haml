@@ -1,0 +1,9 @@
+%table.span12.diff_table
+  - diff.diff.force_encoding("UTF-8").split("\n").each do |line|
+    %tr
+      - if line.match(/^\+/)
+        %td.green= line
+      - elsif line.match(/^\-/)
+        %td.red= line
+      - else
+        %td.normal= line

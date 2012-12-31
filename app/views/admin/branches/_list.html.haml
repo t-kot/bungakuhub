@@ -1,0 +1,8 @@
+- branch.repository.branches.each do |branch|
+  = branch.name
+
+- if branch.has_mergeable_branch?
+  = link_to "Merge", new_admin_branch_merge_path(branch)
+
+%br
+= link_to "Create Branch", new_admin_branch_checkout_path(branch)

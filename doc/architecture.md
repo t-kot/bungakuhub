@@ -171,6 +171,25 @@ RepositoryTagRelationship
 インクリメンタルサーチなどの実装がけっこうチャレンジングなので後回し。
 
 
+#### Issue
+RepositoryとIssueTopicは1対多関係。さらにIssueTopicはIssueCommentをhas_many.
+
+Repository =has_many => IssueTopic has_many=>IssueComment
+
+IssueTopic
+
+- title:string
+- body:text
+- author:user
+- open:boolean
+
+IssueComment
+- issue_topic_id:integer
+- body:text
+- author:user
+
+
+
 
 
 

@@ -12,7 +12,7 @@
       %td= repository.type_name[current_locale]
       %td= repository.name
       %td= repository.description
-      %td= link_to 'Show', admin_repository_path(repository)
+      %td= link_to 'Show', admin_branch_path(repository.master)
 
 %br
 

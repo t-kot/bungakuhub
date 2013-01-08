@@ -1,5 +1,6 @@
-%p#notice= notice
-
+.span12
+  = render 'admin/branches/header', user:@user, repository:@repository, branch:@branch
+  #repository_header.span9
 %p
   %b Message:
   = @kommit.message

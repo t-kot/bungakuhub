@@ -5,6 +5,8 @@ module Admin
       @branch = Branch.find(params[:branch_id])
       @posts = @branch.posts
       @post = Post.new
+      @repository = @branch.repository
+      @user = @repository.user
     end
 
     def create

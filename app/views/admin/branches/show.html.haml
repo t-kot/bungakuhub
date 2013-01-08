@@ -1,16 +1,20 @@
 .span12
-  #repository_header.span9
-    %h3
-      = link_to @repository.name, admin_repository_path(@repository)
-      @
-      = link_to @branch.name, admin_branch_path(@branch)
-  
+  = render '/admin/branches/header', user:@user, repository:@repository, branch:@branch
   #repository_body.span9
     = render 'admin/branches/menu', branch:@branch
-    = render 'admin/branches/list_dropdown', repository:@repository
+    #main_data
+      = render 'admin/branches/list_dropdown', repository:@repository
+      %table.table
+        %tr
+          %td
+            作成日
+          %td
+            = @branch.created_at.strftime("%g/%m/%d")
+        %tr
+          %td
+            最終更新日
+          %td
+            = @branch.updated_at.strftime("%g/%m/%d")
+    %hr
     = render 'admin/branches/tab', branch:@branch
-
-%p
-  %b Name:
-  = @branch.name
 

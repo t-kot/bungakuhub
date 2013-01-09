@@ -8,7 +8,7 @@ describe Timeline::NewsController do
       news = [double(News)]
       News.should_receive(:followed_by).with(subject.current_user).and_return(news)
       get :index
-      assigns(:news).should eq news
+      assigns(:feeds).should eq news
     end
   end
 end

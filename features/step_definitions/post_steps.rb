@@ -39,7 +39,7 @@ end
 end
 
 もし /^"(.*?)"の(.*)を"(.*?)"に更新する$/ do |title, target, update_value|
-  form_id = find(:xpath, "//input[@value='#{title}']/../..")[:id]
+  form_id = find(:xpath, "//input[@value='#{title}']/../../..")[:id]
   within("##{form_id}") do
     case target
     when "タイトル"

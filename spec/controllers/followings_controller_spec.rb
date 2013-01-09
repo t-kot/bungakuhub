@@ -28,7 +28,7 @@ describe FollowingsController do
     end
     it "should redirect to root_path" do
       post :create, {user_id:user}
-      response.should redirect_to root_path
+      response.should redirect_to user_path(user)
     end
 
     it "should add following" do
@@ -46,7 +46,7 @@ describe FollowingsController do
     end
     it "should redirect to root_path" do
       delete :destroy, {id: user}
-      response.should redirect_to root_path
+      response.should redirect_to user_path(user)
     end
     it "display flash info" do
       delete :destroy, {id: user}

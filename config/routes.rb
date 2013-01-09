@@ -20,6 +20,10 @@ Bungaku::Application.routes.draw do
   resources :text_repositories, only: [:show]
   resources :repositories, only: [:show, :new] do
     resources :branches, only: [:index]
+    resources :issue_topics, only: [:index, :new, :create], path: :issues
+  end
+  resources :issue_topics, only: [:show, :update, :destroy], path: :issues do
+    resources :issue_comments, only: [:create], path: :comments
   end
   resources :branches, only: [:show] do
     resources :kommits, only: [:index, :show] do

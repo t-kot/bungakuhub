@@ -184,12 +184,25 @@ IssueTopic
 - open:boolean
 
 IssueComment
+
 - issue_topic_id:integer
 - body:text
 - author:user
 
+◯Controller
 
+IssueTopic
 
+- (GET) /repositories/1/issues IssueTopic#index あるレポジトリが持っているIssue一覧 (openとかcloseはさすがにgetのパラメータで処理)
+- (GET) /issues/1 IssueTopic#show Issueの本体で、commentの一覧や投稿画面が存在
+- (GET) /repositories/1/issues/new IssueTopic#new Issueの新規投稿画面
+- (POST) /repositories/1/issues IssueTopic#create Issueの作成
+- (PUT) /issues/1 IssueTopic#update showから、closeにする、など
+- (DELETE) /issues/1 IssueTopic#destroy 存在の削除
+
+IssueComment
+
+- (POST) /issues/1/comments IssueComment#create  Commentの作成　
 
 
 

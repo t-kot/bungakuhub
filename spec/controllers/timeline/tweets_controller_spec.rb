@@ -8,7 +8,7 @@ describe Timeline::TweetsController do
       tweets = [double(Tweet)]
       Tweet.should_receive(:followed_by).with(subject.current_user).and_return(tweets)
       get :index
-      assigns(:tweets).should eq tweets
+      assigns(:feeds).should eq tweets
     end
   end
 end

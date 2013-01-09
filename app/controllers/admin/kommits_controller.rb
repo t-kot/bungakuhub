@@ -16,7 +16,7 @@ module Admin
     def show
       @kommit = Kommit.find(params[:id])
       @repository = @branch.repository
-      @user = @branch.repository.user
+      @user = @branch.repository.owner
       respond_to do |format|
         format.html
         format.json { render json: @kommit }

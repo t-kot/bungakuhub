@@ -7,7 +7,7 @@ module Admin
     def show
       @branch = Branch.find(params[:id])
       @repository = @branch.repository
-      @user = @repository.user
+      @user = @repository.owner
 
       respond_to do |format|
         format.html

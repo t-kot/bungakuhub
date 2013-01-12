@@ -1,6 +1,11 @@
-class Devise::RegistrationsController < DeviseController
-  before_filter :authenticate_user!
-
+class RegistrationsController < Devise::RegistrationsController
+  before_filter :authenticate_user!, only:[:update]
+  def new
+    super
+  end
+  def create
+    super
+  end
   def update
     @user = current_user
     if current_user.update_with_password(params[:user])
@@ -18,4 +23,3 @@ class Devise::RegistrationsController < DeviseController
     end
   end
 end
-

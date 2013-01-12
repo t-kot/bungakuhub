@@ -1,8 +1,9 @@
 require 'grit'
 module Admin
   class KommitsController < ApplicationController
+    layout "admin_menu"
     before_filter :user_branch_authenticate
-    before_filter :load_branch, only: [:index, :show, :new, :create]
+    before_filter :load_items, only: [:index, :show, :new, :create]
     before_filter :status_has_changes?, only:[:create]
     def index
       @kommits = @branch.kommits
@@ -15,8 +16,6 @@ module Admin
 
     def show
       @kommit = Kommit.find(params[:id])
-      @repository = @branch.repository
-      @user = @branch.repository.owner
       respond_to do |format|
         format.html
         format.json { render json: @kommit }
@@ -66,8 +65,10 @@ module Admin
 
     private
 
-    def load_branch
+    def load_items
       @branch = Branch.find(params[:branch_id])
+      @repository = @branch.repository
+      @user = @repository.owner
     end
 
 

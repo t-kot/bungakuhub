@@ -1,5 +1,6 @@
 module Admin
   class PostsController < ApplicationController
+    layout "admin_menu"
 
     def index
       @branch = Branch.find(params[:branch_id])
@@ -11,6 +12,8 @@ module Admin
 
     def create
       @branch = Branch.find(params[:branch_id])
+      @repository = @branch.repository
+      @user = @repository.user
       @branch.enter do
         @post = Post.new(params[:post])
         @post.branch = @branch
@@ -29,6 +32,8 @@ module Admin
     def update
       @update_post = Post.find(params[:id])
       @branch = @update_post.branch
+      @repository = @branch.repository
+      @user = @repository.user
       @branch.enter do
         respond_to do |format|
           if @update_post.update_attributes(params[:post])

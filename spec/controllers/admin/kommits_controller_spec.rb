@@ -13,7 +13,7 @@ describe Admin::KommitsController do
   describe "GET index" do
     login_user
     let(:branch){ mock_model(Branch, id:1).as_null_object}
-    let(:kommits){ [double(Kommit)] }
+    let(:kommits){ [mock_model(Kommit).as_null_object] }
     before do
       branch.stub_chain(:repository, :owner).and_return subject.current_user
       branch.stub(:kommits).and_return kommits
@@ -33,7 +33,7 @@ describe Admin::KommitsController do
     login_user
 
     let(:branch){ mock_model(Branch, id:1).as_null_object}
-    let(:kommit){ mock_model(Kommit, id:1)}
+    let(:kommit){ mock_model(Kommit, id:1).as_null_object}
 
     before do
       branch.stub_chain(:repository, :owner).and_return subject.current_user
@@ -115,8 +115,8 @@ describe Admin::KommitsController do
 
   describe "DELETE destroy" do
     login_user
-    let(:branch){ mock_model(Branch, id:1) }
-    let(:kommit){ mock_model(Kommit, id:1) }
+    let(:branch){ mock_model(Branch, id:1).as_null_object }
+    let(:kommit){ mock_model(Kommit, id:1).as_null_object }
     before(:each) do
       branch.stub(:nothing_to_commit?).and_return false
       branch.stub(:enter).and_yield

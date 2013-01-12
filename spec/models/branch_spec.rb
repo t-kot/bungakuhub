@@ -127,7 +127,7 @@ describe Branch do
       it "merging commit" do
         @repository.master.kommits.should have(4).items
         @repository.master.merge(@another)
-        @repository.master.kommits.should have(5).items
+        @repository.master.kommits.should have(7).items
 
       end
     end
@@ -143,7 +143,7 @@ describe Branch do
       it "should not increase kommit count" do
         @repository.master.kommits.should have(3).items
         @repository.master.merge(@another)
-        @repository.master.kommits.should have(3).items
+        @repository.master.kommits.should have(4).items
       end
     end
 

@@ -1,5 +1,7 @@
 module Admin
   class RepositoriesController < ApplicationController
+    layout "admin_menu", except: [:index]
+    before_filter :load_items, only:[:show, :edit, :update, :destroy]
     before_filter :authenticate_user!
     before_filter :user_repository_authenticate, only: [:show, :edit, :update, :destroy]
     def index
@@ -12,8 +14,6 @@ module Admin
     end
 
     def show
-      @repository = Repository.find(params[:id])
-
       respond_to do |format|
         format.html
         format.json { render json: @repository }
@@ -21,12 +21,9 @@ module Admin
     end
 
     def edit
-      @repository = Repository.find(params[:id])
     end
 
     def update
-      @repository = Repository.find(params[:id])
-
       respond_to do |format|
         if @repository.update_attributes(params[:repository])
           format.html { redirect_to repository_url(@repository), notice: t("flash.info.update.notice", model: t("activerecord.models.repository")) }
@@ -39,13 +36,19 @@ module Admin
     end
 
     def destroy
-      @repository = Repository.find(params[:id])
       @repository.destroy
 
       respond_to do |format|
         format.html { redirect_to user_repositories_url(current_user) }
         format.json { head :no_content }
       end
+    end
+
+    private
+    def load_items
+      @repository = Repository.find(params[:id])
+      @branch = @repository.master
+      @user = @repository.user
     end
   end
 end

@@ -1,7 +1,7 @@
 %h1 New branch
 
-= form_for @branch, url: admin_branch_checkouts_path do |f|
-  = render 'common/form_error', record: @branch
+= form_for @new_branch, url: admin_branch_checkouts_path do |f|
+  = render 'common/form_error', record: @new_branch
 
   .field
     = f.label :name
@@ -9,4 +9,4 @@
   .actions
     = f.submit 'Save'
 
-= link_to 'Back', repository_path(@orig_branch.repository)
+= link_to 'Back', repository_path(@repository)

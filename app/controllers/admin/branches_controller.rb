@@ -1,5 +1,6 @@
 module Admin
   class BranchesController < ApplicationController
+    layout "admin_menu"
     before_filter :user_branch_authenticate, only:[:show, :new, :destroy]
     #before_filter :user_repository_authenticate, only:[:new, :create]
     before_filter :status_has_no_changes?, only: [:new, :create]
@@ -16,8 +17,10 @@ module Admin
     end
 
     def new
-      @orig_branch = Branch.find(params[:branch_id])
-      @branch = Branch.new
+      @branch = Branch.find(params[:branch_id])
+      @repository = @branch.repository
+      @user = @repository.owner
+      @new_branch = Branch.new
 
       respond_to do |format|
         format.html
@@ -26,17 +29,19 @@ module Admin
     end
 
     def create
-      @orig_branch = Branch.find(params[:branch_id])
-      @branch = @orig_branch.checkout(params[:branch])
+      @branch = Branch.find(params[:branch_id])
+      @repository = @branch.repository
+      @user = @repository.owner
+      @new_branch = @branch.checkout(params[:branch])
 
       respond_to do |format|
-        if @branch.save
-          @branch.kommits << @orig_branch.kommits
-          format.html { redirect_to repository_path(@branch.repository), notice: t("flash.info.create.notice", model: t("activerecord.models.branch"))}
-          format.json { render json: @branch, status: :created, location: @branch}
+        if @new_branch.save
+          @new_branch.kommits << @branch.kommits
+          format.html { redirect_to repository_path(@new_branch.repository), notice: t("flash.info.create.notice", model: t("activerecord.models.branch"))}
+          format.json { render json: @new_branch, status: :created, location: @new_branch}
         else
           format.html { render action: "new" }
-          format.json { render json: @branch.errors, status: :unprocessable_entity }
+          format.json { render json: @new_branch.errors, status: :unprocessable_entity }
         end
       end
     end

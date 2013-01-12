@@ -28,61 +28,60 @@ describe Admin::BranchesController do
 
   describe "GET new" do
     login_user
-    let(:orig_branch){ mock_model(Branch, id:1).as_null_object}
-    let(:branch){ mock_model(Branch, id:2).as_null_object.as_new_record}
+    let(:branch){ mock_model(Branch, id:1).as_null_object}
+    let(:new_branch){ mock_model(Branch, id:2).as_null_object.as_new_record}
     before do
-      orig_branch.stub_chain(:repository, :owner).and_return(subject.current_user)
-      Branch.stub(:find).with("1").and_return(orig_branch)
-      Branch.stub(:find).with("2").and_return(branch)
-      orig_branch.stub(:nothing_to_commit?).and_return true
+      branch.stub_chain(:repository, :owner).and_return(subject.current_user)
+      Branch.stub(:find).with("1").and_return(branch)
+      branch.stub(:nothing_to_commit?).and_return true
     end
-    it "assigns a new branch as @branch" do
-      get  :new, {branch_id: orig_branch}
-      assigns(:branch).should be_a_new(Branch)
+    it "assigns a requested branch as @branch" do
+      get  :new, {branch_id: branch}
+      assigns(:branch).should eq branch
     end
-    it "assigns a orig branch as @orig_branch" do
-      get :new, {branch_id: orig_branch}
-      assigns(:orig_branch).should eq orig_branch
+    it "assigns a new branch as @new_branch" do
+      get :new, {branch_id: branch}
+      assigns(:new_branch).should be_a_new(Branch)
     end
   end
 
   describe "POST create" do
     login_user
-    let(:orig_branch){ mock_model(Branch, id:1).as_null_object}
-    let(:branch){ mock_model(Branch, id:2, repository:1).as_null_object}
+    let(:new_branch){ mock_model(Branch, id:1).as_null_object}
+    let(:branch){ mock_model(Branch, id:2).as_null_object}
     before do
-      orig_branch.stub_chain(:repository, :owner).and_return(subject.current_user)
-      Branch.stub(:find).with("1").and_return orig_branch
-      orig_branch.stub(:checkout).and_return branch
+      branch.stub(:repository).and_return mock_model(Repository, id:1, owner:subject.current_user).as_null_object
+      Branch.stub(:find).with("2").and_return branch
+      branch.stub(:checkout).and_return new_branch
     end
     describe "with valid params" do
       it "should create new branch" do
-        branch.should_receive(:save)
-        post :create, {branch_id:orig_branch, branch:valid_attributes}
+        new_branch.should_receive(:save)
+        post :create, {branch_id:branch, branch:valid_attributes}
       end
-      it "assigns a newly created branch as @branch" do
-        post :create, {branch_id:orig_branch, branch:valid_attributes}
-        assigns(:branch).should eq branch
+      it "assigns a newly created branch as @new_branch" do
+        post :create, {branch_id:branch, branch:valid_attributes}
+        assigns(:new_branch).should eq new_branch
       end
 
 
       it "redirects to the created branch" do
-        post :create, {branch_id:orig_branch, branch:valid_attributes}
+        post :create, {branch_id:branch, branch:valid_attributes}
         response.should redirect_to repository_path(branch.repository)
       end
     end
 
     describe "with invalid params" do
       before do
-        branch.should_receive(:save).and_return(false)
+        new_branch.should_receive(:save).and_return(false)
       end
-      it "assigns a newly created but unsaved branch as @branch" do
-        post :create, {branch_id:orig_branch}
-        assigns(:branch).should eq branch
+      it "assigns a newly created but unsaved branch as @new_branch" do
+        post :create, {branch_id:branch}
+        assigns(:new_branch).should eq new_branch
       end
 
       it "re-renders the 'new' template" do
-        post :create, {branch_id:orig_branch}
+        post :create, {branch_id:branch}
         response.should render_template("new")
       end
     end

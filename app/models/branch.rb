@@ -84,9 +84,10 @@ class Branch < ActiveRecord::Base
     Dir.chdir(self.repository.working_dir) do
       Open3.popen3("git merge --no-ff --no-edit #{merged_branch.name}") do |stdin, stdout, stderr|
         BungakuHub::Error.new(stderr).try_raise
-        bol = stdout.read.split("\n").first
+        self.kommits << merged_branch.kommits
         self.destroy_all_post
         create_posts_by_current_file
+        bol = stdout.read.split("\n").first
         if /^Merge (.*) strategy.$/.match bol
           self.build_kommit(message:"Merge branch #{merged_branch.name}", revision: head).save
         end

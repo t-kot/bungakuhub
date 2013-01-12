@@ -19,7 +19,7 @@ describe Admin::RepositoriesController do
 
   describe "GET index" do
     login_user
-    let(:repositories){ [mock_model(Repository)] }
+    let(:repositories){ [mock_model(Repository).as_null_object] }
 
     before do
       subject.current_user.stub(:repositories).and_return repositories
@@ -33,7 +33,7 @@ describe Admin::RepositoriesController do
 
   describe "GET show" do
     login_user
-    let(:repository){ mock_model(Repository, id:1, owner:subject.current_user) }
+    let(:repository){ mock_model(Repository, id:1, owner:subject.current_user).as_null_object }
     before do
       Repository.stub(:find).with("1").and_return repository
     end
@@ -46,7 +46,7 @@ describe Admin::RepositoriesController do
   describe "GET edit" do
     login_user
     context "when valid user" do
-      let(:repository){ mock_model(Repository, id:1, owner:subject.current_user)}
+      let(:repository){ mock_model(Repository, id:1, owner:subject.current_user).as_null_object}
       before do
         Repository.stub(:find).with("1").and_return repository
       end
@@ -56,7 +56,7 @@ describe Admin::RepositoriesController do
       end
     end
     context "When invalid user" do
-      let(:repository){ mock_model(Repository, id:1, owner:mock_model(User, id:100) )}
+      let(:repository){ mock_model(Repository, id:1, owner:mock_model(User, id:100) ).as_null_object}
       before do
         Repository.stub(:find).with("1").and_return repository
       end
@@ -114,7 +114,7 @@ describe Admin::RepositoriesController do
   describe "DELETE destroy" do
     login_user
     context "When valid user" do
-      let(:repository){ mock_model(Repository, id:1, owner:subject.current_user) }
+      let(:repository){ mock_model(Repository, id:1, owner:subject.current_user).as_null_object }
       before do
         Repository.stub(:find).with("1").and_return repository
       end
@@ -130,7 +130,7 @@ describe Admin::RepositoriesController do
     end
     context "When invalid user" do
 
-      let(:repository){ mock_model(Repository, id:1, owner:mock_model(User, id:100) )}
+      let(:repository){ mock_model(Repository, id:1, owner:mock_model(User, id:100) ).as_null_object}
 
       before do
         Repository.stub(:find).and_return repository

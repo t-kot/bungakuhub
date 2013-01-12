@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :repository_create_news
   has_many :repository_update_news
+  has_many :issue_topics, dependent: :destroy, foreign_key: :author_id
+  has_many :issue_comments, dependent: :destroy, foreign_key: :author_id
 
 
   validates :display_name,  presence: true, length: {maximum:30},

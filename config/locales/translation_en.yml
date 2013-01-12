@@ -44,6 +44,7 @@ en:
       branch: Branch
       kommit: Commit
       post: Post
+      issue_topic: Topic
     attributes:
       user:
         email: Email

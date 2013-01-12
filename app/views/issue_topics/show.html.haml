@@ -1,0 +1,7 @@
+タイトル:
+= @issue_topic.title
+本文:
+= @issue_topic.body
+
+- @issue_comments.each do |issue_comment|
+  = issue_comment.body

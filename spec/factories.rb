@@ -14,7 +14,7 @@ FactoryGirl.define do
   factory :text_repository , parent: :repository do
     type "TextRepository"
   end
-  factory :user do
+  factory :user , aliases: [:author] do
     sequence(:email) {|n| "email#{n}@example.com"}
     sequence(:display_name) {|n| "User#{n}"}
     first_name "First"
@@ -36,5 +36,10 @@ FactoryGirl.define do
     sequence(:title) {|n| "Title#{n}"}
     sequence(:body) {|n| "Post body #{n}"}
     branch
+  end
+  factory :issue_topic do
+    sequence(:title){|n| "Topic#{n}"}
+    sequence(:body){|n| "TopicBody#{n}"}
+    author
   end
 end

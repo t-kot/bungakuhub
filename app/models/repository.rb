@@ -8,6 +8,7 @@ class Repository < ActiveRecord::Base
   belongs_to :user
   has_many :branches
   has_many :feeds
+  has_many :issue_topics, dependent: :destroy
   belongs_to :category
 
   validates :name,  presence: true, length: {maximum:30}, uniqueness: true

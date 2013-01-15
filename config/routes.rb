@@ -26,10 +26,12 @@ Bungaku::Application.routes.draw do
     resources :issue_comments, only: [:create], path: :comments
   end
   resources :branches, only: [:show] do
+    resources :posts, only: [:index]
     resources :kommits, only: [:index, :show] do
       resources :diffs, only: [:show]
     end
   end
+  resources :posts, only: [:show]
 
   namespace :admin do
     resources :text_repositories, only: [:index, :show, :edit, :update]

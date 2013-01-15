@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title BungakuHub
+    %meta{name:'viewport', content:'width=device-width,initial-scale=1.0'}
+  = stylesheet_link_tag 'application', media: 'all'
+  = javascript_include_tag 'application'
+  = csrf_meta_tags
+  = yield :head
+  %body
+    = render 'layouts/header'
+    %header.visible-desktop.jumbotron.subhead#overview{style:'height:50px'}
+    .container
+      - if notice
+        .alert.alert-success
+          %a.close{"data-dismiss"=>"alert"} x
+          = notice
+
+      - if alert
+        .alert.alert-error
+          %a.close{"data-dismiss"=>'alert'} x
+          = alert
+      .row
+        = render 'branches/header', user:@user, repository:@repository, branch:@branch
+        #repository_body.span9
+          = render 'branches/menu', branch:@branch
+          = yield
+      = render 'layouts/footer'
+
+

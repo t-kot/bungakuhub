@@ -8,6 +8,9 @@ describe Admin::FilesController do
   end
 
   describe "GET index" do
+    before do
+      Branch.should_receive(:find).with("1").and_return branch
+    end
 
     it "assigns the requested kommit as @kommit" do
       get :index, {kommit_id: kommit, branch_id: branch}
@@ -16,6 +19,9 @@ describe Admin::FilesController do
   end
 
   describe "GET show" do
+    before do
+      Branch.should_receive(:find).with("1").and_return branch
+    end
     it "assigns the requested kommit as @kommit" do
       kommit.should_receive(:inspect).with("hoge").and_return "result"
       get :show, {kommit_id: kommit, branch_id: branch, name: "hoge"}

@@ -9,14 +9,6 @@
       .nav-collapse
         %ul.nav
           %li.dropdown
-            %a.dropdown-toggle{"data-toggle"=>"dropdown"}
-              Work
-              %b.caret
-            %ul.dropdown-menu{role:'menu',"aria-labelledby"=>'drop1'}
-              %li
-                != link_to "Create Game Room",root_path
-              %li
-                = link_to "Game Room",root_path
           - if user_signed_in?
             %li.dropdown
               %a.dropdown-toggle{"data-toggle"=>"dropdown"}

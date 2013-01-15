@@ -1,0 +1,11 @@
+.navbar
+  .navbar-inner
+    #ul.nav
+      = content_tag :li, class: is_active?("branches#show", "kommits#show") do
+        = link_to "Content", branch_path(branch)
+      = content_tag :li, class: ["divider-vertical", is_active?("posts#index")] do
+        %a{href:"#"} Network
+      = content_tag :li, class: ["divider-vertical", is_active?("issue_topics#index")] do
+        = link_to "Issue", repository_issue_topics_path(branch.repository)
+      %li.divider-vertical
+        %a{href:"#"} Wiki

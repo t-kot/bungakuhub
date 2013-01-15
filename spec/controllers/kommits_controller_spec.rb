@@ -4,7 +4,7 @@ require 'spec_helper'
 describe KommitsController do
 
   describe "GET index" do
-    let(:branch){ mock_model(Branch, id:1) }
+    let(:branch){ mock_model(Branch, id:1).as_null_object }
     let(:kommits){ [double(Kommit)] }
     before do
       branch.stub(:kommits).and_return kommits
@@ -18,8 +18,8 @@ describe KommitsController do
   end
 
   describe "GET show" do
-    let(:branch){ mock_model(Branch, id:1)}
-    let(:kommit){ mock_model(Kommit, id:1)}
+    let(:branch){ mock_model(Branch, id:1).as_null_object}
+    let(:kommit){ mock_model(Kommit, id:1).as_null_object}
     before do
       Kommit.should_receive(:find).with("1").and_return(kommit)
       Branch.should_receive(:find).with("1").and_return(branch)

@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe IssueTopicsController do
-  let(:repository){ mock_model(Repository, id:1)}
+  let(:repository){ mock_model(Repository, id:1).as_null_object}
 
   describe "GET index" do
-    let(:issue_topics){ [mock_model(IssueTopic)] }
+    let(:issue_topics){ [mock_model(IssueTopic).as_null_object] }
     before do
       repository.stub(:issue_topics).and_return issue_topics
       Repository.should_receive(:find).with("1").and_return(repository)
@@ -19,7 +19,7 @@ describe IssueTopicsController do
     let(:issue_topic){ mock_model(IssueTopic, id:1).as_null_object }
     before do
       issue_topic.stub(:repository).and_return repository
-      IssueTopic.should_receive(:find).with("1").and_return issue_topic
+      IssueTopic.should_receive(:find).at_least(1).with("1").and_return issue_topic
     end
 
     it "should assign the requested issue_topic as @issue_topic" do

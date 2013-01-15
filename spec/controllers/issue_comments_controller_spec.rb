@@ -26,9 +26,9 @@ describe IssueCommentsController do
       before do
         IssueComment.any_instance.should_receive(:save).and_return false
       end
-      it "should re-render new template" do
+      it "should display flash alert" do
         post :create, {issue_topic_id: issue_topic}
-        response.should render_template("issue_topics/index")
+        flash[:alert].should_not be_nil
       end
     end
   end

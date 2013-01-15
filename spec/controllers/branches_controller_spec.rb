@@ -16,7 +16,7 @@ describe BranchesController do
   end
 
   describe "GET show" do
-    let(:branch){ mock_model(Branch, id:1) }
+    let(:branch){ mock_model(Branch, id:1).as_null_object }
     before do
       Branch.should_receive(:find).with("1").and_return(branch)
     end

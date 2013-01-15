@@ -1,0 +1,7 @@
+#repository_header.span9
+  %h4
+    = link_to user.display_name, user_path(@user)
+    \/
+    = link_to repository.name, repository_path(repository)
+    @
+    = link_to branch.name, branch_path(branch)

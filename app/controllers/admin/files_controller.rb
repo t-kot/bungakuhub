@@ -1,6 +1,8 @@
 #coding: utf-8
 module Admin
   class FilesController < ApplicationController
+    layout "admin_menu"
+    before_filter :load_items, only: [:index, :show]
 
     def index
       @kommit = Kommit.find(params[:kommit_id])
@@ -31,6 +33,12 @@ module Admin
           format.html {redirect_to admin_branch_posts_path(@branch), notice: t("flash.info.update.notice", model: t("activerecord.models.post"))}
         end
       end
+    end
+
+    def load_items
+      @branch = Branch.find(params[:branch_id])
+      @repository = @branch.repository
+      @user = @repository.user
     end
 
   end

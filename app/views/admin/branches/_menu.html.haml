@@ -1,17 +1,17 @@
 .navbar
   .navbar-inner
     #ul.nav
-      %li.active 
-        %a{href:"#"} Content
-      %li.divider-vertical
+      = content_tag :li, class: is_active?("admin/branches#show", "admin/branches#new", "admin/kommits#show", "admin/files#index", "admin/files#show") do
+        = link_to "Content", admin_branch_path(branch)
+      = content_tag :li, class: ["divider-vertical", is_active?("admin/kommits#new")] do
         = link_to "Status", new_admin_branch_kommit_path(branch)
-      %li.divider-vertical
+      = content_tag :li, class: ["divider-vertical", is_active?("admin/posts#index")] do
         = link_to "Editor", admin_branch_posts_path(branch)
-      %li
+      = content_tag :li, class: ["divider-vertical", is_active?("admin/repositories#edit")] do
         = link_to 'Settings', edit_admin_repository_path(branch.repository)
       %li.divider-vertical
         %a{href:"#"} Network
-      %li
+      = content_tag :li, class: ["divider-vertical", is_active?("admin/issue_topics#index")] do
         = link_to "Issue", repository_issue_topics_path(branch.repository)
       %li.divider-vertical
         %a{href:"#"} Wiki

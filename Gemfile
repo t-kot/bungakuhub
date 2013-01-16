@@ -9,6 +9,7 @@ gem 'friendly_id'
 gem 'grit', require: false
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :development do
   gem 'erb2haml'

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
   default_scope where(hidden:false)
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id, :hidden, :facebook_uid
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id, :hidden, :facebook_uid, :twitter_uid
 
   belongs_to :sex
   has_many :text_repositories
@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   def self.find_for_facebook_oauth(auth)
      User.find_by_facebook_uid(auth.uid)
   end
+  def self.find_for_twitter_oauth(auth)
+    User.find_by_twitter_uid(auth.uid)
+  end
 
   def full_name
     self.first_name+" "+self.last_name
@@ -57,16 +60,19 @@ class User < ActiveRecord::Base
     self.update_attributes(hidden:false)
   end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if session["facebook_uid"] && data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        p "facebook called"
-        user.facebook_uid = session["facebook_uid"]
-        user.email = data["email"] if user.email.blank?
-        user.password = Devise.friendly_token[0, 20]
-        user.confirm!
-      end
-    end
+  def self.new_with_facebook_session(params, session)
+    data = session["devise.facebook_data"]
+    user = User.new(params, facebook_uid:session["devise.facebook_uid"],
+             email: data["info"]["email"])
+    user.password = Devise.friendly_token[0, 20]
+    user
+  end
+
+  def self.new_with_twitter_session(params, session)
+    data = session["devise.twitter_data"]
+    user = User.new(params, twitter_uid:data[:uid])
+    user.password = Devise.friendly_token[0, 20]
+    user
   end
 
 end

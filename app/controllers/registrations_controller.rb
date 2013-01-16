@@ -22,4 +22,26 @@ class RegistrationsController < Devise::RegistrationsController
       render '/users/edit'
     end
   end
+
+  def facebook
+    @user = User.new_with_facebook_session(params[:user], session)
+    if @user.save
+      @user.confirm!
+      set_flash_message :notice, :signed_up if is_navigational_format?
+      sign_in_and_redirect @user
+    else
+      render 'devise/registrations/facebook'
+    end
+  end
+
+  def twitter
+    @user = User.new_with_twitter_session(params[:user], session)
+    if @user.save
+      set_flash_message :notice, :"signed_up_but_#{@user.inactive_message}" if is_navigational_format?
+      expire_session_data_after_sign_in!
+      respond_with @user, location: after_inactive_sign_up_path_for(@user)
+    else
+      render 'devise/registrations/twitter'
+    end
+  end
 end

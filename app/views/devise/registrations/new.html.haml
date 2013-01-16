@@ -1,9 +1,6 @@
 %h2 Sign up
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  - if resource.errors.any?
-    .alert.alert-error
-      %a.close{"data-dismiss"=>"alert"} x
-      = devise_error_messages!
+  = render 'common/form_error', record: resource
   %div
     = f.label :email
     %br/

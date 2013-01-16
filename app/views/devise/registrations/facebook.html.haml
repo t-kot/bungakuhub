@@ -1,0 +1,13 @@
+%h2 Sign up
+= form_for(@user,:url => registration_path(@user)) do |f|
+  - if @user.errors.any?
+    .alert.alert-error
+      %a.close{"data-dismiss"=>"alert"} x
+      = devise_error_messages!
+  %div
+    = f.label :display_name
+    %br/
+    = f.text_field :display_name
+  %div= f.submit t("label.user.signup")
+= render "devise/shared/links"
+

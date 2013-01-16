@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   friendly_id :display_name
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
+         :confirmable, :omniauthable
   default_scope where(hidden:false)
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id, :hidden
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name, :first_name, :last_name,:sex_id, :hidden, :facebook_uid
 
   belongs_to :sex
   has_many :text_repositories
@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
   validates :display_name,  presence: true, length: {maximum:30},
                             uniqueness: true
   validates :email,         length: {maximum:50},
-                            uniqueness: true, email: true
+                            email: true
+
+  def self.find_for_facebook_oauth(auth)
+     User.find_by_facebook_uid(auth.uid)
+  end
 
   def full_name
     self.first_name+" "+self.last_name
@@ -51,6 +55,18 @@ class User < ActiveRecord::Base
 
   def recover
     self.update_attributes(hidden:false)
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if session["facebook_uid"] && data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        p "facebook called"
+        user.facebook_uid = session["facebook_uid"]
+        user.email = data["email"] if user.email.blank?
+        user.password = Devise.friendly_token[0, 20]
+        user.confirm!
+      end
+    end
   end
 
 end

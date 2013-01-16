@@ -7,6 +7,8 @@ gem 'devise'
 gem 'haml-rails'
 gem 'friendly_id'
 gem 'grit', require: false
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'erb2haml'

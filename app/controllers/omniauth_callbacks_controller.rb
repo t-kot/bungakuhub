@@ -44,6 +44,26 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def google_oauth2
+    @user = User.find_for_google_oauth(auth_hash)
+    if @user
+      p "ログイン"
+      sign_in_and_redirect @user
+      set_flash_message(:notice, :success, kind: "Google") if is_navigational_format?
+    else
+      if current_user
+        current_user.update_attributes(google_uid:auth_hash.uid)
+        flash[:notice] = "認証を追加しました"
+        redirect_to root_path
+      else
+        session["devise.google_data"] = {uid: auth_hash.uid,
+                                         email: auth_hash.info.email}
+        @user = User.new(display_name: auth_hash.info.name)
+        render 'devise/registrations/google'
+      end
+    end
+  end
+
   private
   def auth_hash
     request.env['omniauth.auth']

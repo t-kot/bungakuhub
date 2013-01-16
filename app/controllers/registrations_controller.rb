@@ -44,4 +44,15 @@ class RegistrationsController < Devise::RegistrationsController
       render 'devise/registrations/twitter'
     end
   end
+
+  def google
+    @user = User.new_with_google_session(params[:user], session)
+    if @user.save
+      @user.confirm!
+      set_flash_message :notice, :signed_up if is_navigational_format?
+      sign_in_and_redirect @user
+    else
+      render 'devise/registrations/google'
+    end
+  end
 end

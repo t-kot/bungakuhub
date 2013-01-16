@@ -19,6 +19,14 @@
       #system
         %legend システム登録情報
         = render 'users/devise_form'
+      #social_connect
+        %legend ソーシャルメディア連携
+        - unless @user.twitter_connected?
+          = link_to "Connect with Twitter",user_omniauth_authorize_path(:twitter)
+        - unless @user.facebook_connected?
+          = link_to "Connect with Facebook", user_omniauth_authorize_path(:facebook)
+        - unless @user.google_connected?
+          = link_to "Connect with Google", user_omniauth_authorize_path(:google_oauth2)
       #others
         %legend その他
         = link_to '自分のページを見る', user_path(current_user)

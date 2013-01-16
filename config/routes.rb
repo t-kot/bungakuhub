@@ -6,6 +6,7 @@ Bungaku::Application.routes.draw do
     get "/users/sign_out", to: 'devise/sessions#destroy', as: :destroy_user_session
     post "/users/facebook", to: 'registrations#facebook', as: :facebook_user_registration
     post "/users/twitter", to: 'registrations#twitter', as: :twitter_user_registration
+    post "/users/google", to: 'registrations#google', as: :google_user_registration
   end
 
   scope module: :home do

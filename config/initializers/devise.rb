@@ -8,7 +8,13 @@ Devise.setup do |config|
   config.reconfirmable = true
   config.reset_password_within = 6.hours
   config.sign_out_via = :delete
-  config.omniauth :facebook, "145038345651878", "738da90c8c0f6a791c8e88b187a2b9e9"
-  config.omniauth :twitter, "0BLYypN8nZFgSKZYGebw", "2DpZdqdNOHdNJ1fa6kiYMoXiHKtIEZqK1GGHdtBalek"
-  config.omniauth :google_oauth2, "188166332274.apps.googleusercontent.com", "RM1KSA5HFF8N5BXRkgXQgpkj", {access_type: "offline", approval_promt: ""}
+  if Rails.env.production?
+    config.omniauth :facebook
+    config.omniauth :twitter
+    config.omniauth :google_oauth2
+  else
+    config.omniauth :facebook, "145038345651878", "738da90c8c0f6a791c8e88b187a2b9e9"
+    config.omniauth :twitter, "0BLYypN8nZFgSKZYGebw", "2DpZdqdNOHdNJ1fa6kiYMoXiHKtIEZqK1GGHdtBalek"
+    config.omniauth :google_oauth2, "188166332274.apps.googleusercontent.com", "RM1KSA5HFF8N5BXRkgXQgpkj", {access_type: "offline", approval_promt: ""}
+  end
 end
